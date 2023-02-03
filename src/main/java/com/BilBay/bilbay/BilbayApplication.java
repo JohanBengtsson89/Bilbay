@@ -9,5 +9,5 @@ public class BilbayApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BilbayApplication.class, args);
 	}
-asdasd
+
 }
