@@ -1,6 +1,7 @@
 package com.BilBay.bilbay.models;
 
 import jakarta.persistence.*;
+import jdk.jfr.Relational;
 
 import java.util.Date;
 
@@ -9,29 +10,37 @@ import java.util.Date;
 public class Bid {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "Id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
     private int id;
 
-    @Column(name ="seller_id")
-    private int sellerId;
+
+    @Column(name = "seller_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "seller_id", referencedColumnName = "id")
+    private User sellerId;
 
     @Column(name = "buyer_id")
-    private int buyerId;
+    @OneToOne
+    @JoinColumn(name = "buyer_id", referencedColumnName = "id")
+    private User buyerId;
 
     @Column(name = "auction_id")
-    private int auctionId;
+    @ManyToOne
+    @JoinColumn(name = "auction_id", referencedColumnName = "id")
+    private Auction auctionId;
 
     @Column(name = "bid_amount")
     private int bidAmount;
 
     @Column(name = "created_at")
+    @Temporal(TemporalType.DATE)
     private Date createdAt;
 
     public Bid() {
     }
 
-    public Bid(int id, int sellerId, int buyerId, int auctionId, int bidAmount, Date createdAt) {
+    public Bid(int id, User sellerId, User buyerId, Auction auctionId, int bidAmount, Date createdAt) {
         this.id = id;
         this.sellerId = sellerId;
         this.buyerId = buyerId;
@@ -48,27 +57,27 @@ public class Bid {
         this.id = id;
     }
 
-    public int getSellerId() {
+    public User getSellerId() {
         return sellerId;
     }
 
-    public void setSellerId(int sellerId) {
+    public void setSellerId(User sellerId) {
         this.sellerId = sellerId;
     }
 
-    public int getBuyerId() {
+    public User getBuyerId() {
         return buyerId;
     }
 
-    public void setBuyerId(int buyerId) {
+    public void setBuyerId(User buyerId) {
         this.buyerId = buyerId;
     }
 
-    public int getAuctionId() {
+    public Auction getAuctionId() {
         return auctionId;
     }
 
-    public void setAuctionId(int auctionId) {
+    public void setAuctionId(Auction auctionId) {
         this.auctionId = auctionId;
     }
 
@@ -88,3 +97,5 @@ public class Bid {
         this.createdAt = createdAt;
     }
 }
+
+
