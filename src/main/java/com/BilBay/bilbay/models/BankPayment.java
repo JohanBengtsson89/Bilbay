@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class BankPayment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "users_id")
