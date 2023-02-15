@@ -9,14 +9,13 @@ import java.util.Date;
 public class CardPayment {
 
     @Id
-    @Column
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "user_id")
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User userId;
+    @JoinColumn(name = "users_id", referencedColumnName = "id")
+    private User user;
 
     @Column(name = "card_type")
     private String cardType;
@@ -33,9 +32,9 @@ public class CardPayment {
     public CardPayment() {
     }
 
-    public CardPayment(int id, User userId, String cardType, long cardNumber, Date expireDate, int cvv) {
+    public CardPayment(int id, User user, String cardType, long cardNumber, Date expireDate, int cvv) {
         this.id = id;
-        this.userId = userId;
+        this.user = user;
         this.cardType = cardType;
         this.cardNumber = cardNumber;
         this.expireDate = expireDate;
@@ -50,12 +49,12 @@ public class CardPayment {
         this.id = id;
     }
 
-    public User getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getCardType() {
