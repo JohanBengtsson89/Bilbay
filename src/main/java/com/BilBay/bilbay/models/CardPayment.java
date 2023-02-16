@@ -10,11 +10,10 @@ import java.util.List;
 public class CardPayment {
 
     @Id
-    @Column
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "user_id")
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User userId;
@@ -104,3 +103,4 @@ public class CardPayment {
         this.deliveryPaymentTransactions = deliveryPaymentTransactions;
     }
 }
+
