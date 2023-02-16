@@ -3,6 +3,7 @@ package com.BilBay.bilbay.models;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "card_payment")
@@ -30,16 +31,21 @@ public class CardPayment {
     @Column(name = "cvv")
     private int cvv;
 
+    @OneToMany(mappedBy = "cardPayment")
+    private List <DeliveryPaymentTransaction> deliveryPaymentTransactions= new ArrayList<>();
+
     public CardPayment() {
     }
 
-    public CardPayment(int id, User userId, String cardType, long cardNumber, Date expireDate, int cvv) {
+    public CardPayment(int id, User userId, String cardType, long cardNumber, Date expireDate, int cvv,
+                       List<DeliveryPaymentTransaction> deliveryPaymentTransactions) {
         this.id = id;
         this.userId = userId;
         this.cardType = cardType;
         this.cardNumber = cardNumber;
         this.expireDate = expireDate;
         this.cvv = cvv;
+        this.deliveryPaymentTransactions = deliveryPaymentTransactions;
     }
 
     public int getId() {
@@ -88,5 +94,13 @@ public class CardPayment {
 
     public void setCvv(int cvv) {
         this.cvv = cvv;
+    }
+
+    public List<DeliveryPaymentTransaction> getDeliveryPaymentTransactions() {
+        return deliveryPaymentTransactions;
+    }
+
+    public void setDeliveryPaymentTransactions(List<DeliveryPaymentTransaction> deliveryPaymentTransactions) {
+        this.deliveryPaymentTransactions = deliveryPaymentTransactions;
     }
 }
