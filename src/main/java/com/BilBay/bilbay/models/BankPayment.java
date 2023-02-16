@@ -10,7 +10,8 @@ public class BankPayment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "users_id")
+
+    @JoinColumn(name = "users_id", referencedColumnName = "id")
     @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 
