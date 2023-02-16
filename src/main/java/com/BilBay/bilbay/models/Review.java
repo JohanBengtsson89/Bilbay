@@ -1,27 +1,26 @@
 package com.BilBay.bilbay.models;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "reviews")
-public class Reviews {
+public class Review {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "users_id_by")
     @ManyToOne
     @JoinColumn(name = "users_id_by", referencedColumnName = "id")
-    private User usersIdBy;
+    private User userBy; // Kan inte döpa den till user
 
-    @Column(name = "users_id_for")
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "users_id_for", referencedColumnName = "id")
-    private User usersIdFor;
+    private User userFor; // Kan inte döpa den till user
 
     @Column(name = "comment")
     private String comment;
@@ -30,18 +29,20 @@ public class Reviews {
     private int rate;
 
     @Column(name = "created_at")
+    @CreationTimestamp
     private Date createdAt;
 
     @Column(name = "updated_at")
+    @CreationTimestamp
     private Date updatedAt;
 
-    public Reviews() {
+    public Review() {
     }
 
-    public Reviews(int id, User usersIdBy, User usersIdFor, String comment, int rate, Date createdAt, Date updatedAt) {
+    public Review(int id, User usersIdBy, User usersIdFor, String comment, int rate, Date createdAt, Date updatedAt) {
         this.id = id;
-        this.usersIdBy = usersIdBy;
-        this.usersIdFor = usersIdFor;
+        this.userBy = usersIdBy;
+        this.userFor = usersIdFor;
         this.comment = comment;
         this.rate = rate;
         this.createdAt = createdAt;
@@ -56,20 +57,20 @@ public class Reviews {
         this.id = id;
     }
 
-    public User getUsersIdBy() {
-        return usersIdBy;
+    public User getUserBy() {
+        return userBy;
     }
 
-    public void setUsersIdBy(User usersIdBy) {
-        this.usersIdBy = usersIdBy;
+    public void setUserBy(User usersIdBy) {
+        this.userBy = usersIdBy;
     }
 
-    public User getUsersIdFor() {
-        return usersIdFor;
+    public User getUserFor() {
+        return userFor;
     }
 
-    public void setUsersIdFor(User usersIdFor) {
-        this.usersIdFor = usersIdFor;
+    public void setUserFor(User usersIdFor) {
+        this.userFor = usersIdFor;
     }
 
     public String getComment() {
