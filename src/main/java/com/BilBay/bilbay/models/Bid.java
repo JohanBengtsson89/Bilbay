@@ -15,13 +15,20 @@ public class Bid {
     @Column(name = "id", nullable = false, updatable = false)
     private int id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    // TODO: 2023-02-16 osäker om detta funkar
+/*    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "seller_id", referencedColumnName = "id")
-    private User userSeller;
+    private User seller;
 
     @OneToOne
     @JoinColumn(name = "buyer_id", referencedColumnName = "id")
-    private User userBuyer;
+    private User buyer;*/
+
+    @ManyToOne@JoinColumns({
+            @JoinColumn(name = "buyer_id", referencedColumnName = "id"),
+            @JoinColumn(name = "seller_id", referencedColumnName = "id")})
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "auction_id", referencedColumnName = "id")
@@ -37,10 +44,9 @@ public class Bid {
     public Bid() {
     }
 
-    public Bid(int id, User userSeller, User userBuyer, Auction auction, Long bidAmount, Date createdAt) {
+    public Bid(int id, User user, Auction auction, Long bidAmount, Date createdAt) {
         this.id = id;
-        this.userSeller = userSeller;
-        this.userBuyer = userBuyer;
+        this.user = user;
         this.auction = auction;
         this.bidAmount = bidAmount;
         this.createdAt = createdAt;
@@ -54,20 +60,12 @@ public class Bid {
         this.id = id;
     }
 
-    public User getUserSeller() {
-        return userSeller;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserSeller(User userSeller) {
-        this.userSeller = userSeller;
-    }
-
-    public User getUserBuyer() {
-        return userBuyer;
-    }
-
-    public void setUserBuyer(User userBuyer) {
-        this.userBuyer = userBuyer;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Auction getAuction() {
