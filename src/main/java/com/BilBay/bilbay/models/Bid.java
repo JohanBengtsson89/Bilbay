@@ -2,6 +2,7 @@ package com.BilBay.bilbay.models;
 
 import jakarta.persistence.*;
 import jdk.jfr.Relational;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 
@@ -10,41 +11,37 @@ import java.util.Date;
 public class Bid {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, updatable = false)
     private int id;
 
-
-    @Column(name = "seller_id")
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "seller_id", referencedColumnName = "id")
-    private User sellerId;
+    private User userSeller;
 
-    @Column(name = "buyer_id")
     @OneToOne
     @JoinColumn(name = "buyer_id", referencedColumnName = "id")
-    private User buyerId;
+    private User userBuyer;
 
-    @Column(name = "auction_id")
     @ManyToOne
     @JoinColumn(name = "auction_id", referencedColumnName = "id")
-    private Auction auctionId;
+    private Auction auction;
 
     @Column(name = "bid_amount")
-    private int bidAmount;
+    private Long bidAmount;
 
     @Column(name = "created_at")
-    @Temporal(TemporalType.DATE)
+    @CreationTimestamp
     private Date createdAt;
 
     public Bid() {
     }
 
-    public Bid(int id, User sellerId, User buyerId, Auction auctionId, int bidAmount, Date createdAt) {
+    public Bid(int id, User userSeller, User userBuyer, Auction auction, Long bidAmount, Date createdAt) {
         this.id = id;
-        this.sellerId = sellerId;
-        this.buyerId = buyerId;
-        this.auctionId = auctionId;
+        this.userSeller = userSeller;
+        this.userBuyer = userBuyer;
+        this.auction = auction;
         this.bidAmount = bidAmount;
         this.createdAt = createdAt;
     }
@@ -57,35 +54,35 @@ public class Bid {
         this.id = id;
     }
 
-    public User getSellerId() {
-        return sellerId;
+    public User getUserSeller() {
+        return userSeller;
     }
 
-    public void setSellerId(User sellerId) {
-        this.sellerId = sellerId;
+    public void setUserSeller(User userSeller) {
+        this.userSeller = userSeller;
     }
 
-    public User getBuyerId() {
-        return buyerId;
+    public User getUserBuyer() {
+        return userBuyer;
     }
 
-    public void setBuyerId(User buyerId) {
-        this.buyerId = buyerId;
+    public void setUserBuyer(User userBuyer) {
+        this.userBuyer = userBuyer;
     }
 
-    public Auction getAuctionId() {
-        return auctionId;
+    public Auction getAuction() {
+        return auction;
     }
 
-    public void setAuctionId(Auction auctionId) {
-        this.auctionId = auctionId;
+    public void setAuction(Auction auction) {
+        this.auction = auction;
     }
 
-    public int getBidAmount() {
+    public Long getBidAmount() {
         return bidAmount;
     }
 
-    public void setBidAmount(int bidAmount) {
+    public void setBidAmount(Long bidAmount) {
         this.bidAmount = bidAmount;
     }
 
@@ -97,5 +94,7 @@ public class Bid {
         this.createdAt = createdAt;
     }
 }
+
+
 
 
