@@ -16,19 +16,14 @@ public class Bid {
     private int id;
 
 
-    // TODO: 2023-02-16 osäker om detta funkar
-/*    @ManyToOne(cascade = CascadeType.ALL)
+    // Ändrade här enligt överenskommelse - Johan
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "seller_id", referencedColumnName = "id")
     private User seller;
 
     @OneToOne
     @JoinColumn(name = "buyer_id", referencedColumnName = "id")
-    private User buyer;*/
-
-    @ManyToOne@JoinColumns({
-            @JoinColumn(name = "buyer_id", referencedColumnName = "id"),
-            @JoinColumn(name = "seller_id", referencedColumnName = "id")})
-    private User user;
+    private User buyer;
 
     @ManyToOne
     @JoinColumn(name = "auction_id", referencedColumnName = "id")
@@ -44,9 +39,10 @@ public class Bid {
     public Bid() {
     }
 
-    public Bid(int id, User user, Auction auction, Long bidAmount, Date createdAt) {
+    public Bid(int id, User seller, User buyer, Auction auction, Long bidAmount, Date createdAt) {
         this.id = id;
-        this.user = user;
+        this.seller = seller;
+        this.buyer = buyer;
         this.auction = auction;
         this.bidAmount = bidAmount;
         this.createdAt = createdAt;
@@ -60,12 +56,20 @@ public class Bid {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public User getSeller() {
+        return seller;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setSeller(User seller) {
+        this.seller = seller;
+    }
+
+    public User getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(User buyer) {
+        this.buyer = buyer;
     }
 
     public Auction getAuction() {
