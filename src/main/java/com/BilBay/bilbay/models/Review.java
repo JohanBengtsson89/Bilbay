@@ -14,19 +14,14 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    // TODO: 2023-02-16 samma lösning som på bid
-/*    @ManyToOne
+    // Ändrade här enligt överenskomlse - Johan
+    @ManyToOne
     @JoinColumn(name = "users_id_by", referencedColumnName = "id")
     private User userBy; // Kan inte döpa den till user
 
     @ManyToOne
     @JoinColumn(name = "users_id_for", referencedColumnName = "id")
-    private User userFor; // Kan inte döpa den till user*/
-
-    @ManyToOne@JoinColumns({
-            @JoinColumn(name = "user_for", referencedColumnName = "id"),
-            @JoinColumn(name = "user_by", referencedColumnName = "id")})
-    private User user;
+    private User userFor; // Kan inte döpa den till user
 
     @Column(name = "comment")
     private String comment;
@@ -45,9 +40,10 @@ public class Review {
     public Review() {
     }
 
-    public Review(int id, User user, String comment, int rate, Date createdAt, Date updatedAt) {
+    public Review(int id, User userBy, User userFor, String comment, int rate, Date createdAt, Date updatedAt) {
         this.id = id;
-        this.user = user;
+        this.userBy = userBy;
+        this.userFor = userFor;
         this.comment = comment;
         this.rate = rate;
         this.createdAt = createdAt;
@@ -62,12 +58,20 @@ public class Review {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public User getUserBy() {
+        return userBy;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserBy(User userBy) {
+        this.userBy = userBy;
+    }
+
+    public User getUserFor() {
+        return userFor;
+    }
+
+    public void setUserFor(User userFor) {
+        this.userFor = userFor;
     }
 
     public String getComment() {

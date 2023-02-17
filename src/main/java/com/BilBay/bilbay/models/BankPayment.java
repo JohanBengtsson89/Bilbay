@@ -2,6 +2,9 @@ package com.BilBay.bilbay.models;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "bank_payment")
 public class BankPayment {
