@@ -9,7 +9,7 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)
-    private Long id;
+    private long id;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "users_id", referencedColumnName = "id")
@@ -19,7 +19,7 @@ public class Address {
     private String address;
 
     @Column(name = "telephone")
-    private int telephone;
+    private long telephone;
 
     @Column (name = "city")
     private String city;
@@ -33,11 +33,11 @@ public class Address {
     public Address() {
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -57,7 +57,7 @@ public class Address {
         this.address = address;
     }
 
-    public int getTelephone() {
+    public long getTelephone() {
         return telephone;
     }
 
@@ -89,7 +89,7 @@ public class Address {
         this.postal_code = postal_code;
     }
 
-    public Address(Long id, User user, String address, int telephone, String city, String country, int postal_code)
+    public Address(long id, User user, String address, long telephone, String city, String country, int postal_code)
     {
         this.id = id;
         this.user = user;
