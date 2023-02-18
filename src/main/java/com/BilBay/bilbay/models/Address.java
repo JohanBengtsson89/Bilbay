@@ -19,7 +19,7 @@ public class Address {
     private String address;
 
     @Column(name = "telephone")
-    private long telephone;
+    private int telephone;
 
     @Column (name = "city")
     private String city;
