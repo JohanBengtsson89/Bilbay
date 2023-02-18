@@ -12,7 +12,6 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany
     @Column (name = "name")
     private String name;
 
@@ -35,5 +34,7 @@ public class Category {
     public Category(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+    public Category() {
     }
 }
