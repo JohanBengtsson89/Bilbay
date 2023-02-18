@@ -2,6 +2,9 @@ package com.BilBay.bilbay.models;
 
 import jakarta.persistence.*;
 import org.yaml.snakeyaml.events.Event;
+import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table (name = "category")
@@ -14,6 +17,16 @@ public class Category {
 
     @Column (name = "name")
     private String name;
+    @OneToMany(mappedBy = "category")
+    private List<Product> products= new ArrayList<>();
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
 
     public int getId() {
         return id;
@@ -31,9 +44,10 @@ public class Category {
         this.name = name;
     }
 
-    public Category(int id, String name) {
+    public Category(int id, String name, List<Product> products) {
         this.id = id;
         this.name = name;
+        this.products = products;
     }
     public Category() {
     }
