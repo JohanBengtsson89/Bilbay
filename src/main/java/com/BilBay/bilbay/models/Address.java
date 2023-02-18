@@ -12,8 +12,8 @@ public class Address {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user_id;
+    @JoinColumn(name = "users_id", referencedColumnName = "id")
+    private User user;
 
     @Column(name = "address")
     private String address;
@@ -41,12 +41,12 @@ public class Address {
         this.id = id;
     }
 
-    public User getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(User user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getAddress() {
@@ -89,10 +89,10 @@ public class Address {
         this.postal_code = postal_code;
     }
 
-    public Address(Long id, User user_id, String address, int telephone, String city, String country, int postal_code)
+    public Address(Long id, User user, String address, int telephone, String city, String country, int postal_code)
     {
         this.id = id;
-        this.user_id = user_id;
+        this.user = user;
         this.address = address;
         this.telephone = telephone;
         this.city = city;
