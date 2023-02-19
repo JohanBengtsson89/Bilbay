@@ -9,9 +9,13 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -19,9 +23,9 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "users_type")
+    @JoinColumn(name = "users_type_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private typeUser typeUser;
+    private TypeUser typeUser;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
@@ -34,10 +38,14 @@ public class User {
     private String passwordHash;
     @Column(name = "created_at")
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    //    Testa med annotering @CreationTimestamp
     private LocalDateTime createdAt;
     @Column(name = "updated_at")
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+//    Testa med annotering @UpdateTimestamp
     private LocalDateTime updatedAt;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<User> users = new HashSet<>();
 
     public User() {
     }
@@ -50,12 +58,12 @@ public class User {
         this.id = id;
     }
 
-    public typeUser getTypeUser() {
+    public TypeUser getTypeUser() {
         return typeUser;
     }
 
-    public void setTypeUser(typeUser typeUser) {
-        this.typeUser = typeUser;
+    public void setTypeUser(TypeUser typeUser) {
+        this.TypeUser = typeUser;
     }
 
     public String getFirstName() {
