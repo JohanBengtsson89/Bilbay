@@ -3,6 +3,8 @@ package com.BilBay.bilbay.models;
 import jakarta.persistence.*;
 import org.yaml.snakeyaml.events.Event;
 
+import java.util.HashSet;
+
 @Entity
 @Table (name = "favorite")
 public class Favorite {
@@ -12,21 +14,17 @@ public class Favorite {
     private long id;
 
 
-    @ManyToOne
+    @ManyToMany
     @JoinColumn (name = "user_id", referencedColumnName = "id")
-    private User user;
+    private set<user> users = new HashSet<>();
 
-    @ManyToOne
+    @ManyToMany
     @JoinColumn (name = "product_id",referencedColumnName = "id")
-    private Product product;
+    private Set<Product> products = new HashSet<>();
 
     public Favorite() {
-    }
 
-    public Favorite(long id, User user, Product product) {
-        this.id = id;
-        this.user = user;
-        this.product = product;
+
     }
 
     public long getId() {
@@ -37,18 +35,28 @@ public class Favorite {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public set<user> getUsers() {
+        return users;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsers(set<user> users) {
+        this.users = users;
     }
 
-    public Product getProduct() {
-        return product;
+    public Set<Product> getProducts() {
+        return products;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
+
+    public Favorite(long id, set<user> users, Set<Product> products) {
+        this.id = id;
+        this.users = users;
+        this.products = products;
+    }
+
+}
+
+
