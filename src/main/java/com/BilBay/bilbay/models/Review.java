@@ -12,7 +12,7 @@ public class Review {
     @Id
     @Column(name = "id", nullable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     // Ändrade här enligt överenskomlse - Johan
     @ManyToOne
@@ -40,7 +40,7 @@ public class Review {
     public Review() {
     }
 
-    public Review(int id, User userBy, User userFor, String comment, int rate, Date createdAt, Date updatedAt) {
+    public Review(Long id, User userBy, User userFor, String comment, int rate, Date createdAt, Date updatedAt) {
         this.id = id;
         this.userBy = userBy;
         this.userFor = userFor;
@@ -50,11 +50,11 @@ public class Review {
         this.updatedAt = updatedAt;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

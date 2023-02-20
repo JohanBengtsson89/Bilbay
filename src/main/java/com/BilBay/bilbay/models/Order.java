@@ -10,7 +10,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)
-    private int id;
+    private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "bid_id", referencedColumnName = "id")
@@ -23,17 +23,17 @@ public class Order {
     public Order() {
     }
 
-    public Order(int id, Bid bid, LocalDate registrationName) {
+    public Order(Long id, Bid bid, LocalDate registrationName) {
         this.id = id;
         this.bid = bid;
         this.registrationName = registrationName;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
