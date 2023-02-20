@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import org.yaml.snakeyaml.events.Event;
 
 @Entity
-@Table (name = "Favorite")
+@Table (name = "favorite")
 public class Favorite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,13 +13,20 @@ public class Favorite {
 
 
     @ManyToOne
-    @JoinColumn (name = "User_id", referencedColumnName = "id")
-    private User user_id;
+    @JoinColumn (name = "user_id", referencedColumnName = "id")
+    private User user;
 
     @ManyToOne
-    @JoinColumn (name = "product id",referencedColumnName = "id")
-    private Product product_id;
+    @JoinColumn (name = "product_id",referencedColumnName = "id")
+    private Product product;
+
     public Favorite() {
+    }
+
+    public Favorite(long id, User user, Product product) {
+        this.id = id;
+        this.user = user;
+        this.product = product;
     }
 
     public long getId() {
@@ -30,27 +37,18 @@ public class Favorite {
         this.id = id;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public String getProduct_id() {
-        return product_id;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProduct_id(String product_id) {
-        this.product_id = product_id;
+    public void setProduct(Product product) {
+        this.product = product;
     }
-
-    public Favorite(long id, String user_id, String product_id) {
-        this.id = id;
-        this.user_id = user_id;
-        this.product_id = product_id;
-    }
-
-
-}
