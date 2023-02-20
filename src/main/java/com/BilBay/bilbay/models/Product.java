@@ -39,8 +39,8 @@ public class Product {
     private Auction auction;
     @Column(name = "product_name")
     private String productName;
-    @Column(name = "orignal_price")
-    private long orginalPrice;
+    @Column(name = "original_price")
+    private long originalPrice;
     @Column(name = "created_at")
     @CreationTimestamp
     private LocalDateTime createdAt;
