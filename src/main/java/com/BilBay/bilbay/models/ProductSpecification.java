@@ -17,7 +17,7 @@ public class ProductSpecification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "id")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "productSpecification")
     private Product product;
     @Column(name = "product_photo")
     private String productPhoto;
