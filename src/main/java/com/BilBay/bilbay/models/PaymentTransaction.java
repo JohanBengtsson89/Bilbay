@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class PaymentTransaction {
     @Id
     @Column(name = "id", nullable = false, updatable = false)
-    private int id;
+    private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "orders_id", referencedColumnName = "id")
@@ -39,7 +39,7 @@ public class PaymentTransaction {
     public PaymentTransaction() {
     }
 
-    public PaymentTransaction(int id, Order order, Bid bid, CardPayment cardPayment, BankPayment bankPayment, LocalDate createdAt, boolean isSuccessful) {
+    public PaymentTransaction(Long id, Order order, Bid bid, CardPayment cardPayment, BankPayment bankPayment, LocalDate createdAt, boolean isSuccessful) {
         this.id = id;
         this.order = order;
         this.bid = bid;
@@ -49,11 +49,11 @@ public class PaymentTransaction {
         this.isSuccessful = isSuccessful;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
