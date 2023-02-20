@@ -16,17 +16,29 @@ public class Order {
     @JoinColumn(name = "bid_id", referencedColumnName = "id")
     private Bid bid;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
+    private DeliveryPaymentTransaction deliveryPaymentTransaction;
+
     @CreationTimestamp
     @Column(name = "registration_date")
-    private LocalDate registrationName;
+    private LocalDate registrationDate;
 
     public Order() {
     }
 
-    public Order(Long id, Bid bid, LocalDate registrationName) {
+    public Order(Long id, Bid bid, DeliveryPaymentTransaction deliveryPaymentTransaction, LocalDate registrationDate) {
         this.id = id;
         this.bid = bid;
-        this.registrationName = registrationName;
+        this.deliveryPaymentTransaction = deliveryPaymentTransaction;
+        this.registrationDate = registrationDate;
+    }
+
+    public DeliveryPaymentTransaction getDeliveryPaymentTransaction() {
+        return deliveryPaymentTransaction;
+    }
+
+    public void setDeliveryPaymentTransaction(DeliveryPaymentTransaction deliveryPaymentTransaction) {
+        this.deliveryPaymentTransaction = deliveryPaymentTransaction;
     }
 
     public Long getId() {
@@ -45,11 +57,11 @@ public class Order {
         this.bid = bid;
     }
 
-    public LocalDate getRegistrationName() {
-        return registrationName;
+    public LocalDate getRegistrationDate() {
+        return registrationDate;
     }
 
-    public void setRegistrationName(LocalDate registrationName) {
-        this.registrationName = registrationName;
+    public void setRegistrationDate(LocalDate registrationDate) {
+        this.registrationDate = registrationDate;
     }
 }
