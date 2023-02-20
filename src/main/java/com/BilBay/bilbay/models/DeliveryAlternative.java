@@ -29,11 +29,20 @@ public class DeliveryAlternative {
         this.deliveryPaymentTransactions = deliveryPaymentTransactions;
     }
 
-    public DeliveryAlternative(Long id, String companyName, int deliveryCost, String estimatedDelivery) {
+    public DeliveryAlternative(Long id, String companyName, int deliveryCost, String estimatedDelivery, List<DeliveryPaymentTransaction> deliveryPaymentTransactions) {
         this.id = id;
         this.companyName = companyName;
         this.deliveryCost = deliveryCost;
         this.estimatedDelivery = estimatedDelivery;
+        this.deliveryPaymentTransactions = deliveryPaymentTransactions;
+    }
+
+    public List<DeliveryPaymentTransaction> getDeliveryPaymentTransactions() {
+        return deliveryPaymentTransactions;
+    }
+
+    public void setDeliveryPaymentTransactions(List<DeliveryPaymentTransaction> deliveryPaymentTransactions) {
+        this.deliveryPaymentTransactions = deliveryPaymentTransactions;
     }
 
     public Long getId() {
