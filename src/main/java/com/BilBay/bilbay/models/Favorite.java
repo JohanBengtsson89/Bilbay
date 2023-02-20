@@ -15,12 +15,13 @@ public class Favorite {
     private Long id;
 
 
-    @ManyToMany
-    @JoinColumn (name = "user_id", referencedColumnName = "id")
+    @ManyToMany(mappedBy = "favorites")
     private Set<User> users = new HashSet<>();
 
     @ManyToMany
-    @JoinColumn (name = "product_id",referencedColumnName = "id")
+    @JoinTable(name = "favorite_products",
+            joinColumns = @JoinColumn(name = "favorite_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
     private Set<Product> products = new HashSet<>();
 
     public Favorite(Long id, Set<User> users, Set<Product> products) {
