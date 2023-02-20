@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.yaml.snakeyaml.events.Event;
 
 import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table (name = "favorite")
@@ -16,17 +17,21 @@ public class Favorite {
 
     @ManyToMany
     @JoinColumn (name = "user_id", referencedColumnName = "id")
-    private set<user> users = new HashSet<>();
+    private Set<User> users = new HashSet<>();
 
     @ManyToMany
     @JoinColumn (name = "product_id",referencedColumnName = "id")
     private Set<Product> products = new HashSet<>();
 
-    public Favorite() {
-
+    public Favorite(long id, Set<User> users, Set<Product> products) {
+        this.id = id;
+        this.users = users;
+        this.products = products;
 
     }
+    public Favorite() {
 
+    }
     public long getId() {
         return id;
     }
@@ -35,11 +40,11 @@ public class Favorite {
         this.id = id;
     }
 
-    public set<user> getUsers() {
+    public Set<User> getUsers() {
         return users;
     }
 
-    public void setUsers(set<user> users) {
+    public void setUsers(Set<User> users) {
         this.users = users;
     }
 
@@ -48,12 +53,6 @@ public class Favorite {
     }
 
     public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
-
-    public Favorite(long id, set<user> users, Set<Product> products) {
-        this.id = id;
-        this.users = users;
         this.products = products;
     }
 
