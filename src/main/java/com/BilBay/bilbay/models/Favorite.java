@@ -12,7 +12,7 @@ public class Favorite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)
-    private long id;
+    private Long id;
 
 
     @ManyToMany
@@ -23,7 +23,7 @@ public class Favorite {
     @JoinColumn (name = "product_id",referencedColumnName = "id")
     private Set<Product> products = new HashSet<>();
 
-    public Favorite(long id, Set<User> users, Set<Product> products) {
+    public Favorite(Long id, Set<User> users, Set<Product> products) {
         this.id = id;
         this.users = users;
         this.products = products;
@@ -32,11 +32,11 @@ public class Favorite {
     public Favorite() {
 
     }
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

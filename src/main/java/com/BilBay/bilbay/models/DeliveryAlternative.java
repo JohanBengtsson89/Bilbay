@@ -10,7 +10,7 @@ public class DeliveryAlternative {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false,updatable = false)
-    private int id;
+    private Long id;
     @Column(name = "company_name")
     private String companyName;
     @Column(name = "delivery_cost")
@@ -29,18 +29,18 @@ public class DeliveryAlternative {
         this.deliveryPaymentTransactions = deliveryPaymentTransactions;
     }
 
-    public DeliveryAlternative(int id, String companyName, int deliveryCost, String estimatedDelivery) {
+    public DeliveryAlternative(Long id, String companyName, int deliveryCost, String estimatedDelivery) {
         this.id = id;
         this.companyName = companyName;
         this.deliveryCost = deliveryCost;
         this.estimatedDelivery = estimatedDelivery;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
