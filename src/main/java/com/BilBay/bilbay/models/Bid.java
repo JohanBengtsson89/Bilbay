@@ -18,10 +18,6 @@ public class Bid {
 
     // Ändrade här enligt överenskommelse - Johan
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "seller_id", referencedColumnName = "id")
-    private User seller;
-
-    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "buyer_id", referencedColumnName = "id")
     private User buyer;
 
@@ -41,7 +37,7 @@ public class Bid {
 
     public Bid(Long id, User seller, User buyer, Auction auction, Long bidAmount, Date createdAt) {
         this.id = id;
-        this.seller = seller;
+//        this.seller = seller;
         this.buyer = buyer;
         this.auction = auction;
         this.bidAmount = bidAmount;
@@ -56,13 +52,13 @@ public class Bid {
         this.id = id;
     }
 
-    public User getSeller() {
-        return seller;
-    }
-
-    public void setSeller(User seller) {
-        this.seller = seller;
-    }
+//    public User getSeller() {
+//        return seller;
+//    }
+//
+//    public void setSeller(User seller) {
+//        this.seller = seller;
+//    }
 
     public User getBuyer() {
         return buyer;
