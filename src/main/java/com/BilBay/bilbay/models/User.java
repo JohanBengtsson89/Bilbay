@@ -55,8 +55,6 @@ public class User {
     private Set<Product> products = new HashSet<>();
     @OneToMany(mappedBy = "user")
     private Set<Auction> auctions = new HashSet<>();
-    @OneToMany(mappedBy = "seller")
-    private Set<Bid> bidsSeller = new HashSet<>();
     @OneToMany(mappedBy = "buyer")
     private Set<Bid> bidsBuyer = new HashSet<>();
     @OneToMany(mappedBy = "userFor")
@@ -64,10 +62,10 @@ public class User {
     @OneToMany(mappedBy = "userBy")
     private Set<Review> reviewsBy = new HashSet<>();
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_favorites",
+    @JoinTable(name = "favorites",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "favorite_id", referencedColumnName = "id"))
-    private Set<Favorite> favorites = new HashSet<>();
+            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
+    private Set<Product> favorites = new HashSet<>();
     @OneToMany(mappedBy = "user")
     private Set<BankPayment> bankPayments = new HashSet<>();
     @OneToMany(mappedBy = "user")
@@ -169,13 +167,13 @@ public class User {
         this.auctions = auctions;
     }
 
-    public Set<Bid> getBidsSeller() {
-        return bidsSeller;
-    }
-
-    public void setBidsSeller(Set<Bid> bidsSeller) {
-        this.bidsSeller = bidsSeller;
-    }
+//    public Set<Bid> getBidsSeller() {
+//        return bidsSeller;
+//    }
+//
+//    public void setBidsSeller(Set<Bid> bidsSeller) {
+//        this.bidsSeller = bidsSeller;
+//    }
 
     public Set<Bid> getBidsBuyer() {
         return bidsBuyer;
@@ -201,11 +199,11 @@ public class User {
         this.reviewsBy = reviewsBy;
     }
 
-    public Set<Favorite> getFavorites() {
+    public Set<Product> getFavorites() {
         return favorites;
     }
 
-    public void setFavorites(Set<Favorite> favorites) {
+    public void setFavorites(Set<Product> favorites) {
         this.favorites = favorites;
     }
 

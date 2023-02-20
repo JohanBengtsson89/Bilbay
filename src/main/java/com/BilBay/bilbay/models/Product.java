@@ -33,8 +33,8 @@ public class Product {
     @JoinColumn(name = "product_specification_id", referencedColumnName = "id")
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private ProductSpecification productSpecification;
-    @ManyToMany(mappedBy = "products")
-    private Set<Favorite> favorites = new HashSet<>();
+    @ManyToMany(mappedBy = "favorites")
+    private Set<User> users = new HashSet<>();
     @OneToOne(mappedBy = "product")
     private Auction auction;
     @Column(name = "product_name")
@@ -85,12 +85,12 @@ public class Product {
         this.productSpecification = productSpecification;
     }
 
-    public Set<Favorite> getFavorites() {
-        return favorites;
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setFavorites(Set<Favorite> favorites) {
-        this.favorites = favorites;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
     public Auction getAuction() {
