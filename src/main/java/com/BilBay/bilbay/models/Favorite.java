@@ -12,12 +12,13 @@ public class Favorite {
     private long id;
 
 
-    @ManyToMany
-    @Column (name = "User_id")
-    private String user_id;
+    @ManyToOne
+    @JoinColumn (name = "User_id", referencedColumnName = "id")
+    private User user_id;
 
-    @Column (name = "product id")
-    private String product_id;
+    @ManyToOne
+    @JoinColumn (name = "product id",referencedColumnName = "id")
+    private Product product_id;
     public Favorite() {
     }
 
