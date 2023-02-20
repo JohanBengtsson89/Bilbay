@@ -13,7 +13,7 @@ public class Bid {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)
-    private int id;
+    private Long id;
 
 
     // Ändrade här enligt överenskommelse - Johan
@@ -21,11 +21,11 @@ public class Bid {
     @JoinColumn(name = "seller_id", referencedColumnName = "id")
     private User seller;
 
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "buyer_id", referencedColumnName = "id")
     private User buyer;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "auction_id", referencedColumnName = "id")
     private Auction auction;
 
@@ -39,7 +39,7 @@ public class Bid {
     public Bid() {
     }
 
-    public Bid(int id, User seller, User buyer, Auction auction, Long bidAmount, Date createdAt) {
+    public Bid(Long id, User seller, User buyer, Auction auction, Long bidAmount, Date createdAt) {
         this.id = id;
         this.seller = seller;
         this.buyer = buyer;
@@ -48,11 +48,11 @@ public class Bid {
         this.createdAt = createdAt;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

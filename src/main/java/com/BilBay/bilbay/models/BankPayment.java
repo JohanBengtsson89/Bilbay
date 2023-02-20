@@ -2,8 +2,7 @@ package com.BilBay.bilbay.models;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "bank_payment")
@@ -11,8 +10,7 @@ public class BankPayment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
+    private Long id;
 
     @JoinColumn(name = "users_id", referencedColumnName = "id")
     @ManyToOne(cascade = CascadeType.ALL)
@@ -24,13 +22,14 @@ public class BankPayment {
     @Column(name = "bank_account_nr")
     private Long bankAccountNr;
 
-    @OneToMany(mappedBy = "bankPayment")
-    private List < PaymentTransaction > paymentTransactions = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "bankPayment")
+    private Set< PaymentTransaction > paymentTransactions = new HashSet<>();
 
     public BankPayment() {
     }
 
-    public BankPayment(int id, User user, String bankName, Long bankAccountNr, List<PaymentTransaction> paymentTransactions) {
+    public BankPayment(Long id, User user, String bankName, Long bankAccountNr,
+                       Set<PaymentTransaction> paymentTransactions) {
         this.id = id;
         this.user = user;
         this.bankName = bankName;
@@ -38,11 +37,11 @@ public class BankPayment {
         this.paymentTransactions = paymentTransactions;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -70,11 +69,11 @@ public class BankPayment {
         this.bankAccountNr = bankAccountNr;
     }
 
-    public List<PaymentTransaction> getPaymentTransactions() {
+    public Set<PaymentTransaction> getPaymentTransactions() {
         return paymentTransactions;
     }
 
-    public void setPaymentTransactions(List<PaymentTransaction> paymentTransactions) {
+    public void setPaymentTransactions(Set<PaymentTransaction> paymentTransactions) {
         this.paymentTransactions = paymentTransactions;
     }
 }

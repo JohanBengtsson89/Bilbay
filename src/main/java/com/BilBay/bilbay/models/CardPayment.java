@@ -2,9 +2,7 @@ package com.BilBay.bilbay.models;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "card_payment")
@@ -13,11 +11,11 @@ public class CardPayment {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User userId;
+    private User user;
 
     @Column(name = "card_type")
     private String cardType;
@@ -31,16 +29,16 @@ public class CardPayment {
     @Column(name = "cvv")
     private int cvv;
 
-    @OneToMany(mappedBy = "cardPayment")
-    private List <DeliveryPaymentTransaction> deliveryPaymentTransactions= new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "cardPayment")
+    private Set<DeliveryPaymentTransaction> deliveryPaymentTransactions= new HashSet<>();
 
     public CardPayment() {
     }
 
-    public CardPayment(int id, User userId, String cardType, long cardNumber, Date expireDate, int cvv,
-                       List<DeliveryPaymentTransaction> deliveryPaymentTransactions) {
+    public CardPayment(Long id, User user, String cardType, long cardNumber, Date expireDate, int cvv,
+                       Set<DeliveryPaymentTransaction> deliveryPaymentTransactions) {
         this.id = id;
-        this.userId = userId;
+        this.user = user;
         this.cardType = cardType;
         this.cardNumber = cardNumber;
         this.expireDate = expireDate;
@@ -48,20 +46,20 @@ public class CardPayment {
         this.deliveryPaymentTransactions = deliveryPaymentTransactions;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public User getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getCardType() {
@@ -96,11 +94,11 @@ public class CardPayment {
         this.cvv = cvv;
     }
 
-    public List<DeliveryPaymentTransaction> getDeliveryPaymentTransactions() {
+    public Set<DeliveryPaymentTransaction> getDeliveryPaymentTransactions() {
         return deliveryPaymentTransactions;
     }
 
-    public void setDeliveryPaymentTransactions(List<DeliveryPaymentTransaction> deliveryPaymentTransactions) {
+    public void setDeliveryPaymentTransactions(Set<DeliveryPaymentTransaction> deliveryPaymentTransactions) {
         this.deliveryPaymentTransactions = deliveryPaymentTransactions;
     }
 }
