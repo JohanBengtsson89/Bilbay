@@ -15,6 +15,8 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "auction")
@@ -31,7 +33,7 @@ public class Auction {
     private Product product;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "current_bid", referencedColumnName = "id")
-    private Bid bid;
+    private Set<Bid> bids = new HashSet<>();
     @Column(name = "reserve_price")
     private int reservePrice;
     @Column(name = "start_price")
@@ -69,20 +71,20 @@ public class Auction {
         this.product = product;
     }
 
+    public Set<Bid> getBids() {
+        return bids;
+    }
+
+    public void setBids(Set<Bid> bids) {
+        this.bids = bids;
+    }
+
     public int getReservePrice() {
         return reservePrice;
     }
 
     public void setReservePrice(int reservePrice) {
         this.reservePrice = reservePrice;
-    }
-
-    public Bid getBid() {
-        return bid;
-    }
-
-    public void setBid(Bid bid) {
-        this.bid = bid;
     }
 
     public int getStartPrice() {
