@@ -39,8 +39,8 @@ public class Product {
     private Auction auction;
     @Column(name = "product_name")
     private String productName;
-    @Column(name = "orignal_price")
-    private long orginalPrice;
+    @Column(name = "original_price")
+    private long originalPrice;
     @Column(name = "created_at")
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -109,12 +109,12 @@ public class Product {
         this.productName = productName;
     }
 
-    public long getOrginalPrice() {
-        return orginalPrice;
+    public long getOriginalPrice() {
+        return originalPrice;
     }
 
-    public void setOrginalPrice(long orginalPrice) {
-        this.orginalPrice = orginalPrice;
+    public void setOriginalPrice(long originalPrice) {
+        this.originalPrice = originalPrice;
     }
 
     public LocalDateTime getCreatedAt() {
