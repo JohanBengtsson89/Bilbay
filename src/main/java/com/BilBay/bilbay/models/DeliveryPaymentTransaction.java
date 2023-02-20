@@ -13,7 +13,7 @@ public class DeliveryPaymentTransaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)
-    private int id;
+    private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "buyer_id", referencedColumnName = "id")
@@ -43,7 +43,7 @@ public class DeliveryPaymentTransaction {
     public DeliveryPaymentTransaction() {
     }
 
-    public DeliveryPaymentTransaction(int id, User user, Order order, DeliveryAlternative deliveryAlternatives, CardPayment cardPayment, boolean isSuccessful, LocalDate createdAt) {
+    public DeliveryPaymentTransaction(Long id, User user, Order order, DeliveryAlternative deliveryAlternatives, CardPayment cardPayment, boolean isSuccessful, LocalDate createdAt) {
         this.id = id;
         this.user = user;
         this.order = order;
@@ -53,11 +53,11 @@ public class DeliveryPaymentTransaction {
         this.createdAt = createdAt;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
