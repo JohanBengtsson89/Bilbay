@@ -109,12 +109,12 @@ public class Product {
         this.productName = productName;
     }
 
-    public long getOrginalPrice() {
-        return orginalPrice;
+    public long getOriginalPrice() {
+        return originalPrice;
     }
 
-    public void setOrginalPrice(long orginalPrice) {
-        this.orginalPrice = orginalPrice;
+    public void setOriginalPrice(long originalPrice) {
+        this.originalPrice = originalPrice;
     }
 
     public LocalDateTime getCreatedAt() {
