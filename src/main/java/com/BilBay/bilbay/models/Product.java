@@ -12,6 +12,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -48,6 +49,7 @@ public class Product {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
     @Column(name = "sold")
+    @ColumnDefault("false")
     private Boolean sold;
 
     public Product() {

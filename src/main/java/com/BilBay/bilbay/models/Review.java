@@ -3,6 +3,7 @@ package com.BilBay.bilbay.models;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -31,16 +32,16 @@ public class Review {
 
     @Column(name = "created_at")
     @CreationTimestamp
-    private Date createdAt;
+    private LocalDate createdAt;
 
     @Column(name = "updated_at")
     @CreationTimestamp
-    private Date updatedAt;
+    private LocalDate updatedAt;
 
     public Review() {
     }
 
-    public Review(Long id, User userBy, User userFor, String comment, int rate, Date createdAt, Date updatedAt) {
+    public Review(Long id, User userBy, User userFor, String comment, int rate, LocalDate createdAt, LocalDate updatedAt) {
         this.id = id;
         this.userBy = userBy;
         this.userFor = userFor;
@@ -90,19 +91,19 @@ public class Review {
         this.rate = rate;
     }
 
-    public Date getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Date getUpdatedAt() {
+    public LocalDate getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
     }
 }

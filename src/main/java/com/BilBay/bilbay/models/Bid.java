@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jdk.jfr.Relational;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -30,12 +31,12 @@ public class Bid {
 
     @Column(name = "created_at")
     @CreationTimestamp
-    private Date createdAt;
+    private LocalDate createdAt;
 
     public Bid() {
     }
 
-    public Bid(Long id, User seller, User buyer, Auction auction, Long bidAmount, Date createdAt) {
+    public Bid(Long id, User seller, User buyer, Auction auction, Long bidAmount, LocalDate createdAt) {
         this.id = id;
 //        this.seller = seller;
         this.buyer = buyer;
@@ -84,11 +85,11 @@ public class Bid {
         this.bidAmount = bidAmount;
     }
 
-    public Date getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
 }
