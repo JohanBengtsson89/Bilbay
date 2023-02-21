@@ -16,6 +16,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -44,15 +45,31 @@ public class Product {
     private long originalPrice;
     @Column(name = "created_at")
     @CreationTimestamp
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
     @Column(name = "updated_at")
     @UpdateTimestamp
-    private LocalDateTime updatedAt;
+    private LocalDate updatedAt;
     @Column(name = "sold")
     @ColumnDefault("false")
     private Boolean sold;
 
     public Product() {
+    }
+
+    public Product(Long id, User user, String category, ProductSpecification productSpecification, Set<User> users,
+                   Auction auction, String productName, long originalPrice, LocalDate createdAt, LocalDate updatedAt,
+                   Boolean sold) {
+        this.id = id;
+        this.user = user;
+        this.category = category;
+        this.productSpecification = productSpecification;
+        this.users = users;
+        this.auction = auction;
+        this.productName = productName;
+        this.originalPrice = originalPrice;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.sold = sold;
     }
 
     public Long getId() {
@@ -119,19 +136,19 @@ public class Product {
         this.originalPrice = originalPrice;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public LocalDate getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
+    public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
     }
 
