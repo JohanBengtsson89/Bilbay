@@ -38,8 +38,10 @@ public class User {
     private String lastName;
     @Column(name = "company_name")
     private String companyName;
-    @Column(name = "email_address")
+    @Column(name = "email_address", unique = true, nullable = false)
     private String emailAddress;
+    @Column(name = "organization_name")
+    private String organizationName;
     @Column(name = "password_hash")
     private String passwordHash;
     @CreationTimestamp
