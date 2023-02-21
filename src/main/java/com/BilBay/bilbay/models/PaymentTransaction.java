@@ -25,7 +25,7 @@ public class PaymentTransaction {
     private CardPayment cardPayment;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "bank_peyment_id", referencedColumnName = "id")
+    @JoinColumn(name = "bank_payment_id", referencedColumnName = "id")
     private BankPayment bankPayment;
 
     @CreationTimestamp

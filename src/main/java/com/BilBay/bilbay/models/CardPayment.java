@@ -24,7 +24,7 @@ public class CardPayment {
     private long cardNumber;
 
     @Column(name = "expire_date")
-    private Date expireDate;
+    private Date expireDate;    // Manuell inmatning, kan behöva byta datatyp - Johan
 
     @Column(name = "cvv")
     private int cvv;

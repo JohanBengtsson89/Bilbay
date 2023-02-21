@@ -13,7 +13,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import org.hibernate.annotations.ColumnDefault;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -39,12 +41,27 @@ public class Auction {
     @Column(name = "start_price")
     private int startPrice;
     @Column(name = "start_time")
-    private LocalDateTime startTime;
+    private LocalDate startTime;
     @Column(name = "end_time")
-    private LocalDateTime endTime;
+    private LocalDate endTime;
+    @Column(name = "active")
+    @ColumnDefault("false")
     private boolean active;
 
     public Auction() {
+    }
+
+    public Auction(Long id, User user, Product product, Set<Bid> bids, int reservePrice,
+                   int startPrice, LocalDate startTime, LocalDate endTime, boolean active) {
+        this.id = id;
+        this.user = user;
+        this.product = product;
+        this.bids = bids;
+        this.reservePrice = reservePrice;
+        this.startPrice = startPrice;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.active = active;
     }
 
     public Long getId() {
@@ -95,19 +112,19 @@ public class Auction {
         this.startPrice = startPrice;
     }
 
-    public LocalDateTime getStartTime() {
+    public LocalDate getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(LocalDate startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public LocalDate getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(LocalDate endTime) {
         this.endTime = endTime;
     }
 
