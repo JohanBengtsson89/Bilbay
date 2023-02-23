@@ -1,5 +1,8 @@
 package com.BilBay.bilbay.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jdk.jfr.Relational;
 import org.hibernate.annotations.CreationTimestamp;
@@ -18,12 +21,14 @@ public class Bid {
 
 
     // Ändrade här enligt överenskommelse - Johan
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "buyer_id", referencedColumnName = "id")
     private User buyer;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "auction_id", referencedColumnName = "id")
+    //@JsonManagedReference
     private Auction auction;
 
     @Column(name = "bid_amount")
@@ -61,6 +66,7 @@ public class Bid {
 //        this.seller = seller;
 //    }
 
+    @JsonBackReference
     public User getBuyer() {
         return buyer;
     }
@@ -69,9 +75,11 @@ public class Bid {
         this.buyer = buyer;
     }
 
+    @JsonBackReference
     public Auction getAuction() {
         return auction;
     }
+
 
     public void setAuction(Auction auction) {
         this.auction = auction;

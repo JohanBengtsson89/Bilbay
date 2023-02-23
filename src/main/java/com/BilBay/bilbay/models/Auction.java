@@ -1,5 +1,6 @@
 package com.BilBay.bilbay.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -34,6 +35,7 @@ public class Auction {
     private Product product;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "current_bid", referencedColumnName = "id")
+    //@JsonBackReference
     private Set<Bid> bids = new HashSet<>();
     @Column(name = "reserve_price")
     private int reservePrice;
@@ -87,6 +89,7 @@ public class Auction {
         this.product = product;
     }
 
+    @JsonManagedReference
     public Set<Bid> getBids() {
         return bids;
     }
