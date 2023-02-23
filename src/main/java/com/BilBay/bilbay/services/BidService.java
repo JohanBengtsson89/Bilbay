@@ -21,30 +21,7 @@ public class BidService {
         return bidRepository.save(bid);
     }
 
-    // get bid
     public Bid getBidByID(Long id) {
         return bidRepository.findById(id).get();
     }
-
-    // get all bids for auction
-   /* public HashSet<Bid> getAllBidsForAuction(Auction auction) {
-        return bidRepository.getAuctionBids(auction);
-    }*/
-
-
-    // delete bid - ska denna funktionen finnas? - Johan
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

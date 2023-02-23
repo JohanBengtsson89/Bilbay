@@ -12,6 +12,4 @@ import java.util.Set;
 @Repository
 public interface BidRepository extends JpaRepository<Bid, Long> {
 
-    // HashSet<Bid> getAuctionBids(Auction auction);
-
 }
