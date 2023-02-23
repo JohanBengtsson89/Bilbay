@@ -28,12 +28,12 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @JoinColumn(name = "seller_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
     @Column(name = "category")
     private String category;
     @JoinColumn(name = "product_specification_id", referencedColumnName = "id")
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     private ProductSpecification productSpecification;
     @ManyToMany(mappedBy = "favorites")
     private Set<User> users = new HashSet<>();

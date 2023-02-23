@@ -31,7 +31,6 @@ public class Auction {
     private User user;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id", referencedColumnName = "id")
-    @JsonManagedReference
     private Product product;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "current_bid", referencedColumnName = "id")
