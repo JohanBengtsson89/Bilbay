@@ -66,6 +66,7 @@ public class Bid {
 //        this.seller = seller;
 //    }
 
+    @JsonBackReference
     public User getBuyer() {
         return buyer;
     }
@@ -74,7 +75,7 @@ public class Bid {
         this.buyer = buyer;
     }
 
-
+    @JsonBackReference
     public Auction getAuction() {
         return auction;
     }

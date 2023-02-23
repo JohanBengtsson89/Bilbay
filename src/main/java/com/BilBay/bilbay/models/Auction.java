@@ -90,7 +90,7 @@ public class Auction {
         this.product = product;
     }
 
-    @JsonBackReference
+    @JsonManagedReference
     public Set<Bid> getBids() {
         return bids;
     }
