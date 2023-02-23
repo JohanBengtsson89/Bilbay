@@ -1,7 +1,12 @@
 package com.BilBay.bilbay.models;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,16 +17,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -41,41 +43,48 @@ public class User {
     private String companyName;
     @Column(name = "email_address", unique = true, nullable = false)
     private String emailAddress;
-    @Column(name = "organization_name")
-    private String organizationName;
+    @Column(name = "organization_nr")
+    private String organizationNumber;
     @Column(name = "password_hash")
     private String passwordHash;
     @CreationTimestamp
     @Column(name = "created_at")
-//    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    //    Testa med annotering @CreationTimestamp
     private LocalDate createdAt;
     @Column(name = "updated_at")
-//    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @UpdateTimestamp
     private LocalDate updatedAt;
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private Set<Product> products = new HashSet<>();
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private Set<Auction> auctions = new HashSet<>();
     @OneToMany(mappedBy = "buyer")
+    @JsonIgnore
     private Set<Bid> bidsBuyer = new HashSet<>();
     @OneToMany(mappedBy = "userFor")
+    @JsonIgnore
     private Set<Review> reviewsFor = new HashSet<>();
     @OneToMany(mappedBy = "userBy")
+    @JsonIgnore
     private Set<Review> reviewsBy = new HashSet<>();
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore
     @JoinTable(name = "favorites",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
     private Set<Product> favorites = new HashSet<>();
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private Set<BankPayment> bankPayments = new HashSet<>();
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private Set<CardPayment> cardPayments = new HashSet<>();
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private Set<DeliveryPaymentTransaction> deliveryPaymentTransactions = new HashSet<>();
     @OneToOne(mappedBy = "user")
+    @JsonIgnore
     private Address address;
 
 
@@ -130,6 +139,14 @@ public class User {
         this.emailAddress = emailAddress;
     }
 
+    public String getOrganizationNumber() {
+        return organizationNumber;
+    }
+
+    public void setOrganizationNumber(String organizationNumber) {
+        this.organizationNumber = organizationNumber;
+    }
+
     public String getPasswordHash() {
         return passwordHash;
     }
@@ -169,14 +186,6 @@ public class User {
     public void setAuctions(Set<Auction> auctions) {
         this.auctions = auctions;
     }
-
-//    public Set<Bid> getBidsSeller() {
-//        return bidsSeller;
-//    }
-//
-//    public void setBidsSeller(Set<Bid> bidsSeller) {
-//        this.bidsSeller = bidsSeller;
-//    }
 
     public Set<Bid> getBidsBuyer() {
         return bidsBuyer;
