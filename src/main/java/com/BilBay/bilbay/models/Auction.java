@@ -1,5 +1,4 @@
 package com.BilBay.bilbay.models;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
@@ -15,12 +14,10 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import org.hibernate.annotations.ColumnDefault;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
-
 @Entity
 @Table(name = "auction")
 public class Auction {
@@ -47,91 +44,61 @@ public class Auction {
     @ColumnDefault("false")
     private boolean active;
 
+
     public Auction() {
     }
-
-    public Auction(Long id, User user, Product product, Set<Bid> bids, int reservePrice,
-                   int startPrice, LocalDate startTime, LocalDate endTime, boolean active) {
-        this.id = id;
-        this.user = user;
-        this.product = product;
-        this.bids = bids;
-        this.reservePrice = reservePrice;
-        this.startPrice = startPrice;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.active = active;
-    }
-
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public User getUser() {
         return user;
     }
-
     public void setUser(User user) {
         this.user = user;
     }
-
     public Product getProduct() {
         return product;
     }
-
     public void setProduct(Product product) {
         this.product = product;
     }
-
     @JsonManagedReference
     public Set<Bid> getBids() {
         return bids;
     }
-
     public void setBids(Set<Bid> bids) {
         this.bids = bids;
     }
-
     public int getReservePrice() {
         return reservePrice;
     }
-
     public void setReservePrice(int reservePrice) {
         this.reservePrice = reservePrice;
     }
-
     public int getStartPrice() {
         return startPrice;
     }
-
     public void setStartPrice(int startPrice) {
         this.startPrice = startPrice;
     }
-
     public LocalDate getStartTime() {
         return startTime;
     }
-
     public void setStartTime(LocalDate startTime) {
         this.startTime = startTime;
     }
-
     public LocalDate getEndTime() {
         return endTime;
     }
-
     public void setEndTime(LocalDate endTime) {
         this.endTime = endTime;
     }
-
     public boolean isActive() {
         return active;
     }
-
     public void setActive(boolean active) {
         this.active = active;
     }
