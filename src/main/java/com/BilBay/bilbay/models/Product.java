@@ -33,7 +33,7 @@ public class Product {
     @Column(name = "category")
     private String category;
     @JoinColumn(name = "product_specification_id", referencedColumnName = "id")
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     private ProductSpecification productSpecification;
     @ManyToMany(mappedBy = "favorites")
     private Set<User> users = new HashSet<>();
