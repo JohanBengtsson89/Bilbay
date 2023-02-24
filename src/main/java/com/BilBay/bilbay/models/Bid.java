@@ -28,7 +28,6 @@ public class Bid {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "auction_id", referencedColumnName = "id")
-    //@JsonManagedReference
     private Auction auction;
 
     @Column(name = "bid_amount")
