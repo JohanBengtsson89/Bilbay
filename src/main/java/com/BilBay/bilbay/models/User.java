@@ -20,8 +20,10 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -29,23 +31,29 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
+@Validated
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "user_type")
-    private String userType;
+    private UserType userType;
     @Column(name = "first_name")
+    @Size(max = 50)
     private String firstName;
     @Column(name = "last_name")
+    @Size(max = 50)
     private String lastName;
     @Column(name = "company_name")
+    @Size(max = 50)
     private String companyName;
     @Column(name = "email_address", unique = true, nullable = false)
+    @Size(max = 50)
     private String emailAddress;
     @Column(name = "organization_nr")
     private String organizationNumber;
     @Column(name = "password_hash")
+    @Size(max = 50)
     private String passwordHash;
     @CreationTimestamp
     @Column(name = "created_at")
@@ -99,11 +107,11 @@ public class User {
         this.id = id;
     }
 
-    public String getUserType() {
+    public UserType getUserType() {
         return userType;
     }
 
-    public void setUserType(String userType) {
+    public void setUserType(UserType userType) {
         this.userType = userType;
     }
 

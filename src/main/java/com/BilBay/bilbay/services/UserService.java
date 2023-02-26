@@ -25,7 +25,6 @@ public class UserService {
         return userRepository;
     }
 
-    @RequestMapping(value = "/addUser", produces = "application/json")
     public User addUser(User user) {
         return userRepository.save(user);
     }
