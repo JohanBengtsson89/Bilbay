@@ -24,4 +24,8 @@ public class BidService {
     public Bid getBidByID(Long id) {
         return bidRepository.findById(id).get();
     }
+
+    public List<Bid> findAllBidsByAuction (Long id) {
+        return bidRepository.findAllBidsByAuction(id);
+    }
 }
