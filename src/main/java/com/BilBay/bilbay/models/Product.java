@@ -1,5 +1,4 @@
 package com.BilBay.bilbay.models;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,7 +19,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
-
 @Entity
 @Table(name = "product")
 public class Product {
@@ -28,12 +26,12 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @JoinColumn(name = "seller_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
     @Column(name = "category")
     private String category;
     @JoinColumn(name = "product_specification_id", referencedColumnName = "id")
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER)
     private ProductSpecification productSpecification;
     @ManyToMany(mappedBy = "favorites")
     private Set<User> users = new HashSet<>();
@@ -53,109 +51,72 @@ public class Product {
     @ColumnDefault("false")
     private Boolean sold;
 
+
     public Product() {
     }
-
-    public Product(Long id, User user, String category, ProductSpecification productSpecification, Set<User> users,
-                   Auction auction, String productName, long originalPrice, LocalDate createdAt, LocalDate updatedAt,
-                   Boolean sold) {
-        this.id = id;
-        this.user = user;
-        this.category = category;
-        this.productSpecification = productSpecification;
-        this.users = users;
-        this.auction = auction;
-        this.productName = productName;
-        this.originalPrice = originalPrice;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.sold = sold;
-    }
-
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public User getUser() {
         return user;
     }
-
     public void setUser(User user) {
         this.user = user;
     }
-
     public String getCategory() {
         return category;
     }
-
     public void setCategory(String category) {
         this.category = category;
     }
-
     public ProductSpecification getProductSpecification() {
         return productSpecification;
     }
-
     public void setProductSpecification(ProductSpecification productSpecification) {
         this.productSpecification = productSpecification;
     }
-
     public Set<User> getUsers() {
         return users;
     }
-
     public void setUsers(Set<User> users) {
         this.users = users;
     }
-
     public Auction getAuction() {
         return auction;
     }
-
     public void setAuction(Auction auction) {
         this.auction = auction;
     }
-
     public String getProductName() {
         return productName;
     }
-
     public void setProductName(String productName) {
         this.productName = productName;
     }
-
     public long getOriginalPrice() {
         return originalPrice;
     }
-
     public void setOriginalPrice(long originalPrice) {
         this.originalPrice = originalPrice;
     }
-
     public LocalDate getCreatedAt() {
         return createdAt;
     }
-
     public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
-
     public LocalDate getUpdatedAt() {
         return updatedAt;
     }
-
     public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
     }
-
     public Boolean getSold() {
         return sold;
     }
-
     public void setSold(Boolean sold) {
         this.sold = sold;
     }
