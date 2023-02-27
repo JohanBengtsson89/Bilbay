@@ -33,6 +33,7 @@ public class Product {
     private User user;
     @Column(name = "category")
     private String category;
+    @JsonManagedReference("product-spec")
     @JoinColumn(name = "product_specification_id", referencedColumnName = "id")
     @OneToOne(fetch = FetchType.EAGER)
     private ProductSpecification productSpecification;
