@@ -53,7 +53,7 @@ public class User {
     @Column(name = "organization_nr")
     private String organizationNumber;
     @Column(name = "password_hash")
-    @Size(max = 50)
+    @Size(min = 1, max = 50, message = "Lösenord måste vara mellan {min} och {max} tecken långt.")
     private String passwordHash;
     @CreationTimestamp
     @Column(name = "created_at")
