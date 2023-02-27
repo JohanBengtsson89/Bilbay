@@ -53,10 +53,13 @@ public class User {
     @UpdateTimestamp
     private LocalDate updatedAt;
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference(value = "product-user")
     private Set<Product> products = new HashSet<>();
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference(value = "auction-user")
     private Set<Auction> auctions = new HashSet<>();
     @OneToMany(mappedBy = "buyer")
+    @JsonManagedReference(value = "bid-user")
     private Set<Bid> bidsBuyer = new HashSet<>();
     @OneToMany(mappedBy = "userFor")
     private Set<Review> reviewsFor = new HashSet<>();
@@ -133,12 +136,14 @@ public class User {
     public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
     }
+
     public Set<Product> getProducts() {
         return products;
     }
     public void setProducts(Set<Product> products) {
         this.products = products;
     }
+
     public Set<Auction> getAuctions() {
         return auctions;
     }
@@ -152,7 +157,7 @@ public class User {
 //    public void setBidsSeller(Set<Bid> bidsSeller) {
 //        this.bidsSeller = bidsSeller;
 //    }
-    @JsonManagedReference
+
     public Set<Bid> getBidsBuyer() {
         return bidsBuyer;
     }
