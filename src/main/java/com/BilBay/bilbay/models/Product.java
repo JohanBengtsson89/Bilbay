@@ -1,4 +1,6 @@
 package com.BilBay.bilbay.models;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,6 +29,7 @@ public class Product {
     private Long id;
     @JoinColumn(name = "seller_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "product-user")
     private User user;
     @Column(name = "category")
     private String category;
@@ -36,6 +39,7 @@ public class Product {
     @ManyToMany(mappedBy = "favorites")
     private Set<User> users = new HashSet<>();
     @OneToOne(mappedBy = "product")
+    @JsonManagedReference(value = "auction-product")
     private Auction auction;
     @Column(name = "product_name")
     private String productName;
@@ -60,6 +64,7 @@ public class Product {
     public void setId(Long id) {
         this.id = id;
     }
+
     public User getUser() {
         return user;
     }
@@ -84,6 +89,7 @@ public class Product {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
+
     public Auction getAuction() {
         return auction;
     }

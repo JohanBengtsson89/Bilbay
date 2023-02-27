@@ -26,11 +26,14 @@ public class Auction {
     private Long id;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "seller_id", referencedColumnName = "id")
+    @JsonBackReference(value = "auction-user")
     private User user;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @JsonBackReference(value = "auction-product")
     private Product product;
     @OneToMany(mappedBy = "auction")
+    @JsonManagedReference(value = "auction-bid")
     private Set<Bid> bids = new HashSet<>();
     @Column(name = "reserve_price")
     private int reservePrice;
@@ -47,25 +50,28 @@ public class Auction {
 
     public Auction() {
     }
+
     public Long getId() {
         return id;
     }
     public void setId(Long id) {
         this.id = id;
     }
+
     public User getUser() {
         return user;
     }
     public void setUser(User user) {
         this.user = user;
     }
+
     public Product getProduct() {
         return product;
     }
     public void setProduct(Product product) {
         this.product = product;
     }
-    @JsonManagedReference
+
     public Set<Bid> getBids() {
         return bids;
     }

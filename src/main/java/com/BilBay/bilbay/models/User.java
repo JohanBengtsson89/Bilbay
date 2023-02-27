@@ -1,14 +1,7 @@
 package com.BilBay.bilbay.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -62,37 +55,30 @@ public class User {
     @UpdateTimestamp
     private LocalDate updatedAt;
     @OneToMany(mappedBy = "user")
-    @JsonIgnore
+    @JsonManagedReference(value = "product-user")
     private Set<Product> products = new HashSet<>();
     @OneToMany(mappedBy = "user")
-    @JsonIgnore
+    @JsonManagedReference(value = "auction-user")
     private Set<Auction> auctions = new HashSet<>();
     @OneToMany(mappedBy = "buyer")
-    @JsonIgnore
+    @JsonManagedReference(value = "bid-user")
     private Set<Bid> bidsBuyer = new HashSet<>();
     @OneToMany(mappedBy = "userFor")
-    @JsonIgnore
     private Set<Review> reviewsFor = new HashSet<>();
     @OneToMany(mappedBy = "userBy")
-    @JsonIgnore
     private Set<Review> reviewsBy = new HashSet<>();
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JsonIgnore
     @JoinTable(name = "favorites",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
     private Set<Product> favorites = new HashSet<>();
     @OneToMany(mappedBy = "user")
-    @JsonIgnore
     private Set<BankPayment> bankPayments = new HashSet<>();
     @OneToMany(mappedBy = "user")
-    @JsonIgnore
     private Set<CardPayment> cardPayments = new HashSet<>();
     @OneToMany(mappedBy = "user")
-    @JsonIgnore
     private Set<DeliveryPaymentTransaction> deliveryPaymentTransactions = new HashSet<>();
     @OneToOne(mappedBy = "user")
-    @JsonIgnore
     private Address address;
 
 

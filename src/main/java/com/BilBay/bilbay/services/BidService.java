@@ -6,10 +6,7 @@ import com.BilBay.bilbay.repositories.BidRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class BidService {
@@ -24,4 +21,8 @@ public class BidService {
     public Bid getBidByID(Long id) {
         return bidRepository.findById(id).get();
     }
+
+ /*   public List<Bid> getAllBidsOnAuction (Auction auction) {
+        return bidRepository.findAllBidsByAuctionId(auction.getId());
+    }*/
 }
