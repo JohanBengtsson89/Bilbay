@@ -1,12 +1,14 @@
 package com.BilBay.bilbay.controllers;
 
 import com.BilBay.bilbay.models.User;
+import com.BilBay.bilbay.models.UserType;
 import com.BilBay.bilbay.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,14 +23,8 @@ public class UserController extends Exception{
     private UserService userService;
 
     @PostMapping(value = "addUser")
-    String addUser(@RequestBody User user) {
-        try {
-            userService.addUser(user);
-            return user.getEmailAddress() + " har lagts till som användare.";
-        }
-        catch (Exception e) {
-            return e.getMessage();
-        }
+    User addUser(@RequestBody User user) {
+            return userService.addUser(user);
     }
 
     @GetMapping("getUsers")
@@ -45,5 +41,13 @@ public class UserController extends Exception{
         catch (Exception e) {
             return e.toString();
         }
+    }
+
+    @PutMapping("{email}/{userType}")
+    User changeUserType(@PathVariable("email") String email,
+                          @PathVariable("userType") UserType userType) {
+        User user = userService.getUser(email);
+        user.setUserType(userType);
+        return userService.getUser(user.getEmailAddress());
     }
 }

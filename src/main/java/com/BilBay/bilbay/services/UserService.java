@@ -4,10 +4,7 @@ import com.BilBay.bilbay.models.User;
 import com.BilBay.bilbay.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
@@ -40,5 +37,9 @@ public class UserService {
             return "Inloggning lyckades för användare med email " + email;
         }
         return "Du angav fel email eller lösenord.";
+    }
+
+    public User getUser(String email) {
+        return userRepository.findByEmailAddress(email);
     }
 }
