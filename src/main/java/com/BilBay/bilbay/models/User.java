@@ -133,12 +133,14 @@ public class User {
     public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
     }
+    @JsonManagedReference
     public Set<Product> getProducts() {
         return products;
     }
     public void setProducts(Set<Product> products) {
         this.products = products;
     }
+    @JsonManagedReference
     public Set<Auction> getAuctions() {
         return auctions;
     }

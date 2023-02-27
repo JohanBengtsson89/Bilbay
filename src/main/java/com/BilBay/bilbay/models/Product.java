@@ -1,4 +1,6 @@
 package com.BilBay.bilbay.models;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -60,6 +62,7 @@ public class Product {
     public void setId(Long id) {
         this.id = id;
     }
+    @JsonBackReference
     public User getUser() {
         return user;
     }
@@ -84,6 +87,7 @@ public class Product {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
+    @JsonManagedReference
     public Auction getAuction() {
         return auction;
     }
