@@ -17,7 +17,7 @@ public class ProductSpecification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @JsonBackReference("product-spec")
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "productSpecification")
+    @OneToOne(mappedBy = "productSpecification")
     private Product product;
     @Column(name = "product_photo")
     private String productPhoto;

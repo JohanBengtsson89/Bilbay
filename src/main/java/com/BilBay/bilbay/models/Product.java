@@ -35,7 +35,7 @@ public class Product {
     private String category;
     @JsonManagedReference("product-spec")
     @JoinColumn(name = "product_specification_id", referencedColumnName = "id")
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private ProductSpecification productSpecification;
     @ManyToMany(mappedBy = "favorites")
     private Set<User> users = new HashSet<>();
