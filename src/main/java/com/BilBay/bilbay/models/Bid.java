@@ -18,9 +18,11 @@ public class Bid {
     // Ändrade här enligt överenskommelse - Johan
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "buyer_id", referencedColumnName = "id")
+    @JsonBackReference(value = "bid-user")
     private User buyer;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "auction_id", referencedColumnName = "id")
+    @JsonBackReference(value = "auction-bid")
     private Auction auction;
     @Column(name = "bid_amount")
     private Long bidAmount;
@@ -44,14 +46,14 @@ public class Bid {
 //    public void setSeller(User seller) {
 //        this.seller = seller;
 //    }
-    @JsonBackReference
+
     public User getBuyer() {
         return buyer;
     }
     public void setBuyer(User buyer) {
         this.buyer = buyer;
     }
-    @JsonBackReference
+
     public Auction getAuction() {
         return auction;
     }
