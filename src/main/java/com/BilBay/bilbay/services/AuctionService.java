@@ -18,7 +18,11 @@ public class AuctionService {
         this.auctionRepository = auctionRepository;
     }
 
-    /*public List<Bid> findAllBidsOnAuction(Long id){
-        return auctionRepository.findAllBidsOnAuction(id);
+    public Auction findAuctionById (Long id){
+        return auctionRepository.findById(id).get();
+    }
+
+    /*public List<Bid> findAllBidsOnAuction(Auction auction){
+        return auctionRepository.findAllBidsOnAuction(auction.getId());
     }*/
 }
