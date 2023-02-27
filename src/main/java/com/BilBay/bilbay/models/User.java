@@ -1,6 +1,7 @@
 package com.BilBay.bilbay.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -73,6 +74,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
     private Set<Product> favorites = new HashSet<>();
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference(value = "bankPayment-user")
     private Set<BankPayment> bankPayments = new HashSet<>();
     @OneToMany(mappedBy = "user")
     private Set<CardPayment> cardPayments = new HashSet<>();
