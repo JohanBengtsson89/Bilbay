@@ -25,5 +25,10 @@ public class ProductController {
     public List<Product> searchProducts(@RequestParam("query") String query){
         return productService.searchProducts(query);
     }
+    @GetMapping("product/{sold}")
+    public List<Product> findBySoldFalse(@PathVariable boolean sold){
+        return productService.findBySold(sold);
+    }
+
 }
 
