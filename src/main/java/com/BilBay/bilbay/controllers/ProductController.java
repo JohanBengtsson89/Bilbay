@@ -25,7 +25,7 @@ public class ProductController {
     public List<Product> searchProducts(@RequestParam("query") String query){
         return productService.searchProducts(query);
     }
-    @GetMapping("product/{isAvailable}")
+    @GetMapping("available.product/{isAvailable}")
     public List<Product> findByIsAvailable(@PathVariable boolean isAvailable){
         return productService.findByIsAvailable(isAvailable);
     }
