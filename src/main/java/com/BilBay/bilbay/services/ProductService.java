@@ -24,4 +24,7 @@ public class ProductService {
     public List<Product> findByIsAvailable(boolean isAvailable){
             return productRepository.findAllByIsAvailable(isAvailable);
     }
+    public void deleteProduct(Long id){
+        productRepository.deleteById(id);
+    }
 }

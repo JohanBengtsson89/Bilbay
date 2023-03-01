@@ -25,10 +25,16 @@ public class ProductController {
     public List<Product> searchProducts(@RequestParam("query") String query){
         return productService.searchProducts(query);
     }
-    @GetMapping("available.product/{isAvailable}")
+    @GetMapping("available-products/{isAvailable}")
     public List<Product> findByIsAvailable(@PathVariable boolean isAvailable){
         return productService.findByIsAvailable(isAvailable);
     }
+    @DeleteMapping("delete-product/{id}")
+    public String deleteById(@PathVariable Long id){
+        productService.deleteProduct(id);
+        return "product has been deleted";
+    }
+
 
 }
 
