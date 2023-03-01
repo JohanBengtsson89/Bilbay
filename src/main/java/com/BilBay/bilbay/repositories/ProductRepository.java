@@ -16,4 +16,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "or p.category LIKE CONCAT ('%',:query, '%')")
     List<Product> searchProducts(String query);
 
+    List<Product> findAllByIsAvailable(boolean isAvailable);
+
 }
