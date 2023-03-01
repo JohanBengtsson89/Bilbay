@@ -16,9 +16,7 @@ import jakarta.persistence.Table;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 @Entity
@@ -52,9 +50,9 @@ public class Product {
     @Column(name = "updated_at")
     @UpdateTimestamp
     private LocalDate updatedAt;
-    @Column(name = "sold")
-    @ColumnDefault("false")
-    private Boolean sold;
+    @Column(name = "is_available")
+    @ColumnDefault("true")
+    private Boolean isAvailable;
 
 
     public Product() {
@@ -121,10 +119,10 @@ public class Product {
     public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
     }
-    public Boolean getSold() {
-        return sold;
+    public Boolean getIsAvailable() {
+        return isAvailable;
     }
-    public void setSold(Boolean sold) {
-        this.sold = sold;
+    public void setIsAvailable(Boolean isAvailable) {
+        this.isAvailable = isAvailable;
     }
 }

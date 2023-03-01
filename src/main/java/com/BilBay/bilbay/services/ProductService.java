@@ -21,7 +21,7 @@ public class ProductService {
     public List<Product> searchProducts(String query){
         return productRepository.searchProducts(query);
     }
-    public List<Product> findBySold(boolean sold){
-            return productRepository.findAllBySold(sold);
+    public List<Product> findByIsAvailable(boolean isAvailable){
+            return productRepository.findAllByIsAvailable(isAvailable);
     }
 }
