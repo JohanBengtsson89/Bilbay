@@ -2,6 +2,7 @@ package com.BilBay.bilbay.services;
 
 import com.BilBay.bilbay.models.Auction;
 import com.BilBay.bilbay.models.Bid;
+import com.BilBay.bilbay.models.Product;
 import com.BilBay.bilbay.repositories.AuctionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,13 @@ public class AuctionService {
         return auctionRepository.findById(id).get();
     }
 
+    public List<Auction> searchHighestBid (String query){
+        return auctionRepository.searchHighestBid(query);
+    }
+
+    public List<Auction> searchBidDate (String query){
+        return auctionRepository.searchBidDate(query);
+    }
     /*public List<Bid> findAllBidsOnAuction(Auction auction){
         return auctionRepository.findAllBidsOnAuction(auction.getId());
     }*/
