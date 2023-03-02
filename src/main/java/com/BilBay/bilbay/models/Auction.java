@@ -1,5 +1,5 @@
 package com.BilBay.bilbay.models;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -13,11 +13,11 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-
+import org.hibernate.annotations.ColumnDefault;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
-
 @Entity
 @Table(name = "auction")
 public class Auction {
@@ -26,23 +26,27 @@ public class Auction {
     private Long id;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "seller_id", referencedColumnName = "id")
+    @JsonBackReference(value = "auction-user")
     private User user;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id", referencedColumnName = "id")
-    @JsonManagedReference
+    @JsonBackReference(value = "auction-product")
     private Product product;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "current_bid", referencedColumnName = "id")
+    @OneToMany(mappedBy = "auction")
+    @JsonManagedReference(value = "auction-bid")
     private Set<Bid> bids = new HashSet<>();
     @Column(name = "reserve_price")
     private int reservePrice;
     @Column(name = "start_price")
     private int startPrice;
     @Column(name = "start_time")
-    private LocalDateTime startTime;
+    private LocalDate startTime;
     @Column(name = "end_time")
-    private LocalDateTime endTime;
+    private LocalDate endTime;
+    @Column(name = "active")
+    @ColumnDefault("false")
     private boolean active;
+
 
     public Auction() {
     }
@@ -50,7 +54,6 @@ public class Auction {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -58,7 +61,6 @@ public class Auction {
     public User getUser() {
         return user;
     }
-
     public void setUser(User user) {
         this.user = user;
     }
@@ -66,7 +68,6 @@ public class Auction {
     public Product getProduct() {
         return product;
     }
-
     public void setProduct(Product product) {
         this.product = product;
     }
@@ -74,47 +75,36 @@ public class Auction {
     public Set<Bid> getBids() {
         return bids;
     }
-
     public void setBids(Set<Bid> bids) {
         this.bids = bids;
     }
-
     public int getReservePrice() {
         return reservePrice;
     }
-
     public void setReservePrice(int reservePrice) {
         this.reservePrice = reservePrice;
     }
-
     public int getStartPrice() {
         return startPrice;
     }
-
     public void setStartPrice(int startPrice) {
         this.startPrice = startPrice;
     }
-
-    public LocalDateTime getStartTime() {
+    public LocalDate getStartTime() {
         return startTime;
     }
-
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(LocalDate startTime) {
         this.startTime = startTime;
     }
-
-    public LocalDateTime getEndTime() {
+    public LocalDate getEndTime() {
         return endTime;
     }
-
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(LocalDate endTime) {
         this.endTime = endTime;
     }
-
     public boolean isActive() {
         return active;
     }
-
     public void setActive(boolean active) {
         this.active = active;
     }

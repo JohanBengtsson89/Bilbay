@@ -1,9 +1,7 @@
 package com.BilBay.bilbay.models;
-
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
 @Entity
 @Table(name = "delivery_alternatives")
 public class DeliveryAlternative {
@@ -17,32 +15,11 @@ public class DeliveryAlternative {
     private int deliveryCost;
     @Column(name = "estimated_delivery")
     private String estimatedDelivery;
-
     @OneToMany(targetEntity = DeliveryPaymentTransaction.class, mappedBy = "deliveryAlternatives")
     private List<DeliveryPaymentTransaction> deliveryPaymentTransactions= new ArrayList<>();
 
 
     public DeliveryAlternative() {
-    }
-
-    public DeliveryAlternative(List<DeliveryPaymentTransaction> deliveryPaymentTransactions) {
-        this.deliveryPaymentTransactions = deliveryPaymentTransactions;
-    }
-
-    public DeliveryAlternative(Long id, String companyName, int deliveryCost, String estimatedDelivery, List<DeliveryPaymentTransaction> deliveryPaymentTransactions) {
-        this.id = id;
-        this.companyName = companyName;
-        this.deliveryCost = deliveryCost;
-        this.estimatedDelivery = estimatedDelivery;
-        this.deliveryPaymentTransactions = deliveryPaymentTransactions;
-    }
-
-    public List<DeliveryPaymentTransaction> getDeliveryPaymentTransactions() {
-        return deliveryPaymentTransactions;
-    }
-
-    public void setDeliveryPaymentTransactions(List<DeliveryPaymentTransaction> deliveryPaymentTransactions) {
-        this.deliveryPaymentTransactions = deliveryPaymentTransactions;
     }
 
     public Long getId() {
@@ -75,6 +52,14 @@ public class DeliveryAlternative {
 
     public void setEstimatedDelivery(String estimatedDelivery) {
         this.estimatedDelivery = estimatedDelivery;
+    }
+
+    public List<DeliveryPaymentTransaction> getDeliveryPaymentTransactions() {
+        return deliveryPaymentTransactions;
+    }
+
+    public void setDeliveryPaymentTransactions(List<DeliveryPaymentTransaction> deliveryPaymentTransactions) {
+        this.deliveryPaymentTransactions = deliveryPaymentTransactions;
     }
 }
 
