@@ -22,6 +22,11 @@ public class AuctionService {
         return auctionRepository.findById(id).get();
     }
 
+
+    public Auction createAuction(Auction auction) {
+        return auctionRepository.save(auction);
+    }
+
     /*public List<Bid> findAllBidsOnAuction(Auction auction){
         return auctionRepository.findAllBidsOnAuction(auction.getId());
     }*/
