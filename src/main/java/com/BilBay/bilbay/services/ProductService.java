@@ -31,7 +31,7 @@ public class ProductService {
     public void deleteProduct(Long id){
         productRepository.deleteById(id);
     }
-    public void updateIsAvailableProduct(Long id, boolean isAvailable){
+    public void updateProductStatus(Long id, boolean isAvailable){
         productRepository.updateProductStatus(isAvailable, id);
     }
 }

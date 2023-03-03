@@ -34,5 +34,9 @@ public class ProductController {
         productService.deleteProduct(id);
         return "product has been deleted";
     }
+    @PutMapping("{id}/{isAvailable}")
+    public void updateProductStatus (@PathVariable Long id, @PathVariable boolean isAvailable) {
+        productService.updateProductStatus(id, isAvailable);
+    }
 }
 
