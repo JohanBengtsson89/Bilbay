@@ -1,6 +1,7 @@
 package com.BilBay.bilbay.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -80,6 +81,9 @@ public class User {
     private Set<DeliveryPaymentTransaction> deliveryPaymentTransactions = new HashSet<>();
     @OneToOne(mappedBy = "user")
     private Address address;
+    @JsonManagedReference(value = "payment-user")
+    @OneToMany(mappedBy = "buyer")
+    private Set<PaymentTransaction> paymentTransactions= new HashSet<>();
 
 
     public User() {
@@ -243,5 +247,11 @@ public class User {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+    public Set<PaymentTransaction> getPaymentTransactions() {
+        return paymentTransactions;
+    }
+    public void setPaymentTransactions(Set<PaymentTransaction> paymentTransactions) {
+        this.paymentTransactions = paymentTransactions;
     }
 }
