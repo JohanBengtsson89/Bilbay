@@ -31,6 +31,9 @@ public class MessageController {
         //this will check the status of payment. if false within 30 days, a message will be sent to the buyer.
         LocalDate checkPaymentStatus = LocalDate.now().minusDays(30);
         List<PaymentTransaction> buyers = paymentTransactionRepository.findBySuccessfulAndCreatedAt(false, checkPaymentStatus);
-
+        for (PaymentTransaction paymentTransaction : buyers) {
+            messageService.sendPaymentReminder(paymentTransaction);
+        }
+        return ResponseEntity.ok(String.format("Sent reminding email to %d customers.", buyers.size()));
     }
 }
