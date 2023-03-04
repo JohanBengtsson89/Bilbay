@@ -34,9 +34,13 @@ public class ProductController {
     }
     @DeleteMapping("delete-product/{id}")
     public String deleteById(@PathVariable Long id){
-        productService.deleteProduct(id);
-        return "product has been deleted";
+        if (!productRepository.findById(id).isEmpty()){
+            productService.deleteProduct(id);
+            return "Product has been deleted.";
+        }
+        return "Product not found";
     }
+    
     @PutMapping("{id}/{isAvailable}")
     public String updateProductStatus (@PathVariable Long id, @PathVariable boolean isAvailable) {
         if (!productRepository.findById(id).isEmpty()){
