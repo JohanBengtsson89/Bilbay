@@ -32,11 +32,12 @@ public class ProductController {
     @DeleteMapping("delete-product/{id}")
     public String deleteById(@PathVariable Long id){
         productService.deleteProduct(id);
-        return "product has been deleted";
+        return "Product has been deleted.";
     }
     @PutMapping("{id}/{isAvailable}")
-    public void updateProductStatus (@PathVariable Long id, @PathVariable boolean isAvailable) {
+    public String updateProductStatus (@PathVariable Long id, @PathVariable boolean isAvailable) {
         productService.updateProductStatus(id, isAvailable);
+        return "Product status has been updated.";
     }
 }
 
