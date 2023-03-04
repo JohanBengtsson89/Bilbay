@@ -43,8 +43,11 @@ public class ProductController {
     
     @PutMapping("{id}/{isAvailable}")
     public String updateProductStatus (@PathVariable Long id, @PathVariable boolean isAvailable) {
-        productService.updateProductStatus(id, isAvailable);
-        return "Product status has been updated.";
+        if (!productRepository.findById(id).isEmpty()){
+            productService.updateProductStatus(id, isAvailable);
+            return "Product status has been updated.";
+        }
+        return "Product not found";
     }
 }
 
