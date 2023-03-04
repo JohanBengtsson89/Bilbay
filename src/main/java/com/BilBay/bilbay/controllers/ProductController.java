@@ -1,5 +1,6 @@
 package com.BilBay.bilbay.controllers;
 import com.BilBay.bilbay.models.Product;
+import com.BilBay.bilbay.repositories.ProductRepository;
 import com.BilBay.bilbay.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +10,8 @@ import java.util.List;
 public class ProductController {
     @Autowired
     ProductService productService;
+    @Autowired
+    ProductRepository productRepository;
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
@@ -35,8 +38,12 @@ public class ProductController {
         return "product has been deleted";
     }
     @PutMapping("{id}/{isAvailable}")
-    public void updateProductStatus (@PathVariable Long id, @PathVariable boolean isAvailable) {
-        productService.updateProductStatus(id, isAvailable);
+    public String updateProductStatus (@PathVariable Long id, @PathVariable boolean isAvailable) {
+        if (!productRepository.findById(id).isEmpty()){
+            productService.updateProductStatus(id, isAvailable);
+            return "Product status has been updated.";
+        }
+        return "Product not found";
     }
 }
 
