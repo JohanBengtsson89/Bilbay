@@ -24,11 +24,11 @@ public class Auction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE, CascadeType.DETACH})
     @JoinColumn(name = "seller_id", referencedColumnName = "id")
     @JsonBackReference(value = "auction-user")
     private User user;
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE, CascadeType.DETACH})
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     @JsonBackReference(value = "auction-product")
     private Product product;
@@ -64,14 +64,12 @@ public class Auction {
     public void setUser(User user) {
         this.user = user;
     }
-
     public Product getProduct() {
         return product;
     }
     public void setProduct(Product product) {
         this.product = product;
     }
-
     public Set<Bid> getBids() {
         return bids;
     }

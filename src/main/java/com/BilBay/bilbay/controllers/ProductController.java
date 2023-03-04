@@ -40,5 +40,11 @@ public class ProductController {
         }
         return "Product not found";
     }
+    
+    @PutMapping("{id}/{isAvailable}")
+    public String updateProductStatus (@PathVariable Long id, @PathVariable boolean isAvailable) {
+        productService.updateProductStatus(id, isAvailable);
+        return "Product status has been updated.";
+    }
 }
 

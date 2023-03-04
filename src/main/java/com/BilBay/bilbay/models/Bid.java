@@ -39,21 +39,12 @@ public class Bid {
     public void setId(Long id) {
         this.id = id;
     }
-//    public User getSeller() {
-//        return seller;
-//    }
-//
-//    public void setSeller(User seller) {
-//        this.seller = seller;
-//    }
-
     public User getBuyer() {
         return buyer;
     }
     public void setBuyer(User buyer) {
         this.buyer = buyer;
     }
-
     public Auction getAuction() {
         return auction;
     }
