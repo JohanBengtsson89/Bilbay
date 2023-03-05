@@ -5,10 +5,7 @@ import com.BilBay.bilbay.models.Bid;
 import com.BilBay.bilbay.services.AuctionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,6 +19,11 @@ public class AuctionController {
     @GetMapping("auction/{id}")
     public Auction findAuctionById (@PathVariable Long id){
         return auctionService.findAuctionById(id);
+    }
+
+    @PostMapping("post-auction")
+    public Auction createAuction (@RequestBody Auction auction) {
+        return auctionService.createAuction(auction);
     }
 
 }

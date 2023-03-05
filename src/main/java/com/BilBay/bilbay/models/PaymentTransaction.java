@@ -1,4 +1,5 @@
 package com.BilBay.bilbay.models;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
@@ -8,7 +9,12 @@ import java.time.LocalDate;
 public class PaymentTransaction {
     @Id
     @Column(name = "id", nullable = false, updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "buyer_id", referencedColumnName = "id")
+    @JsonBackReference(value = "payment-user")
+    private User buyer;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "orders_id", referencedColumnName = "id")
     private Order order;
@@ -26,7 +32,7 @@ public class PaymentTransaction {
     private LocalDate createdAt;
     @Column(name = "is_successful")
     @ColumnDefault("false")
-    private boolean isSuccessful;
+    private boolean successful;
 
 
     public PaymentTransaction() {
@@ -36,6 +42,12 @@ public class PaymentTransaction {
     }
     public void setId(Long id) {
         this.id = id;
+    }
+    public User getBuyer() {
+        return buyer;
+    }
+    public void setBuyer(User buyer) {
+        this.buyer = buyer;
     }
     public Order getOrder() {
         return order;
@@ -68,9 +80,16 @@ public class PaymentTransaction {
         this.createdAt = createdAt;
     }
     public boolean isSuccessful() {
-        return isSuccessful;
+        return successful;
     }
     public void setSuccessful(boolean successful) {
-        isSuccessful = successful;
+        this.successful = successful;
+    }
+
+    @Override
+    public String toString() {
+        return "PaymentTransaction{" +
+                "buyer=" + buyer +
+                '}';
     }
 }

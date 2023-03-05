@@ -26,7 +26,7 @@ public class DeliveryPaymentTransaction {
     @NotNull
     @Column(name = "is_successful")
     @ColumnDefault("false")
-    private boolean isSuccessful;
+    private boolean Successful;
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDate createdAt;
@@ -65,10 +65,10 @@ public class DeliveryPaymentTransaction {
         this.cardPayment = cardPayment;
     }
     public boolean isSuccessful() {
-        return isSuccessful;
+        return Successful;
     }
     public void setSuccessful(boolean successful) {
-        isSuccessful = successful;
+        Successful = successful;
     }
     public LocalDate getCreatedAt() {
         return createdAt;

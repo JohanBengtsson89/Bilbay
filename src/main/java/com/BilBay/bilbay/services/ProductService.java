@@ -2,7 +2,11 @@ package com.BilBay.bilbay.services;
 import com.BilBay.bilbay.models.Product;
 import com.BilBay.bilbay.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 @Service
 public class ProductService {
@@ -20,5 +24,14 @@ public class ProductService {
     }
     public List<Product> searchProducts(String query){
         return productRepository.searchProducts(query);
+    }
+    public List<Product> findByIsAvailable(boolean isAvailable){
+            return productRepository.findAllByIsAvailable(isAvailable);
+    }
+    public void deleteProduct(Long id){
+        productRepository.deleteById(id);
+    }
+    public void updateProductStatus(Long id, boolean isAvailable){
+        productRepository.updateProductStatus(isAvailable, id);
     }
 }
