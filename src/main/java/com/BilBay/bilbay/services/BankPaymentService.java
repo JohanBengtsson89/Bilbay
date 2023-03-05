@@ -20,6 +20,10 @@ public class BankPaymentService {
         return "Bank Payment has been deleted";
     }
 
+    public BankPayment getBankPaymentById(Long id){
+        return bankPaymentRepository.findById(id).get();
+    }
+
     public BankPayment updateBankPayment (BankPayment bankPayment){
         return bankPaymentRepository.save(bankPayment);
     }

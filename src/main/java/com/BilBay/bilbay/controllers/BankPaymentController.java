@@ -17,6 +17,11 @@ public class BankPaymentController {
         return bankPaymentService.createBankPayment(bankPayment);
     }
 
+    @GetMapping("/bankpayment/get/{id}")
+    public BankPayment getBankPaymentDyId(@PathVariable Long id){
+        return bankPaymentService.getBankPaymentById(id);
+    }
+
     @DeleteMapping("/bankpayment/delete/{id}")
     public String deleteBankPaymentById(@PathVariable Long id) {
         return bankPaymentService.deleteBankPaymentById(id);
