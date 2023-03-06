@@ -22,11 +22,12 @@ public class BidService {
         return bidRepository.findById(id).get();
     }
 
-    public List<Auction> searchHighestBid (String query){
-        return bidRepository. searchHighestBidAndDate(query);
+    public Bid findByHighestAmountAndDate (String query){
+        return bidRepository.findByHighestAmountAndDate(query);
+    }
     }
 
  /*   public List<Bid> getAllBidsOnAuction (Auction auction) {
         return bidRepository.findAllBidsByAuctionId(auction.getId());
     }*/
-}
+
