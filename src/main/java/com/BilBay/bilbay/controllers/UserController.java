@@ -1,7 +1,9 @@
 package com.BilBay.bilbay.controllers;
 
-import com.BilBay.bilbay.models.TypeUser;
+import com.BilBay.bilbay.models.Role;
 import com.BilBay.bilbay.models.User;
+import com.BilBay.bilbay.repositories.RoleRepository;
+import com.BilBay.bilbay.repositories.UserRepository;
 import com.BilBay.bilbay.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @RestController
@@ -20,6 +24,9 @@ import java.util.Set;
 public class UserController extends Exception{
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping(value = "addUser")
     User addUser(@RequestBody User user) {
@@ -46,11 +53,10 @@ public class UserController extends Exception{
 //    (@PathVariable("email") String email,
 //    @PathVariable("typeUser") TypeUser typeUser) {
 
-    @PutMapping("typeUser")
-    User changeUserType(@RequestBody String email, Set<TypeUser> typeUsers) {
-        User user = userService.getUser(email);
-        user.setTypeUsers(typeUsers);
-        return userService.updateUser(user);
-//        return userService.getUser(user.getEmailAddress());
+    @PutMapping("changeRole")
+    User changeUserType(@RequestBody Map<String, Object> payload) {
+        String email = (String) payload.get("emailAddress");
+        Set<Role> roles = new HashSet<>((List<Role>) payload.get("roles"));
+        return userService.changeUserType(email, roles);
     }
 }

@@ -1,6 +1,7 @@
 package com.BilBay.bilbay.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -14,22 +15,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "user_type")
-public class TypeUser {
+@Table(name = "roles")
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     @Enumerated(EnumType.STRING)
-    private ETypeUser name;
-    @ManyToMany(mappedBy = "typeUsers")
+    private ERole name;
+    @ManyToMany(mappedBy = "roles")
     @JsonIgnore
 //    @JsonBackReference("user_type_user")
     private Set<User> users = new HashSet<>();
 
-    public TypeUser() {
-    }
-
-    public TypeUser(String typeUser) {
+    public Role() {
     }
 
     public Long getId() {
@@ -40,15 +39,15 @@ public class TypeUser {
         this.id = id;
     }
 
-    public ETypeUser getName() {
+    public ERole getName() {
         return name;
     }
 
-    public void setETypeUser(ETypeUser eTypeUser) {
-        this.name = eTypeUser;
+    public void setETypeUser(ERole eRole) {
+        this.name = eRole;
     }
 
-    public void setName(ETypeUser name) {
+    public void setName(ERole name) {
         this.name = name;
     }
 

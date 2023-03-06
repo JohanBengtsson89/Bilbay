@@ -1,13 +1,13 @@
 package com.BilBay.bilbay.models;
 
-public enum ETypeUser {
+public enum ERole {
     PRIVATE("PRIVATE"),
     COMPANY("COMPANY"),
     ADMIN("ADMIN");
 
     private String value;
 
-    ETypeUser(String value) {
+    ERole(String value) {
         this.value = value;
     }
 

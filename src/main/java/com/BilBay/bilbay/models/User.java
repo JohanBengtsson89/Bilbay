@@ -1,7 +1,6 @@
 package com.BilBay.bilbay.models;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -31,11 +30,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JsonManagedReference("user_type_user")
-    @JoinTable(name = "type_user_users",
+    @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "typeUser_id", referencedColumnName = "id"))
-    private Set<TypeUser> typeUsers = new HashSet<>();
+            inverseJoinColumns = @JoinColumn(name = "typeUser", referencedColumnName = "id"))
+    private Set<Role> roles = new HashSet<>();
     @Column(name = "first_name")
     @Size(max = 50)
     private String firstName;
@@ -98,12 +96,12 @@ public class User {
         this.id = id;
     }
 
-    public Set<TypeUser> getTypeUsers() {
-        return typeUsers;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setTypeUsers(Set<TypeUser> typeUsers) {
-        this.typeUsers = typeUsers;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public String getFirstName() {
