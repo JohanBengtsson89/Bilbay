@@ -76,6 +76,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<BankPayment> bankPayments = new HashSet<>();
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference(value= "cardpayment-user")
     private Set<CardPayment> cardPayments = new HashSet<>();
     @OneToMany(mappedBy = "user")
     private Set<DeliveryPaymentTransaction> deliveryPaymentTransactions = new HashSet<>();
