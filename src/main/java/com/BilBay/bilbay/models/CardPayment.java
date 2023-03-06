@@ -1,4 +1,5 @@
 package com.BilBay.bilbay.models;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.util.*;
 @Entity
@@ -10,6 +11,7 @@ public class CardPayment {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonBackReference(value= "cardpayment-user")
     private User user;
     @Column(name = "card_type")
     private String cardType;
