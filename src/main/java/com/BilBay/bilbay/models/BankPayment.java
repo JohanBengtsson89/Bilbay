@@ -1,4 +1,5 @@
 package com.BilBay.bilbay.models;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.*;
@@ -9,7 +10,8 @@ public class BankPayment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @JoinColumn(name = "users_id", referencedColumnName = "id")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference(value = "bankPayment-user")
     private User user;
     @Column(name = "bank_name")
     private String bankName;

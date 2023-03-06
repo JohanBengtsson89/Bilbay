@@ -77,6 +77,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
     private Set<Product> favorites = new HashSet<>();
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference(value = "bankPayment-user")
     private Set<BankPayment> bankPayments = new HashSet<>();
     @OneToMany(mappedBy = "user")
     @JsonManagedReference(value= "cardpayment-user")
