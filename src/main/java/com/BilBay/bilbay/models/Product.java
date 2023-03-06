@@ -63,7 +63,6 @@ public class Product {
     public void setId(Long id) {
         this.id = id;
     }
-
     public User getUser() {
         return user;
     }
@@ -88,7 +87,6 @@ public class Product {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
-
     public Auction getAuction() {
         return auction;
     }
