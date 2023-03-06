@@ -22,6 +22,10 @@ public class BidService {
         return bidRepository.findById(id).get();
     }
 
+    public List<Auction> searchHighestBid (String query){
+        return bidRepository. searchHighestBidAndDate(query);
+    }
+
  /*   public List<Bid> getAllBidsOnAuction (Auction auction) {
         return bidRepository.findAllBidsByAuctionId(auction.getId());
     }*/

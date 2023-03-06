@@ -22,14 +22,5 @@ public class AuctionController {
         return auctionService.findAuctionById(id);
     }
 
-    @GetMapping("search-highestBid")
-    public List<Auction> searchHighestBid(@RequestParam("query") String query){
-        return auctionService.searchHighestBid(query);  }
-
-    @GetMapping("search-bidDate")
-    public List<Auction> searchBidDate(@RequestParam("query") String query){
-        return auctionService.searchBidDate(query);
-
     }
 
-}
