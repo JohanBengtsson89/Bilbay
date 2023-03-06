@@ -26,6 +26,10 @@ public class BidController {
         return bidService.getBidByID(id);
     }
 
+
+    @PostMapping("")
+    public Bid bidNotification(@RequestBody Bid Bid){return bidService.bidNotification(bid);}
+
     /*@GetMapping("all-bids/{id}")
     public List<Bid> findAllBidsByAuction(@PathVariable Long id){
         return bidService.getAllBidsOnAuction(id.ge);

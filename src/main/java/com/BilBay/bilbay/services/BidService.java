@@ -21,6 +21,8 @@ public class BidService {
     public Bid getBidByID(Long id) {
         return bidRepository.findById(id).get();
     }
+    public Bid bidNotification (Bid bid){return bidRepository.bidNotifcation(bid);
+    }
 
  /*   public List<Bid> getAllBidsOnAuction (Auction auction) {
         return bidRepository.findAllBidsByAuctionId(auction.getId());
