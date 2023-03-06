@@ -1,26 +1,32 @@
 package com.BilBay.bilbay.controllers;
 
+import com.BilBay.bilbay.models.Role;
 import com.BilBay.bilbay.models.User;
-import com.BilBay.bilbay.models.UserType;
+import com.BilBay.bilbay.repositories.RoleRepository;
+import com.BilBay.bilbay.repositories.UserRepository;
 import com.BilBay.bilbay.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/user/")
 public class UserController extends Exception{
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping(value = "addUser")
     User addUser(@RequestBody User user) {
@@ -43,11 +49,14 @@ public class UserController extends Exception{
         }
     }
 
-    @PutMapping("{email}/{userType}")
-    User changeUserType(@PathVariable("email") String email,
-                          @PathVariable("userType") UserType userType) {
-        User user = userService.getUser(email);
-        user.setUserType(userType);
-        return userService.getUser(user.getEmailAddress());
+
+//    (@PathVariable("email") String email,
+//    @PathVariable("typeUser") TypeUser typeUser) {
+
+    @PutMapping("changeRole")
+    User changeUserType(@RequestBody Map<String, Object> payload) {
+        String email = (String) payload.get("emailAddress");
+        Set<Role> roles = new HashSet<>((List<Role>) payload.get("roles"));
+        return userService.changeUserType(email, roles);
     }
 }

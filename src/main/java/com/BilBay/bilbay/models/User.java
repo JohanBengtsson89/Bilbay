@@ -30,8 +30,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "user_type")
-    private UserType userType;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "typeUser", referencedColumnName = "id"))
+    private Set<Role> roles = new HashSet<>();
     @Column(name = "first_name")
     @Size(max = 50)
     private String firstName;
@@ -95,11 +98,14 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
-    public UserType getUserType() {
-        return userType;
+
+    public Set<Role> getRoles() {
+        return roles;
     }
-    public void setUserType(UserType userType) {
-        this.userType = userType;
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+
     }
     public String getFirstName() {
         return firstName;
