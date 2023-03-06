@@ -2,6 +2,7 @@ package com.BilBay.bilbay.controllers;
 
 import com.BilBay.bilbay.models.Auction;
 import com.BilBay.bilbay.models.Bid;
+import com.BilBay.bilbay.repositories.AuctionRepository;
 import com.BilBay.bilbay.services.AuctionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,9 @@ public class AuctionController {
     @PostMapping("post-auction")
     public Auction createAuction (@RequestBody Auction auction) {
         return auctionService.createAuction(auction);
+
+        @PutMapping("isActive")
+        public Auction isActive (PathVariable boolean isActive)
     }
 
 }
