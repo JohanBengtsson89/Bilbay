@@ -10,8 +10,7 @@ public class BankPayment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @JoinColumn(name = "users_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE,
-            CascadeType.DETACH})
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonBackReference(value = "bankPayment-user")
     private User user;
     @Column(name = "bank_name")
