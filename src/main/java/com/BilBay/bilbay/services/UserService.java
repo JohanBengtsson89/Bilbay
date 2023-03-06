@@ -44,12 +44,12 @@ public class UserService {
 
     //Kollar i repot efter en user med angiven email och password. Om det hittas en en user med det så säger den att
     // inloggningen lyckades, annars att email eller lösenord är felaktigt
-    public String loginUser(String email, String password) {
-        if (!userRepository.findByEmailAndPassword(email, password).isEmpty()) {
-            return "Inloggning lyckades för användare med email " + email;
-        }
-        return "Du angav fel email eller lösenord.";
-    }
+//    public String loginUser(String email, String password) {
+//        if (!userRepository.findByEmailAndPassword(email, password).isEmpty()) {
+//            return "Inloggning lyckades för användare med email " + email;
+//        }
+//        return "Du angav fel email eller lösenord.";
+//    }
 
     public Optional<User> getUser(String email) {
         return userRepository.findUserByEmail(email);

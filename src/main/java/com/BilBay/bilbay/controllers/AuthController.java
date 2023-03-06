@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -92,24 +91,24 @@ public class AuthController {
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
-            Role privateRole = roleRepository.findByName(ERole.PRIVATE)
+            Role privateRole = roleRepository.findByName(ERole.ROLE_PRIVATE)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found"));
             roles.add(privateRole);
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
                     case "company":
-                        Role companyRole = roleRepository.findByName(ERole.COMPANY)
+                        Role companyRole = roleRepository.findByName(ERole.ROLE_COMPANY)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found"));
                         roles.add(companyRole);
                         break;
                     case "admin":
-                        Role adminRole = roleRepository.findByName(ERole.ADMIN)
+                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found"));
                         roles.add(adminRole);
                         break;
                     default:
-                        Role privateRole = roleRepository.findByName(ERole.PRIVATE)
+                        Role privateRole = roleRepository.findByName(ERole.ROLE_PRIVATE)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found"));
                         roles.add(privateRole);
                 }

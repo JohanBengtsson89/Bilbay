@@ -38,16 +38,16 @@ public class UserController extends Exception{
         return userService.getUsers();
     }
 
-    @GetMapping("{email}/{pass}")
-    String loginUser(@PathVariable("email") String email,
-                   @PathVariable("pass") String password) {
-        try {
-            return userService.loginUser(email, password);
-        }
-        catch (Exception e) {
-            return e.toString();
-        }
-    }
+//    @GetMapping("{email}/{pass}")
+//    String loginUser(@PathVariable("email") String email,
+//                   @PathVariable("pass") String password) {
+//        try {
+//            return userService.loginUser(email, password);
+//        }
+//        catch (Exception e) {
+//            return e.toString();
+//        }
+//    }
 
 
 //    (@PathVariable("email") String email,
