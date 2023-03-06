@@ -52,7 +52,7 @@ public class User {
     @Column(name = "organization_nr")
     private String organizationNumber;
     @Column(name = "password")
-    @Size(min = 1, max = 50, message = "Lösenord måste vara mellan {min} och {max} tecken långt.")
+    @Size(min = 1, max = 120, message = "Lösenord måste vara mellan {min} och {max} tecken långt.")
     private String password;
     @CreationTimestamp
     @Column(name = "created_at")
@@ -96,10 +96,10 @@ public class User {
     public User() {
     }
 
-    public User(String email, String password, String username) {
+    public User(String username, String email,String password) {
+        this.username = username;
         this.email = email;
         this.password = password;
-        this.username = username;
     }
 
     public Long getId() {
