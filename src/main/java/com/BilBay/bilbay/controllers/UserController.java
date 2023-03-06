@@ -28,10 +28,10 @@ public class UserController extends Exception{
     @Autowired
     private UserRepository userRepository;
 
-    @PostMapping(value = "addUser")
-    User addUser(@RequestBody User user) {
-            return userService.addUser(user);
-    }
+//    @PostMapping(value = "addUser")
+//    User addUser(@RequestBody User user) {
+//            return userService.addUser(user);
+//    }
 
     @GetMapping("getUsers")
     List<User> getUsers() {
@@ -53,10 +53,10 @@ public class UserController extends Exception{
 //    (@PathVariable("email") String email,
 //    @PathVariable("typeUser") TypeUser typeUser) {
 
-    @PutMapping("changeRole")
-    User changeUserType(@RequestBody Map<String, Object> payload) {
-        String email = (String) payload.get("emailAddress");
-        Set<Role> roles = new HashSet<>((List<Role>) payload.get("roles"));
-        return userService.changeUserType(email, roles);
-    }
+//    @PutMapping("changeRole")
+//    User changeUserType(@RequestBody Map<String, Object> payload) {
+//        String email = (String) payload.get("emailAddress");
+//        Set<Role> roles = new HashSet<>((List<Role>) payload.get("roles"));
+//        return userService.changeUserType(email, roles);
+//    }
 }
