@@ -96,10 +96,14 @@ public class User {
     public User() {
     }
 
-    public User(String username, String email,String password) {
-        this.username = username;
+    public User(String firstName, String lastName, String email, String username, String password, String companyName, String organizationNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
+        this.username = username;
         this.password = password;
+        this.companyName = companyName;
+        this.organizationNumber = organizationNumber;
     }
 
     public Long getId() {
