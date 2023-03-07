@@ -1,9 +1,9 @@
 package com.BilBay.bilbay.models;
 
 public enum ERole {
-    PRIVATE("PRIVATE"),
-    COMPANY("COMPANY"),
-    ADMIN("ADMIN");
+    ROLE_PRIVATE("PRIVATE"),
+    ROLE_COMPANY("COMPANY"),
+    ROLE_ADMIN("ADMIN");
 
     private String value;
 
