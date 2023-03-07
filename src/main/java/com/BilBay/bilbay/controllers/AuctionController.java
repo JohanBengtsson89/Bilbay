@@ -26,7 +26,7 @@ public class AuctionController {
     public Auction createAuction (@RequestBody Auction auction) {
         return auctionService.createAuction(auction);}
 
-    @PutMapping("isActive")
+    @PutMapping("{id}/{isActive}")
     public Auction deActivateProductAuction (@PathVariable boolean isActive, @PathVariable Long id){
         return auctionService.deactivateProductAuction(id, isActive);
     }
