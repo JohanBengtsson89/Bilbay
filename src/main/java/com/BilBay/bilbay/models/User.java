@@ -44,12 +44,12 @@ public class User {
     @Column(name = "company_name")
     @Size(max = 50)
     private String companyName;
-    @Column(name = "email_address", unique = true, nullable = false)
+    @Column(name = "email", unique = true, nullable = false)
     @Size(max = 50)
     private String emailAddress;
     @Column(name = "organization_nr")
     private String organizationNumber;
-    @Column(name = "password_hash")
+    @Column(name = "password")
     @Size(min = 1, max = 50, message = "Lösenord måste vara mellan {min} och {max} tecken långt.")
     private String passwordHash;
     @CreationTimestamp
