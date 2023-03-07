@@ -24,10 +24,11 @@ public class AuctionController {
 
     @PostMapping("post-auction")
     public Auction createAuction (@RequestBody Auction auction) {
-        return auctionService.createAuction(auction);
+        return auctionService.createAuction(auction);}
 
-        @PutMapping("isActive")
-        public Auction isActive (PathVariable boolean isActive)
+    @PutMapping("isActive")
+    public Auction deActivateProductAuction (@PathVariable boolean isActive, @PathVariable Long id){
+        return auctionService.deactivateProductAuction(id, isActive);
     }
 
 }

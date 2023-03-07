@@ -19,6 +19,6 @@ public interface AuctionRepository extends JpaRepository<Auction, Long> {
     @Modifying
     @Transactional
     @Query(value = "DEACTIVATE Product FROM Auction")
-    Auction deActivateProductAuction (boolean isActive);
+    Auction deactivateProductAuction (Long id, boolean isActive);
 }
 

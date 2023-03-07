@@ -24,13 +24,11 @@ public class AuctionService {
 
     public Auction createAuction(Auction auction) {
         return auctionRepository.save(auction);
-
-        public Auction deActivateProductAuction(boolean isActive);{
-            auctionRepository.deActivateProductAuction(isActive);
-        }
+    }
+    public Auction deactivateProductAuction(Long id, boolean isActive){
+       return auctionRepository.deactivateProductAuction(id, isActive);
 
     }
-
     /*public List<Bid> findAllBidsOnAuction(Auction auction){
         return auctionRepository.findAllBidsOnAuction(auction.getId());
     }*/
