@@ -22,9 +22,9 @@ public class BidService {
         return bidRepository.findById(id).get();
     }
 
-    public Bid findByHighestAmountAndDate (String query){
-        return bidRepository.findByHighestAmountAndDate(query);
-    }
+//    public Bid findByHighestAmountAndDate (String query){
+//        return bidRepository.findByHighestAmountAndDate(query);
+//    }
     }
 
  /*   public List<Bid> getAllBidsOnAuction (Auction auction) {

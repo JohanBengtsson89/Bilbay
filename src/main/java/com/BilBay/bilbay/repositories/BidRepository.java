@@ -11,8 +11,7 @@ import java.util.List;
 @Repository
 public interface BidRepository extends JpaRepository<Bid, Long> {
 
-    @Query( "SELECT p FROM Bid b WHERE p.bidAmount > (SELECT max p.bidAmount) FROM p")
-    Bid findByHighestAmountAndDate(String query);
+    List<Bid> findByAuctionIdOrderByBidAmountDesc(Long auctionId);
 
     //List<Bid> findAllBidsByAuctionId(Long id);
 }
