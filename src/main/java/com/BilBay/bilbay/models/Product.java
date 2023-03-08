@@ -37,7 +37,7 @@ public class Product {
     private ProductSpecification productSpecification;
     @ManyToMany(mappedBy = "favorites")
     private Set<User> users = new HashSet<>();
-    @OneToOne(mappedBy = "product")
+    @OneToOne(mappedBy = "product",cascade = CascadeType.ALL)
     @JsonManagedReference(value = "auction-product")
     private Auction auction;
     @Column(name = "product_name")
