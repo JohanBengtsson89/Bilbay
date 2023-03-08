@@ -16,11 +16,11 @@ public class Bid {
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
     // Ändrade här enligt överenskommelse - Johan
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "buyer_id", referencedColumnName = "id")
     @JsonBackReference(value = "bid-user")
     private User buyer;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "auction_id", referencedColumnName = "id")
     @JsonBackReference(value = "auction-bid")
     private Auction auction;
