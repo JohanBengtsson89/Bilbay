@@ -52,13 +52,8 @@ public class User {
     @Column(name = "organization_nr")
     private String organizationNumber;
     @Column(name = "password")
-    
-    @Size(min = 1, max = 50, message = "Lösenord måste vara mellan {min} och {max} tecken långt.")
-    private String passwordHash;
-
     @Size(min = 1, max = 120, message = "Lösenord måste vara mellan {min} och {max} tecken långt.")
     private String password;
-
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDate createdAt;

@@ -5,6 +5,7 @@ import com.BilBay.bilbay.models.Bid;
 import com.BilBay.bilbay.repositories.BidRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
