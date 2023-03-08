@@ -46,12 +46,19 @@ public class User {
     private String companyName;
     @Column(name = "email", unique = true, nullable = false)
     @Size(max = 50)
-    private String emailAddress;
+    private String email;
+    @Column(name = "username")
+    private String username;
     @Column(name = "organization_nr")
     private String organizationNumber;
     @Column(name = "password")
+    
     @Size(min = 1, max = 50, message = "Lösenord måste vara mellan {min} och {max} tecken långt.")
     private String passwordHash;
+
+    @Size(min = 1, max = 120, message = "Lösenord måste vara mellan {min} och {max} tecken långt.")
+    private String password;
+
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDate createdAt;
@@ -93,6 +100,17 @@ public class User {
 
     public User() {
     }
+
+    public User(String firstName, String lastName, String email, String username, String password, String companyName, String organizationNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.companyName = companyName;
+        this.organizationNumber = organizationNumber;
+    }
+
     public Long getId() {
         return id;
     }
@@ -126,23 +144,36 @@ public class User {
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
-    public String getEmailAddress() {
-        return emailAddress;
+
+    public String getEmail() {
+        return email;
     }
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
+
+    public void setEmail(String email) {
+        this.email = email;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getOrganizationNumber() {
         return organizationNumber;
     }
     public void setOrganizationNumber(String organizationNumber) {
         this.organizationNumber = organizationNumber;
     }
-    public String getPasswordHash() {
-        return passwordHash;
+
+    public String getPassword() {
+        return password;
     }
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     public LocalDate getCreatedAt() {
         return createdAt;
