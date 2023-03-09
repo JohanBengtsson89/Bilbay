@@ -25,8 +25,10 @@ public class AuctionService {
     public Auction createAuction(Auction auction) {
         return auctionRepository.save(auction);
     }
-    public Auction deactivateProductAuction(Long id, boolean isActive){
-       return auctionRepository.deactivateProductAuction(id, isActive);
+    public void deactivateProductAuction(Long id, boolean isActive){
+        auctionRepository.deactivateProductAuction(id, isActive);
+
+
     }
     /*public List<Bid> findAllBidsOnAuction(Auction auction){
         return auctionRepository.findAllBidsOnAuction(auction.getId());
