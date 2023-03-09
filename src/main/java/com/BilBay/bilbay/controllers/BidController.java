@@ -1,13 +1,9 @@
 package com.BilBay.bilbay.controllers;
 
-import com.BilBay.bilbay.models.Auction;
 import com.BilBay.bilbay.models.Bid;
 import com.BilBay.bilbay.services.BidService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/")
@@ -28,7 +24,9 @@ public class BidController {
 
 
     @PostMapping("")
-    public Bid bidNotification(@RequestBody Bid Bid){return bidService.bidNotification(bid);}
+    public String bidNotification(@RequestBody Bid bid){
+        return "You have been outbidded";
+    }
 
     /*@GetMapping("all-bids/{id}")
     public List<Bid> findAllBidsByAuction(@PathVariable Long id){
