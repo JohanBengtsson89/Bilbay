@@ -16,6 +16,8 @@ import jakarta.persistence.Table;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.yaml.snakeyaml.DumperOptions;
+
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -35,9 +37,9 @@ public class Product {
     @JoinColumn(name = "product_specification_id", referencedColumnName = "id")
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL) //denna cascade funkar för inmatning
     private ProductSpecification productSpecification;
-    @ManyToMany(mappedBy = "favorites")
+    @ManyToMany(mappedBy = "favorites", cascade = CascadeType.ALL) //Den raderar även user
     private Set<User> users = new HashSet<>();
-    @OneToOne(mappedBy = "product")
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "auction-product")
     private Auction auction;
     @Column(name = "product_name")

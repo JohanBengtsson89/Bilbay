@@ -60,33 +60,33 @@ public class User {
     @Column(name = "updated_at")
     @UpdateTimestamp
     private LocalDate updatedAt;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "product-user")
     private Set<Product> products = new HashSet<>();
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "auction-user")
     private Set<Auction> auctions = new HashSet<>();
-    @OneToMany(mappedBy = "buyer")
+    @OneToMany(mappedBy = "buyer", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "bid-user")
     private Set<Bid> bidsBuyer = new HashSet<>();
     @OneToMany(mappedBy = "userFor")
     private Set<Review> reviewsFor = new HashSet<>();
     @OneToMany(mappedBy = "userBy")
     private Set<Review> reviewsBy = new HashSet<>();
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL) //Den raderar även user
     @JoinTable(name = "favorites",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
     private Set<Product> favorites = new HashSet<>();
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "bankPayment-user")
     private Set<BankPayment> bankPayments = new HashSet<>();
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference(value= "cardpayment-user")
     private Set<CardPayment> cardPayments = new HashSet<>();
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<DeliveryPaymentTransaction> deliveryPaymentTransactions = new HashSet<>();
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Address address;
     @JsonManagedReference(value = "payment-user")
     @OneToMany(mappedBy = "buyer")
