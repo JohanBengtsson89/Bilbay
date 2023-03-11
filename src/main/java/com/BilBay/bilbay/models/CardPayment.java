@@ -21,7 +21,7 @@ public class CardPayment {
     private Date expireDate;    // Manuell inmatning, kan behöva byta datatyp - Johan
     @Column(name = "cvv")
     private int cvv;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "cardPayment")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cardPayment")
     private Set<DeliveryPaymentTransaction> deliveryPaymentTransactions= new HashSet<>();
 
     public CardPayment() {

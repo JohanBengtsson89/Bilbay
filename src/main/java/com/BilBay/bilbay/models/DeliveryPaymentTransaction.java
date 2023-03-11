@@ -9,18 +9,18 @@ import java.time.LocalDate;
 public class DeliveryPaymentTransaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, updatable = false)
+    @Column(name = "id")
     private Long id;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "buyer_id", referencedColumnName = "id")
     private User user;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "orders_id", referencedColumnName = "id")
     private Order order;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "delivery_alternatives_id", referencedColumnName = "id")
     private DeliveryAlternative deliveryAlternatives;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "card_payment_id", referencedColumnName = "id")
     private CardPayment cardPayment;
     @NotNull

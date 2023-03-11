@@ -41,6 +41,11 @@ public class AuctionService {
         return bids.get(0);
     }
 
+    public String deleteAuctionById(Long id){
+        auctionRepository.deleteById(id);
+        return "auction deleted";
+    }
+
 
     /*public List<Bid> findAllBidsOnAuction(Auction auction){
         return auctionRepository.findAllBidsOnAuction(auction.getId());

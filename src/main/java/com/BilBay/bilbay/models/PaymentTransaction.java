@@ -8,23 +8,23 @@ import java.time.LocalDate;
 @Table(name = "payment_transaction")
 public class PaymentTransaction {
     @Id
-    @Column(name = "id", nullable = false, updatable = false)
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "buyer_id", referencedColumnName = "id")
     @JsonBackReference(value = "payment-user")
     private User buyer;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "orders_id", referencedColumnName = "id")
     private Order order;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "bid_id", referencedColumnName = "id")
     private Bid bid;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "card_payment_id", referencedColumnName = "id")
     private CardPayment cardPayment;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "bank_payment_id", referencedColumnName = "id")
     private BankPayment bankPayment;
     @CreationTimestamp

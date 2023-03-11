@@ -13,7 +13,7 @@ public class Bid {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, updatable = false)
+    @Column(name = "id")
     private Long id;
     // Ändrade här enligt överenskommelse - Johan
     @ManyToOne(fetch = FetchType.EAGER)
@@ -24,6 +24,8 @@ public class Bid {
     @JoinColumn(name = "auction_id", referencedColumnName = "id")
     @JsonBackReference(value = "auction-bid")
     private Auction auction;
+    @OneToOne(mappedBy = "bid", cascade = CascadeType.ALL)
+    private Order order;
     @Column(name = "bid_amount")
     private Long bidAmount;
     @Column(name = "created_at")
@@ -51,6 +53,13 @@ public class Bid {
     public void setAuction(Auction auction) {
         this.auction = auction;
     }
+    public Order getOrder() {
+        return order;
+    }
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
     public Long getBidAmount() {
         return bidAmount;
     }

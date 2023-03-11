@@ -17,7 +17,7 @@ public class BankPayment {
     private String bankName;
     @Column(name = "bank_account_nr")
     private Long bankAccountNr;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "bankPayment")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "bankPayment")
     private Set< PaymentTransaction > paymentTransactions = new HashSet<>();
 
 

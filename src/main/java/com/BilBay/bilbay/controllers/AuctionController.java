@@ -36,5 +36,11 @@ public class AuctionController {
     public Auction createAuction (@RequestBody Auction auction) {
         return auctionService.createAuction(auction);
     }
+
+    @DeleteMapping("auc/{id}")
+    public String deleteById(@PathVariable Long id){
+        auctionService.deleteAuctionById(id);
+        return "auction and all bids has been deleted.";
+    }
 }
 
