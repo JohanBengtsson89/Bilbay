@@ -1,5 +1,6 @@
 package com.BilBay.bilbay.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.*;
@@ -17,7 +18,7 @@ public class BankPayment {
     private String bankName;
     @Column(name = "bank_account_nr")
     private Long bankAccountNr;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "bankPayment")
+    @OneToMany(mappedBy = "bankPayment")
     private Set< PaymentTransaction > paymentTransactions = new HashSet<>();
 
 

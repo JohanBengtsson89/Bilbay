@@ -7,7 +7,6 @@ import java.util.List;
 public class DeliveryAlternative {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
     @Column(name = "company_name")
     private String companyName;
@@ -21,43 +20,33 @@ public class DeliveryAlternative {
 
     public DeliveryAlternative() {
     }
-
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getCompanyName() {
         return companyName;
     }
-
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
-
     public int getDeliveryCost() {
         return deliveryCost;
     }
-
     public void setDeliveryCost(int deliveryCost) {
         this.deliveryCost = deliveryCost;
     }
-
     public String getEstimatedDelivery() {
         return estimatedDelivery;
     }
-
     public void setEstimatedDelivery(String estimatedDelivery) {
         this.estimatedDelivery = estimatedDelivery;
     }
-
     public List<DeliveryPaymentTransaction> getDeliveryPaymentTransactions() {
         return deliveryPaymentTransactions;
     }
-
     public void setDeliveryPaymentTransactions(List<DeliveryPaymentTransaction> deliveryPaymentTransactions) {
         this.deliveryPaymentTransactions = deliveryPaymentTransactions;
     }

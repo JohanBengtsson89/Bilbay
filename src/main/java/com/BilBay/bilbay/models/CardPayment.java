@@ -6,12 +6,11 @@ import java.util.*;
 @Table(name = "card_payment")
 public class CardPayment {
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @JsonBackReference(value= "cardpayment-user")
+    @JsonBackReference(value= "cardPayment-user")
     private User user;
     @Column(name = "card_type")
     private String cardType;
@@ -21,7 +20,7 @@ public class CardPayment {
     private Date expireDate;    // Manuell inmatning, kan behöva byta datatyp - Johan
     @Column(name = "cvv")
     private int cvv;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cardPayment")
+    @OneToMany(mappedBy = "cardPayment")
     private Set<DeliveryPaymentTransaction> deliveryPaymentTransactions= new HashSet<>();
 
     public CardPayment() {

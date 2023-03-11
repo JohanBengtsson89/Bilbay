@@ -1,5 +1,6 @@
 package com.BilBay.bilbay.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
@@ -8,20 +9,19 @@ import java.time.LocalDate;
 @Table(name = "payment_transaction")
 public class PaymentTransaction {
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "buyer_id", referencedColumnName = "id")
     @JsonBackReference(value = "payment-user")
     private User buyer;
-    @OneToOne()
+    @OneToOne
     @JoinColumn(name = "orders_id", referencedColumnName = "id")
     private Order order;
-    @OneToOne()
+    @OneToOne
     @JoinColumn(name = "bid_id", referencedColumnName = "id")
     private Bid bid;
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "card_payment_id", referencedColumnName = "id")
     private CardPayment cardPayment;
     @ManyToOne()
