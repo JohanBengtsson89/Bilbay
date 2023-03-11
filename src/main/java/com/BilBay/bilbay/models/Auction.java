@@ -13,6 +13,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.ColumnDefault;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,13 +25,13 @@ public class Auction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "seller_id", referencedColumnName = "id")
     @JsonBackReference(value = "auction-user")
     private User user;
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
     @JoinColumn(name = "product_id", referencedColumnName = "id")
-    @JsonBackReference(value = "auction-product")
+    @JsonManagedReference(value = "auction-product")//bytte den mot backReference
     private Product product;
     @OneToMany(mappedBy = "auction", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "auction-bid")
@@ -53,9 +54,6 @@ public class Auction {
 
     public Long getId() {
         return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public User getUser() {

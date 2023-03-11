@@ -7,7 +7,6 @@ import java.util.Date;
 @Table(name = "reviews")
 public class Review {
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     // Ändrade här enligt överenskomlse - Johan

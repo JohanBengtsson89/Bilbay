@@ -7,9 +7,8 @@ import java.time.LocalDate;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
-    @OneToOne()
+    @OneToOne
     @JoinColumn(name = "bid_id", referencedColumnName = "id")
     private Bid bid;
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
@@ -35,7 +34,6 @@ public class Order {
     public void setPaymentTransaction(PaymentTransaction paymentTransaction) {
         this.paymentTransaction = paymentTransaction;
     }
-
     public Long getId() {
         return id;
     }

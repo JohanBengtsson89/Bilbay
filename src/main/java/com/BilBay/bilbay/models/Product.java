@@ -35,12 +35,12 @@ public class Product {
     private String category;
     @JsonManagedReference("product-spec")
     @JoinColumn(name = "product_specification_id", referencedColumnName = "id")
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL) //denna cascade funkar för inmatning
+    @OneToOne(cascade = CascadeType.ALL) //denna cascade funkar för inmatning
     private ProductSpecification productSpecification;
     @ManyToMany(mappedBy = "favorites", cascade = CascadeType.ALL) //Den raderar även user
     private Set<User> users = new HashSet<>();
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
-    @JsonManagedReference(value = "auction-product")
+    @JsonBackReference(value = "auction-product") //bytte den mot manageReference
     private Auction auction;
     @Column(name = "product_name")
     private String productName;

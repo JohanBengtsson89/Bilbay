@@ -5,9 +5,9 @@ import jakarta.persistence.*;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false, updatable = false)
     private Long id;
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
     @JoinColumn(name = "users_id", referencedColumnName = "id")
     private User user;
     @Column(name = "address")

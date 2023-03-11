@@ -73,7 +73,7 @@ public class User {
     private Set<Review> reviewsFor = new HashSet<>();
     @OneToMany(mappedBy = "userBy")
     private Set<Review> reviewsBy = new HashSet<>();
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL) //Den raderar även user
+    @ManyToMany(cascade = CascadeType.ALL) //Den raderar även user
     @JoinTable(name = "favorites",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
@@ -82,7 +82,7 @@ public class User {
     @JsonManagedReference(value = "bankPayment-user")
     private Set<BankPayment> bankPayments = new HashSet<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonManagedReference(value= "cardpayment-user")
+    @JsonManagedReference(value= "cardPayment-user")
     private Set<CardPayment> cardPayments = new HashSet<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<DeliveryPaymentTransaction> deliveryPaymentTransactions = new HashSet<>();
@@ -95,7 +95,6 @@ public class User {
 
     public User() {
     }
-
     public User(String firstName, String lastName, String email, String username, String password, String companyName, String organizationNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -105,18 +104,15 @@ public class User {
         this.companyName = companyName;
         this.organizationNumber = organizationNumber;
     }
-
     public Long getId() {
         return id;
     }
     public void setId(Long id) {
         this.id = id;
     }
-
     public Set<Role> getRoles() {
         return roles;
     }
-
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
 
@@ -139,34 +135,27 @@ public class User {
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
-
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
-
     public String getUsername() {
         return username;
     }
-
     public void setUsername(String username) {
         this.username = username;
     }
-
     public String getOrganizationNumber() {
         return organizationNumber;
     }
     public void setOrganizationNumber(String organizationNumber) {
         this.organizationNumber = organizationNumber;
     }
-
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
