@@ -15,9 +15,8 @@ public class BankPaymentService {
         return bankPaymentRepository.save(bankPayment);
     }
 
-    public String deleteBankPaymentById (Long id){
-        bankPaymentRepository.deleteById(id);
-        return "Bank Payment has been deleted";
+    public void deleteBankPayment(Long id){
+        bankPaymentRepository.deleteBankPaymentById(id);
     }
 
     public BankPayment getBankPaymentById(Long id){

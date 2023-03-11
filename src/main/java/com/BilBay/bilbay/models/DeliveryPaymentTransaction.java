@@ -1,4 +1,6 @@
 package com.BilBay.bilbay.models;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.ColumnDefault;
@@ -20,6 +22,7 @@ public class DeliveryPaymentTransaction {
     @JoinColumn(name = "delivery_alternatives_id", referencedColumnName = "id")
     private DeliveryAlternative deliveryAlternatives;
     @ManyToOne
+    @JsonBackReference(value = "card-deliver")
     @JoinColumn(name = "card_payment_id", referencedColumnName = "id")
     private CardPayment cardPayment;
     @NotNull

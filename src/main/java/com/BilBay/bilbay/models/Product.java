@@ -39,7 +39,7 @@ public class Product {
     private ProductSpecification productSpecification;
     @ManyToMany(mappedBy = "favorites", cascade = CascadeType.ALL) //Den raderar även user
     private Set<User> users = new HashSet<>();
-    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "product")
     @JsonBackReference(value = "auction-product") //bytte den mot manageReference
     private Auction auction;
     @Column(name = "product_name")

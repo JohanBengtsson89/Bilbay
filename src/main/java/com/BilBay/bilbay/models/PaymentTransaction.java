@@ -22,9 +22,12 @@ public class PaymentTransaction {
     @JoinColumn(name = "bid_id", referencedColumnName = "id")
     private Bid bid;
     @ManyToOne
+
+    @JsonBackReference(value = "card-transaction")
     @JoinColumn(name = "card_payment_id", referencedColumnName = "id")
     private CardPayment cardPayment;
     @ManyToOne()
+    @JsonBackReference(value = "bank-transaction")
     @JoinColumn(name = "bank_payment_id", referencedColumnName = "id")
     private BankPayment bankPayment;
     @CreationTimestamp

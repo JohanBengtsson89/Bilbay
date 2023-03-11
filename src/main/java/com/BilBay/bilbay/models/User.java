@@ -78,7 +78,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
     private Set<Product> favorites = new HashSet<>();
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "bankPayment-user")
     private Set<BankPayment> bankPayments = new HashSet<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

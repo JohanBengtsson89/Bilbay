@@ -1,5 +1,6 @@
 package com.BilBay.bilbay.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -11,7 +12,7 @@ public class BankPayment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @JoinColumn(name = "users_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JsonBackReference(value = "bankPayment-user")
     private User user;
     @Column(name = "bank_name")
@@ -19,6 +20,8 @@ public class BankPayment {
     @Column(name = "bank_account_nr")
     private Long bankAccountNr;
     @OneToMany(mappedBy = "bankPayment")
+    @JsonIgnore
+    @JsonManagedReference(value = "bank-transaction")
     private Set< PaymentTransaction > paymentTransactions = new HashSet<>();
 
 

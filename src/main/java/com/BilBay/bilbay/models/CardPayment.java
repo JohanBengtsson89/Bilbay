@@ -1,5 +1,7 @@
 package com.BilBay.bilbay.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.*;
 @Entity
@@ -21,7 +23,13 @@ public class CardPayment {
     @Column(name = "cvv")
     private int cvv;
     @OneToMany(mappedBy = "cardPayment")
+    @JsonIgnore
+    @JsonManagedReference(value = "card-deliver")
     private Set<DeliveryPaymentTransaction> deliveryPaymentTransactions= new HashSet<>();
+    @OneToMany(mappedBy = "cardPayment")
+    @JsonIgnore
+    @JsonManagedReference(value = "card-transaction")
+    private Set<PaymentTransaction> paymentTransaction;
 
     public CardPayment() {
     }
@@ -66,6 +74,12 @@ public class CardPayment {
     }
     public void setDeliveryPaymentTransactions(Set<DeliveryPaymentTransaction> deliveryPaymentTransactions) {
         this.deliveryPaymentTransactions = deliveryPaymentTransactions;
+    }
+    public Set<PaymentTransaction> getPaymentTransaction() {
+        return paymentTransaction;
+    }
+    public void setPaymentTransaction(Set<PaymentTransaction> paymentTransaction) {
+        this.paymentTransaction = paymentTransaction;
     }
 }
 
