@@ -1,4 +1,6 @@
 package com.BilBay.bilbay.models;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDate;
@@ -13,6 +15,7 @@ public class Order {
     @JoinColumn(name = "bid_id", referencedColumnName = "id")
     private Bid bid;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
+    @JsonBackReference("order")
     private DeliveryPaymentTransaction deliveryPaymentTransaction;
     @CreationTimestamp
     @Column(name = "registration_date")

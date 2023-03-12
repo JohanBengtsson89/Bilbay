@@ -17,11 +17,11 @@ public class Favorite {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonBackReference("user")
+    @JsonBackReference("favorites")
     private User user;
     @ManyToOne
     @JoinColumn(name = "product_id")
-    @JsonBackReference("product")
+    @JsonBackReference("favorites")
     private Product product;
 
     public Favorite() {
