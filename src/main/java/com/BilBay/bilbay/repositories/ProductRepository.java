@@ -1,5 +1,7 @@
 package com.BilBay.bilbay.repositories;
+import com.BilBay.bilbay.models.Favorite;
 import com.BilBay.bilbay.models.Product;
+import com.BilBay.bilbay.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -26,4 +28,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Transactional
     void deleteProductById(Long id);
     Product findProductById(Long id);
+
 }
