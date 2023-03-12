@@ -41,9 +41,8 @@ public class AuctionService {
         return bids.get(0);
     }
 
-    public String deleteAuctionById(Long id){
-        auctionRepository.deleteById(id);
-        return "auction deleted";
+    public void deleteAuctionById(Long id){
+        auctionRepository.deleteAuctionById(id);
     }
 
 

@@ -1,19 +1,25 @@
 package com.BilBay.bilbay.models;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDate;
 import java.util.Date;
 @Entity
 @Table(name = "reviews")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Review.class)
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     // Ändrade här enligt överenskomlse - Johan
     @ManyToOne
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "users_id_by", referencedColumnName = "id")
     private User userBy; // Kan inte döpa den till user
     @ManyToOne
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "users_id_for", referencedColumnName = "id")
     private User userFor; // Kan inte döpa den till user
     @Column(name = "comment")

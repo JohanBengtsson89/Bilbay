@@ -1,33 +1,34 @@
 package com.BilBay.bilbay.models;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDate;
 @Entity
 @Table(name = "payment_transaction")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = PaymentTransaction.class)
 public class PaymentTransaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     @JoinColumn(name = "buyer_id", referencedColumnName = "id")
-    @JsonBackReference(value = "payment-user")
+    @JsonIdentityReference(alwaysAsId = true)
     private User buyer;
     @OneToOne
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "orders_id", referencedColumnName = "id")
     private Order order;
     @OneToOne
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "bid_id", referencedColumnName = "id")
     private Bid bid;
     @ManyToOne
-
-    @JsonBackReference(value = "card-transaction")
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "card_payment_id", referencedColumnName = "id")
     private CardPayment cardPayment;
-    @ManyToOne()
-    @JsonBackReference(value = "bank-transaction")
+    @ManyToOne
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "bank_payment_id", referencedColumnName = "id")
     private BankPayment bankPayment;
     @CreationTimestamp

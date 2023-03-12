@@ -1,7 +1,5 @@
 package com.BilBay.bilbay.models;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import jdk.jfr.Relational;
 import org.hibernate.annotations.CreationTimestamp;
@@ -9,6 +7,7 @@ import java.time.LocalDate;
 import java.util.Date;
 @Entity
 @Table(name = "bid")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Bid.class)
 public class Bid {
 
     @Id
@@ -16,13 +15,14 @@ public class Bid {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "buyer_id", referencedColumnName = "id")
-    @JsonBackReference(value = "bid-user")
+    @JsonIdentityReference(alwaysAsId = true)
     private User buyer;
     @ManyToOne
     @JoinColumn(name = "auction_id", referencedColumnName = "id")
-    @JsonBackReference(value = "auction-bid")
+    @JsonIdentityReference(alwaysAsId = true)
     private Auction auction;
     @OneToOne(mappedBy = "bid", cascade = CascadeType.ALL)
+    @JsonIdentityReference(alwaysAsId = true)
     private Order order;
     @Column(name = "bid_amount")
     private Long bidAmount;

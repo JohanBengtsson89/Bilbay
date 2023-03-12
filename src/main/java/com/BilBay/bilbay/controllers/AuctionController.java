@@ -37,10 +37,10 @@ public class AuctionController {
         return auctionService.createAuction(auction);
     }
 
-    @DeleteMapping("auc/{id}")
-    public String deleteById(@PathVariable Long id){
+    @DeleteMapping("delete-auction/{id}")
+    public ResponseEntity<Void> deleteAuctionById(@PathVariable Long id){
         auctionService.deleteAuctionById(id);
-        return "auction and all bids has been deleted.";
+        return ResponseEntity.noContent().build();
     }
 }
 

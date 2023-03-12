@@ -1,6 +1,5 @@
 package com.BilBay.bilbay.models;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,24 +22,26 @@ import java.util.HashSet;
 import java.util.Set;
 @Entity
 @Table(name = "product")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Product.class)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @JoinColumn(name = "seller_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference(value = "product-user")
+    @JsonIdentityReference(alwaysAsId = true)
     private User user;
     @Column(name = "category")
     private String category;
-    @JsonManagedReference("product-spec")
+    @JsonIdentityReference(alwaysAsId = false)
     @JoinColumn(name = "product_specification_id", referencedColumnName = "id")
     @OneToOne(cascade = CascadeType.ALL) //denna cascade funkar för inmatning
     private ProductSpecification productSpecification;
     @ManyToMany(mappedBy = "favorites", cascade = CascadeType.ALL) //Den raderar även user
+    @JsonIdentityReference(alwaysAsId = true)
     private Set<User> users = new HashSet<>();
-    @OneToOne(mappedBy = "product")
-    @JsonBackReference(value = "auction-product") //bytte den mot manageReference
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    @JsonIdentityReference(alwaysAsId = true)
     private Auction auction;
     @Column(name = "product_name")
     private String productName;

@@ -1,6 +1,5 @@
 package com.BilBay.bilbay.models;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.ColumnDefault;
@@ -8,21 +7,25 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDate;
 @Entity
 @Table(name = "delivery_payment_transactions")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = DeliveryPaymentTransaction.class)
 public class DeliveryPaymentTransaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "buyer_id", referencedColumnName = "id")
     private User user;
     @OneToOne
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "orders_id", referencedColumnName = "id")
     private Order order;
     @ManyToOne
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "delivery_alternatives_id", referencedColumnName = "id")
     private DeliveryAlternative deliveryAlternatives;
     @ManyToOne
-    @JsonBackReference(value = "card-deliver")
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "card_payment_id", referencedColumnName = "id")
     private CardPayment cardPayment;
     @NotNull
