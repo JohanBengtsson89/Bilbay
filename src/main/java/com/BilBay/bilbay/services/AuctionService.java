@@ -31,7 +31,7 @@ public class AuctionService {
         return auctionRepository.save(auction);
     }
     public void deactivateProductAuction(Long id, boolean isActive){
-        auctionRepository.deactivateProductAuction(id, isActive);
+        auctionRepository.deactivateProductAuction(isActive, id);
 
     }
 
