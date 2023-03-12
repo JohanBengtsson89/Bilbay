@@ -29,7 +29,7 @@ public class ProductService {
             return productRepository.findAllByIsAvailable(isAvailable);
     }
     public void deleteProduct(Long id){
-        productRepository.deleteById(id);
+        productRepository.deleteProductById(id);
     }
     public void updateProductStatus(Long id, boolean isAvailable){
         productRepository.updateProductStatus(isAvailable, id);

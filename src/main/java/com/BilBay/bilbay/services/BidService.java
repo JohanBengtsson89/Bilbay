@@ -5,6 +5,7 @@ import com.BilBay.bilbay.models.Bid;
 import com.BilBay.bilbay.repositories.BidRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,7 +23,12 @@ public class BidService {
         return bidRepository.findById(id).get();
     }
 
+//    public Bid findByHighestAmountAndDate (String query){
+//        return bidRepository.findByHighestAmountAndDate(query);
+//    }
+    }
+
  /*   public List<Bid> getAllBidsOnAuction (Auction auction) {
         return bidRepository.findAllBidsByAuctionId(auction.getId());
     }*/
-}
+

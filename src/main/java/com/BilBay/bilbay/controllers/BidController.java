@@ -26,6 +26,10 @@ public class BidController {
         return bidService.getBidByID(id);
     }
 
+//    @GetMapping("find-highestBid")
+//    public Bid findByHighestAmountAndDate(@RequestParam("query") String query){
+//        return bidService.findByHighestAmountAndDate(query);  }
+
     /*@GetMapping("all-bids/{id}")
     public List<Bid> findAllBidsByAuction(@PathVariable Long id){
         return bidService.getAllBidsOnAuction(id.ge);
