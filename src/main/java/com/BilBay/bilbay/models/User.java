@@ -1,6 +1,7 @@
 package com.BilBay.bilbay.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
@@ -70,8 +71,10 @@ public class User {
     @JsonManagedReference(value = "bid-user")
     private Set<Bid> bidsBuyer = new HashSet<>();
     @OneToMany(mappedBy = "userFor")
+    @JsonBackReference("userFor")
     private Set<Review> reviewsFor = new HashSet<>();
     @OneToMany(mappedBy = "userBy")
+    @JsonBackReference("userBy")
     private Set<Review> reviewsBy = new HashSet<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST, orphanRemoval = true)
     @JsonManagedReference
