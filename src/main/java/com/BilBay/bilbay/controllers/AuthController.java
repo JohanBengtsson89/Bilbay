@@ -80,7 +80,7 @@ public class AuthController {
         if (userRepository.existsByUsername((signupRequest.getUsername()))) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Email is already in use!"));
+                    .body(new MessageResponse("Error: Email or Username is already in use!"));
         }
 
         // create new users account

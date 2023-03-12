@@ -1,5 +1,5 @@
 package com.BilBay.bilbay.models;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,11 +12,12 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 @Entity
 @Table(name = "product_specification")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = ProductSpecification.class)
 public class ProductSpecification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @JsonBackReference("product-spec")
+
     @OneToOne(mappedBy = "productSpecification")
     private Product product;
     @Column(name = "product_photo")

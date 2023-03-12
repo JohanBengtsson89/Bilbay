@@ -1,6 +1,5 @@
 package com.BilBay.bilbay.models;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,6 +12,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.ColumnDefault;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -20,20 +20,21 @@ import java.util.HashSet;
 import java.util.Set;
 @Entity
 @Table(name = "auction")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Auction.class)
 public class Auction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seller_id", referencedColumnName = "id")
-    @JsonBackReference(value = "auction-user")
+    @JsonIdentityReference(alwaysAsId = true)
     private User user;
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
     @JoinColumn(name = "product_id", referencedColumnName = "id")
-    @JsonBackReference(value = "auction-product")
+    @JsonIdentityReference(alwaysAsId = true)
     private Product product;
     @OneToMany(mappedBy = "auction", cascade = CascadeType.ALL)
-    @JsonManagedReference(value = "auction-bid")
+    @JsonIdentityReference(alwaysAsId = false)
     private Set<Bid> bids = new HashSet<>();
     @Column(name = "reserve_price")
     private int reservePrice;
@@ -57,7 +58,6 @@ public class Auction {
     public void setId(Long id) {
         this.id = id;
     }
-
     public User getUser() {
         return user;
     }

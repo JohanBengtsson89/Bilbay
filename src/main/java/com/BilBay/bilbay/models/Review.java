@@ -1,6 +1,7 @@
 package com.BilBay.bilbay.models;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.Range;
@@ -10,20 +11,22 @@ import java.time.LocalDate;
 import java.util.Date;
 @Entity
 @Table(name = "reviews")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Review.class)
 @Validated
 public class Review {
     @Id
-    @Column(name = "id", nullable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     // Ändrade här enligt överenskomlse - Johan
     @ManyToOne
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "users_id_by", referencedColumnName = "id")
     @JsonBackReference("userBy")
     private User userBy; // Kan inte döpa den till user
     @Column(name = "comment")
     private String comment;
     @ManyToOne
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "users_id_for", referencedColumnName = "id")
     @JsonBackReference("userFor")
     private User userFor; // Kan inte döpa den till user

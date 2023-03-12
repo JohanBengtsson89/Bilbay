@@ -1,9 +1,7 @@
 package com.BilBay.bilbay.models;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,11 +25,13 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 @Validated
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = User.class)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Long id;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
@@ -61,44 +61,61 @@ public class User {
     @Column(name = "updated_at")
     @UpdateTimestamp
     private LocalDate updatedAt;
-    @OneToMany(mappedBy = "user")
-    @JsonManagedReference(value = "product-user")
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIdentityReference(alwaysAsId = true)
     private Set<Product> products = new HashSet<>();
-    @OneToMany(mappedBy = "user")
-    @JsonManagedReference(value = "auction-user")
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIdentityReference(alwaysAsId = true)
     private Set<Auction> auctions = new HashSet<>();
-    @OneToMany(mappedBy = "buyer")
-    @JsonManagedReference(value = "bid-user")
+    
+    @OneToMany(mappedBy = "buyer", cascade = CascadeType.ALL)
+    @JsonIdentityReference(alwaysAsId = true)
     private Set<Bid> bidsBuyer = new HashSet<>();
+    
     @OneToMany(mappedBy = "userFor")
-    @JsonManagedReference("userFor")
+    @JsonIdentityReference(alwaysAsId = true)
     private Set<Review> reviewsFor = new HashSet<>();
+    
     @OneToMany(mappedBy = "userBy")
-    @JsonManagedReference("userBy")
+    @JsonIdentityReference(alwaysAsId = true)
     private Set<Review> reviewsBy = new HashSet<>();
-    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    @JsonManagedReference("favorites")
-    @JsonIgnore
-    private Set<Favorite> favorites;
-    @OneToMany(mappedBy = "user")
-    @JsonManagedReference(value = "bankPayment-user")
+    
+    @ManyToMany(cascade = CascadeType.ALL) //Den raderar även user
+    @JsonIdentityReference(alwaysAsId = true)
+    @JoinTable(name = "favorites",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
+    private Set<Product> favorites = new HashSet<>();
+    
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIdentityReference(alwaysAsId = true)
     private Set<BankPayment> bankPayments = new HashSet<>();
-    @OneToMany(mappedBy = "user")
-    @JsonManagedReference(value= "cardpayment-user")
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIdentityReference(alwaysAsId = true)
     private Set<CardPayment> cardPayments = new HashSet<>();
-    @OneToMany(mappedBy = "user")
-    @JsonManagedReference("user")
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIdentityReference(alwaysAsId = true)
     private Set<DeliveryPaymentTransaction> deliveryPaymentTransactions = new HashSet<>();
-    @OneToOne(mappedBy = "user")
+    
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIdentityReference(alwaysAsId = true)
     private Address address;
-    @JsonManagedReference(value = "payment-user")
+    
+    @JsonIdentityReference(alwaysAsId = true)
     @OneToMany(mappedBy = "buyer")
     private Set<PaymentTransaction> paymentTransactions= new HashSet<>();
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 
     public User() {
     }
-
     public User(String firstName, String lastName, String email, String username, String password, String companyName, String organizationNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -108,18 +125,13 @@ public class User {
         this.companyName = companyName;
         this.organizationNumber = organizationNumber;
     }
-
     public Long getId() {
         return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Set<Role> getRoles() {
         return roles;
     }
-
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
 
@@ -142,34 +154,27 @@ public class User {
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
-
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
-
     public String getUsername() {
         return username;
     }
-
     public void setUsername(String username) {
         this.username = username;
     }
-
     public String getOrganizationNumber() {
         return organizationNumber;
     }
     public void setOrganizationNumber(String organizationNumber) {
         this.organizationNumber = organizationNumber;
     }
-
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }

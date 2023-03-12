@@ -42,5 +42,11 @@ public class AuctionController {
         auctionService.deactivateProductAuction(id, isActive);
         return "Auction has been deactivated";
     }
+
+    @DeleteMapping("delete-auction/{id}")
+    public ResponseEntity<Void> deleteAuctionById(@PathVariable Long id){
+        auctionService.deleteAuctionById(id);
+        return ResponseEntity.noContent().build();
+    }
 }
 

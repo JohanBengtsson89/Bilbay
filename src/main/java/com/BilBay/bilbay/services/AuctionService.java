@@ -43,7 +43,9 @@ public class AuctionService {
         return bids.get(0);
     }
 
-    /*public List<Bid> findAllBidsOnAuction(Auction auction){
-        return auctionRepository.findAllBidsOnAuction(auction.getId());
-    }*/
+
+    public void deleteAuctionById(Long id){
+        auctionRepository.deleteAuctionById(id);
+    }
+
 }

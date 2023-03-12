@@ -24,7 +24,8 @@ public class BankPaymentController {
 
     @DeleteMapping("/bankpayment/delete/{id}")
     public String deleteBankPaymentById(@PathVariable Long id) {
-        return bankPaymentService.deleteBankPaymentById(id);
+        bankPaymentService.deleteBankPayment(id);
+        return "Bank Payment has been deleted";
     }
 
     @PutMapping("bankpayment/update")
