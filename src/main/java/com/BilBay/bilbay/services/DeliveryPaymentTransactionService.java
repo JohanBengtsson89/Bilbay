@@ -19,4 +19,8 @@ public class DeliveryPaymentTransactionService {
         return deliveryPaymentTransactionRepository.getDeliveryPaymentTransactionById(id);
     }
 
+    public void updateDeliveryPaymentStatus(Long id, boolean successful){
+        deliveryPaymentTransactionRepository.updateDeliveryPaymentTransaction(successful, id);
+    }
+
 }
