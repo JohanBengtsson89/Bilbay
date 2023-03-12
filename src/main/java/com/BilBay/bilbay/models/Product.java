@@ -1,5 +1,6 @@
 package com.BilBay.bilbay.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -9,15 +10,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Set;
 @Entity
 @Table(name = "product")
@@ -35,8 +35,10 @@ public class Product {
     @JoinColumn(name = "product_specification_id", referencedColumnName = "id")
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private ProductSpecification productSpecification;
-    @ManyToMany(mappedBy = "favorites")
-    private Set<User> users = new HashSet<>();
+    @OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @JsonManagedReference
+    @JsonIgnore
+    private Set<Favorite> favorites;
     @OneToOne(mappedBy = "product",cascade = CascadeType.ALL)
     @JsonManagedReference(value = "auction-product")
     private Auction auction;
@@ -81,12 +83,6 @@ public class Product {
     public void setProductSpecification(ProductSpecification productSpecification) {
         this.productSpecification = productSpecification;
     }
-    public Set<User> getUsers() {
-        return users;
-    }
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
     public Auction getAuction() {
         return auction;
     }
@@ -122,5 +118,21 @@ public class Product {
     }
     public void setIsAvailable(Boolean isAvailable) {
         this.isAvailable = isAvailable;
+    }
+
+    public Set<Favorite> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(Set<Favorite> favorites) {
+        this.favorites = favorites;
+    }
+
+    public Boolean getAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(Boolean available) {
+        isAvailable = available;
     }
 }

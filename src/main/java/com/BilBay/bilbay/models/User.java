@@ -1,7 +1,7 @@
 package com.BilBay.bilbay.models;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -73,11 +73,10 @@ public class User {
     private Set<Review> reviewsFor = new HashSet<>();
     @OneToMany(mappedBy = "userBy")
     private Set<Review> reviewsBy = new HashSet<>();
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "favorites",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
-    private Set<Product> favorites = new HashSet<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @JsonManagedReference
+    @JsonIgnore
+    private Set<Favorite> favorites;
     @OneToMany(mappedBy = "user")
     @JsonManagedReference(value = "bankPayment-user")
     private Set<BankPayment> bankPayments = new HashSet<>();
@@ -212,12 +211,6 @@ public class User {
     public void setReviewsBy(Set<Review> reviewsBy) {
         this.reviewsBy = reviewsBy;
     }
-    public Set<Product> getFavorites() {
-        return favorites;
-    }
-    public void setFavorites(Set<Product> favorites) {
-        this.favorites = favorites;
-    }
     public Set<BankPayment> getBankPayments() {
         return bankPayments;
     }
@@ -247,5 +240,13 @@ public class User {
     }
     public void setPaymentTransactions(Set<PaymentTransaction> paymentTransactions) {
         this.paymentTransactions = paymentTransactions;
+    }
+
+    public Set<Favorite> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(Set<Favorite> favorites) {
+        this.favorites = favorites;
     }
 }
