@@ -1,5 +1,7 @@
 package com.BilBay.bilbay.models;
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,53 +17,41 @@ import jakarta.persistence.Table;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.yaml.snakeyaml.DumperOptions;
-
 import java.time.LocalDate;
 import java.util.Set;
 @Entity
 @Table(name = "product")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Product.class)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
     @JoinColumn(name = "seller_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIdentityReference(alwaysAsId = true)
+    @JsonBackReference(value = "product-user")
     private User user;
-    
     @Column(name = "category")
     private String category;
-    
-    @JsonIdentityReference(alwaysAsId = false)
+    @JsonManagedReference("product-spec")
     @JoinColumn(name = "product_specification_id", referencedColumnName = "id")
-    @OneToOne(cascade = CascadeType.ALL) //denna cascade funkar för inmatning
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private ProductSpecification productSpecification;
-    
-    @ManyToMany(mappedBy = "favorites", cascade = CascadeType.ALL) //Den raderar även user
-    @JsonIdentityReference(alwaysAsId = true)
-    private Set<User> users = new HashSet<>();
-    
-    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
-    @JsonIdentityReference(alwaysAsId = true)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @JsonManagedReference("favorites")
+    @JsonIgnore
+    private Set<Favorite> favorites;
+    @OneToOne(mappedBy = "product",cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "auction-product")
     private Auction auction;
-    
     @Column(name = "product_name")
     private String productName;
-    
     @Column(name = "original_price")
     private long originalPrice;
-    
     @Column(name = "created_at")
     @CreationTimestamp
     private LocalDate createdAt;
-    
     @Column(name = "updated_at")
     @UpdateTimestamp
     private LocalDate updatedAt;
-    
     @Column(name = "is_available")
     @ColumnDefault("true")
     private Boolean isAvailable;

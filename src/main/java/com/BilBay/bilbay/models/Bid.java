@@ -1,5 +1,7 @@
 package com.BilBay.bilbay.models;
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jdk.jfr.Relational;
 import org.hibernate.annotations.CreationTimestamp;
@@ -7,23 +9,21 @@ import java.time.LocalDate;
 import java.util.Date;
 @Entity
 @Table(name = "bid")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Bid.class)
 public class Bid {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, updatable = false)
     private Long id;
-    @ManyToOne
+    // Ändrade här enligt överenskommelse - Johan
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "buyer_id", referencedColumnName = "id")
-    @JsonIdentityReference(alwaysAsId = true)
+    @JsonBackReference(value = "bid-user")
     private User buyer;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "auction_id", referencedColumnName = "id")
-    @JsonIdentityReference(alwaysAsId = true)
+    @JsonBackReference(value = "auction-bid")
     private Auction auction;
-    @OneToOne(mappedBy = "bid", cascade = CascadeType.ALL)
-    @JsonIdentityReference(alwaysAsId = true)
-    private Order order;
     @Column(name = "bid_amount")
     private Long bidAmount;
     @Column(name = "created_at")
@@ -50,12 +50,6 @@ public class Bid {
     }
     public void setAuction(Auction auction) {
         this.auction = auction;
-    }
-    public Order getOrder() {
-        return order;
-    }
-    public void setOrder(Order order) {
-        this.order = order;
     }
     public Long getBidAmount() {
         return bidAmount;
