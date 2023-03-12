@@ -36,7 +36,7 @@ public class Product {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private ProductSpecification productSpecification;
     @OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference("favorites")
     @JsonIgnore
     private Set<Favorite> favorites;
     @OneToOne(mappedBy = "product",cascade = CascadeType.ALL)

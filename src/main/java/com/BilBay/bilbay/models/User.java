@@ -71,13 +71,13 @@ public class User {
     @JsonManagedReference(value = "bid-user")
     private Set<Bid> bidsBuyer = new HashSet<>();
     @OneToMany(mappedBy = "userFor")
-    @JsonBackReference("userFor")
+    @JsonManagedReference("userFor")
     private Set<Review> reviewsFor = new HashSet<>();
     @OneToMany(mappedBy = "userBy")
-    @JsonBackReference("userBy")
+    @JsonManagedReference("userBy")
     private Set<Review> reviewsBy = new HashSet<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference("favorites")
     @JsonIgnore
     private Set<Favorite> favorites;
     @OneToMany(mappedBy = "user")
@@ -87,6 +87,7 @@ public class User {
     @JsonManagedReference(value= "cardpayment-user")
     private Set<CardPayment> cardPayments = new HashSet<>();
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference("user")
     private Set<DeliveryPaymentTransaction> deliveryPaymentTransactions = new HashSet<>();
     @OneToOne(mappedBy = "user")
     private Address address;

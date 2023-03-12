@@ -1,4 +1,6 @@
 package com.BilBay.bilbay.models;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,7 @@ public class DeliveryAlternative {
     @Column(name = "estimated_delivery")
     private String estimatedDelivery;
     @OneToMany(targetEntity = DeliveryPaymentTransaction.class, mappedBy = "deliveryAlternatives")
+    @JsonManagedReference("deliveryAlternatives")
     private List<DeliveryPaymentTransaction> deliveryPaymentTransactions= new ArrayList<>();
 
 

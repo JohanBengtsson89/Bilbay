@@ -1,4 +1,6 @@
 package com.BilBay.bilbay.models;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.ColumnDefault;
@@ -11,17 +13,21 @@ public class DeliveryPaymentTransaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "buyer_id", referencedColumnName = "id")
+    @JsonBackReference("user")
     private User user;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "orders_id", referencedColumnName = "id")
+    @JsonBackReference("order")
     private Order order;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "delivery_alternatives_id", referencedColumnName = "id")
+    @JsonBackReference("deliveryAlternatives")
     private DeliveryAlternative deliveryAlternatives;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "card_payment_id", referencedColumnName = "id")
+    @JsonBackReference("cardpayment")
     private CardPayment cardPayment;
     @NotNull
     @Column(name = "is_successful")
