@@ -24,6 +24,7 @@ public class CardPayment {
     @OneToMany(mappedBy = "cardPayment")
     @JsonIgnore
     @JsonIdentityReference(alwaysAsId = true)
+
     private Set<DeliveryPaymentTransaction> deliveryPaymentTransactions= new HashSet<>();
     @OneToMany(mappedBy = "cardPayment")
     @JsonIgnore

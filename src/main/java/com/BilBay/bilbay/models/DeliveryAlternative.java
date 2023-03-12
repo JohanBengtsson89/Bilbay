@@ -18,6 +18,7 @@ public class DeliveryAlternative {
     @Column(name = "estimated_delivery")
     private String estimatedDelivery;
     @OneToMany(targetEntity = DeliveryPaymentTransaction.class, mappedBy = "deliveryAlternatives")
+    @JsonManagedReference("deliveryAlternatives")
     private List<DeliveryPaymentTransaction> deliveryPaymentTransactions= new ArrayList<>();
 
 

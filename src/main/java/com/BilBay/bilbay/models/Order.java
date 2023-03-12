@@ -16,12 +16,15 @@ public class Order {
     @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "bid_id", referencedColumnName = "id")
     private Bid bid;
+
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     @JsonIdentityReference(alwaysAsId = true)
     private DeliveryPaymentTransaction deliveryPaymentTransaction;
+    
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     @JsonIdentityReference(alwaysAsId = true)
     private PaymentTransaction paymentTransaction;
+    
     @CreationTimestamp
     @Column(name = "registration_date")
     private LocalDate registrationDate;

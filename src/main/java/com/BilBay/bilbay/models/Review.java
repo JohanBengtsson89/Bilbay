@@ -4,11 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.validator.constraints.Range;
+import org.springframework.validation.annotation.Validated;
+
 import java.time.LocalDate;
 import java.util.Date;
 @Entity
 @Table(name = "reviews")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Review.class)
+@Validated
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,13 +21,16 @@ public class Review {
     @ManyToOne
     @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "users_id_by", referencedColumnName = "id")
+    @JsonBackReference("userBy")
     private User userBy; // Kan inte döpa den till user
+    @Column(name = "comment")
+    private String comment;
     @ManyToOne
     @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "users_id_for", referencedColumnName = "id")
+    @JsonBackReference("userFor")
     private User userFor; // Kan inte döpa den till user
-    @Column(name = "comment")
-    private String comment;
+    @Range(min = 1, max = 5)
     @Column(name = "rate")
     private int rate;
     @Column(name = "created_at")

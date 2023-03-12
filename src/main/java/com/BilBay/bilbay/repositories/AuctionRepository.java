@@ -22,4 +22,9 @@ public interface AuctionRepository extends JpaRepository<Auction, Long> {
     @Query("DELETE FROM Auction a WHERE a.id = :id")
     void deleteAuctionById(Long id);
 
+
+    @Query(value = "UPDATE Auction u SET u.active = ?1 WHERE u.id = ?2")
+    void deactivateProductAuction ( boolean isActive, Long id);
+
 }
+

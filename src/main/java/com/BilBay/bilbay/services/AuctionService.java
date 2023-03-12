@@ -27,11 +27,13 @@ public class AuctionService {
         return auctionRepository.findById(id).get();
     }
 
-
     public Auction createAuction(Auction auction) {
         return auctionRepository.save(auction);
     }
+    public void deactivateProductAuction(Long id, boolean isActive){
+        auctionRepository.deactivateProductAuction(isActive, id);
 
+    }
 
     public Bid getHighestBid(Long auctionId) {
         List<Bid> bids = bidRepository.findByAuctionIdOrderByBidAmountDesc(auctionId);
@@ -41,12 +43,9 @@ public class AuctionService {
         return bids.get(0);
     }
 
+
     public void deleteAuctionById(Long id){
         auctionRepository.deleteAuctionById(id);
     }
 
-
-    /*public List<Bid> findAllBidsOnAuction(Auction auction){
-        return auctionRepository.findAllBidsOnAuction(auction.getId());
-    }*/
 }
