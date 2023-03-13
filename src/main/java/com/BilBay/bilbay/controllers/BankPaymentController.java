@@ -30,5 +30,9 @@ public class BankPaymentController {
     @PutMapping("bankpayment/update")
     public BankPayment updateBankPayment (@RequestBody BankPayment bankPayment){
         return bankPaymentService.updateBankPayment(bankPayment);
+        
+
     }
+    /*@PostMapping ("bankpayment/pay")
+     public BankPayment payForProduct (@RequestBody Long id){return bankPaymentService.payForProduct(id);}*/
 }
