@@ -28,6 +28,8 @@ public class BankPaymentService {
         return bankPaymentRepository.save(bankPayment);
     }
 
-    public BankPayment payForProduct (Long id){return bankPaymentRepository.payForProduct(id);}
-
+    /*public BankPayment payForProduct (Long id){
+        return bankPaymentRepository.payForProduct(id);
+    }
+*/
 }
