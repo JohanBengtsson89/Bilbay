@@ -1,4 +1,5 @@
 package com.BilBay.bilbay.models;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 @Entity
 @Table (name = "Address")
@@ -7,7 +8,8 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "users_id", referencedColumnName = "id")
     private User user;
     @Column(name = "address")
