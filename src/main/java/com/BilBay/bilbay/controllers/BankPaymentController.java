@@ -35,5 +35,5 @@ public class BankPaymentController {
 
     }
     @PostMapping ("bankpayment/pay")
-    public BankPayment payForProduct (@RequestBody Long id){return bankPaymentService.payForProduct(id);}
+     public BankPayment payForProduct (@RequestBody Long id){return bankPaymentService.payForProduct(id);}
 }

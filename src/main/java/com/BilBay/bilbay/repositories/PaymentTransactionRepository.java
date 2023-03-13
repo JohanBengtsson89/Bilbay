@@ -9,4 +9,6 @@ import java.util.List;
 public interface PaymentTransactionRepository extends JpaRepository<PaymentTransaction, Long> {
     List<PaymentTransaction> findBySuccessfulAndCreatedAt(boolean successful, LocalDate cutOffDate);
 
+
+
 }
