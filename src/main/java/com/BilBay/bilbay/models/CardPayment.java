@@ -5,6 +5,7 @@ import java.util.*;
 @Entity
 @Table(name = "card_payment")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//JsonIdentifyInfo
 public class CardPayment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
