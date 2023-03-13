@@ -1,23 +1,28 @@
 package com.BilBay.bilbay.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.util.*;
 @Entity
 @Table(name = "bank_payment")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = BankPayment.class)
 public class BankPayment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @JoinColumn(name = "users_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JsonBackReference(value = "bankPayment-user")
+    @ManyToOne
+    @JsonIdentityReference(alwaysAsId = true)
     private User user;
     @Column(name = "bank_name")
     private String bankName;
     @Column(name = "bank_account_nr")
     private Long bankAccountNr;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "bankPayment")
+    @OneToMany(mappedBy = "bankPayment")
+    @JsonIdentityReference(alwaysAsId = true)
     private Set< PaymentTransaction > paymentTransactions = new HashSet<>();
 
 

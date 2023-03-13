@@ -29,9 +29,9 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
     private Long id;
     @ManyToMany(fetch = FetchType.LAZY)
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
@@ -87,7 +87,7 @@ public class User {
     @JsonIgnore
     private Set<Favorite> favorites;
     
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIdentityReference(alwaysAsId = true)
     private Set<BankPayment> bankPayments = new HashSet<>();
     

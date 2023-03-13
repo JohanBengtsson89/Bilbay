@@ -1,6 +1,9 @@
 package com.BilBay.bilbay.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -16,6 +19,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "roles")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Role.class)
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +28,7 @@ public class Role {
     @Enumerated(EnumType.STRING)
     private ERole name;
     @ManyToMany(mappedBy = "roles")
-    @JsonIgnore
+    @JsonIdentityReference(alwaysAsId = true)
 //    @JsonBackReference("user_type_user")
     private Set<User> users = new HashSet<>();
 

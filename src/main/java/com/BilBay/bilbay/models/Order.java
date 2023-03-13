@@ -1,22 +1,25 @@
 package com.BilBay.bilbay.models;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDate;
 @Entity
 @Table(name = "orders")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Order.class)
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, updatable = false)
     private Long id;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "bid_id", referencedColumnName = "id")
     private Bid bid;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
-    @JsonBackReference("order")
+    @JsonIdentityReference(alwaysAsId = true)
     private DeliveryPaymentTransaction deliveryPaymentTransaction;
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    @JsonIdentityReference(alwaysAsId = true)
+    private PaymentTransaction paymentTransaction;
     @CreationTimestamp
     @Column(name = "registration_date")
     private LocalDate registrationDate;
@@ -29,6 +32,12 @@ public class Order {
     }
     public void setDeliveryPaymentTransaction(DeliveryPaymentTransaction deliveryPaymentTransaction) {
         this.deliveryPaymentTransaction = deliveryPaymentTransaction;
+    }
+    public PaymentTransaction getPaymentTransaction() {
+        return paymentTransaction;
+    }
+    public void setPaymentTransaction(PaymentTransaction paymentTransaction) {
+        this.paymentTransaction = paymentTransaction;
     }
     public Long getId() {
         return id;
