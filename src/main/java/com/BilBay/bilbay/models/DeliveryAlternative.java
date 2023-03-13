@@ -1,5 +1,6 @@
 package com.BilBay.bilbay.models;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class DeliveryAlternative {
     @Column(name = "estimated_delivery")
     private String estimatedDelivery;
     @OneToMany(targetEntity = DeliveryPaymentTransaction.class, mappedBy = "deliveryAlternatives")
-    @JsonManagedReference("deliveryAlternatives")
+    @JsonIdentityReference(alwaysAsId = true)
     private List<DeliveryPaymentTransaction> deliveryPaymentTransactions= new ArrayList<>();
 
 

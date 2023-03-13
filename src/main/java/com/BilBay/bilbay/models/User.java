@@ -81,13 +81,11 @@ public class User {
     @OneToMany(mappedBy = "userBy")
     @JsonIdentityReference(alwaysAsId = true)
     private Set<Review> reviewsBy = new HashSet<>();
-    
-    @ManyToMany(cascade = CascadeType.ALL) //Den raderar även user
-    @JsonIdentityReference(alwaysAsId = true)
-    @JoinTable(name = "favorites",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
-    private Set<Product> favorites = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @JsonManagedReference("favorites")
+    @JsonIgnore
+    private Set<Favorite> favorites;
     
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIdentityReference(alwaysAsId = true)

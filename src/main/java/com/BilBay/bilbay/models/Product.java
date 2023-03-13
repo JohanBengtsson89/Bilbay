@@ -39,10 +39,11 @@ public class Product {
     @JoinColumn(name = "product_specification_id", referencedColumnName = "id")
     @OneToOne(cascade = CascadeType.ALL) //denna cascade funkar för inmatning
     private ProductSpecification productSpecification;
-    
-    @ManyToMany(mappedBy = "favorites", cascade = CascadeType.ALL) //Den raderar även user
-    @JsonIdentityReference(alwaysAsId = true)
-    private Set<User> users = new HashSet<>();
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @JsonManagedReference("favorites")
+    @JsonIgnore
+    private Set<Favorite> favorites;
     
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
     @JsonIdentityReference(alwaysAsId = true)
