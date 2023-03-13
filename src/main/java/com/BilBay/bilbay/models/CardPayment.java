@@ -1,17 +1,18 @@
 package com.BilBay.bilbay.models;
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.*;
 @Entity
 @Table(name = "card_payment")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class CardPayment {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @JsonIdentityReference(alwaysAsId = true)
+    @JsonBackReference(value= "cardpayment-user")
     private User user;
     @Column(name = "card_type")
     private String cardType;
@@ -21,15 +22,9 @@ public class CardPayment {
     private Date expireDate;    // Manuell inmatning, kan behöva byta datatyp - Johan
     @Column(name = "cvv")
     private int cvv;
-    @OneToMany(mappedBy = "cardPayment")
-    @JsonIgnore
-    @JsonIdentityReference(alwaysAsId = true)
-
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "cardPayment")
+    @JsonManagedReference("cardpayment")
     private Set<DeliveryPaymentTransaction> deliveryPaymentTransactions= new HashSet<>();
-    @OneToMany(mappedBy = "cardPayment")
-    @JsonIgnore
-    @JsonIdentityReference(alwaysAsId = true)
-    private Set<PaymentTransaction> paymentTransaction;
 
     public CardPayment() {
     }
@@ -74,12 +69,6 @@ public class CardPayment {
     }
     public void setDeliveryPaymentTransactions(Set<DeliveryPaymentTransaction> deliveryPaymentTransactions) {
         this.deliveryPaymentTransactions = deliveryPaymentTransactions;
-    }
-    public Set<PaymentTransaction> getPaymentTransaction() {
-        return paymentTransaction;
-    }
-    public void setPaymentTransaction(Set<PaymentTransaction> paymentTransaction) {
-        this.paymentTransaction = paymentTransaction;
     }
 }
 
