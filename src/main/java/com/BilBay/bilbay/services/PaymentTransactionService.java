@@ -10,6 +10,9 @@ public class PaymentTransactionService {
     @Autowired
     PaymentTransactionRepository paymentTransactionRepository;
     public PaymentTransaction createPaymentTransaction(PaymentTransaction paymentTransaction){
-        return paymentTransactionRepository.save(paymentTransaction);
+        return paymentTransactionRepository.save(paymentTransaction);}
+    public void updatePaymentTransactionStatus (Long id, boolean successful){
+        paymentTransactionRepository.updatePaymentTransaction(successful, id);
     }
+
 }
