@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +26,7 @@ public class MessageController {
     @Autowired
     MessageService messageService;
     @GetMapping("reminding-message")
+    @PreAuthorize("hasRole('ADMIN')")
     //this function will be executed every day at midnight to.
     @Scheduled(cron = "0 0 0 1 * *", zone = "Europe/Stockholm")
     public ResponseEntity<String> sendPaymentReminders() {

@@ -4,6 +4,7 @@ import com.BilBay.bilbay.models.Auction;
 import com.BilBay.bilbay.models.Bid;
 import com.BilBay.bilbay.services.BidService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,11 +18,13 @@ public class BidController {
     BidService bidService;
 
     @PostMapping("bid")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public Bid createBid(@RequestBody Bid bid) {
         return bidService.createBid(bid);
     }
 
     @GetMapping("bid/{id}")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public Bid getBidById(@PathVariable Long id) {
         return bidService.getBidByID(id);
     }

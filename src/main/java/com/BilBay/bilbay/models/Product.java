@@ -41,7 +41,7 @@ public class Product {
     private ProductSpecification productSpecification;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    @JsonManagedReference("favorites")
+    @JsonIdentityReference(alwaysAsId = true)
     @JsonIgnore
     private Set<Favorite> favorites;
     

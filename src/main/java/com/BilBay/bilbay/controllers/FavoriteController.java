@@ -8,6 +8,7 @@ import com.BilBay.bilbay.repositories.UserRepository;
 import com.BilBay.bilbay.services.FavoriteService;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,15 +30,18 @@ public class FavoriteController {
 
 
     @PostMapping("/{user_id}/{product_id}")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     Favorite addFavorite(@PathVariable @NotNull Long user_id, @PathVariable @NotNull Long product_id) {
         return favoriteService.addFavorite(user_id, product_id);
     }
 
     @GetMapping("getFavorites")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     Map<User, List<Product>> getAllFavorites() {
         return favoriteService.getAllFavorites();
     }
     @GetMapping("{user_id}")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     List<Product> getUsersFavorites(@PathVariable Long user_id) {
         return favoriteService.getUsersFavorites(user_id);
     }

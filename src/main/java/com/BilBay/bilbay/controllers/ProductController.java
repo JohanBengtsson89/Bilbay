@@ -3,6 +3,7 @@ import com.BilBay.bilbay.models.Product;
 import com.BilBay.bilbay.repositories.ProductRepository;
 import com.BilBay.bilbay.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RequestMapping("/")
@@ -17,6 +18,7 @@ public class ProductController {
     }
 
     @PostMapping("post-product")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public Product registerProduct(@RequestBody Product product) {
         return productService.registerProduct(product);
     }
@@ -33,6 +35,7 @@ public class ProductController {
         return productService.findByIsAvailable(isAvailable);
     }
     @DeleteMapping("delete-product/{id}")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public String deleteById(@PathVariable Long id){
             productService.deleteProduct(id);
             return "Product has been deleted.";
@@ -40,6 +43,7 @@ public class ProductController {
 
     
     @PutMapping("product/{id}/{isAvailable}")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public String updateProductStatus (@PathVariable Long id, @PathVariable boolean isAvailable) {
         if (!productRepository.findById(id).isEmpty()){
             productService.updateProductStatus(id, isAvailable);
