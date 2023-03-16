@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api/")
 public class AuctionController {
 
     @Autowired
@@ -34,12 +34,12 @@ public class AuctionController {
         return ResponseEntity.ok(highestBid);
     }
 
-    @PostMapping("post-auction")
+    @PostMapping("auth/post-auction")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public Auction createAuction (@RequestBody Auction auction) {
         return auctionService.createAuction(auction);}
 
-    @PutMapping("auction/{id}/{isActive}")
+    @PutMapping("auth/auction/{id}/{isActive}")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public String deActivateProductAuction (@PathVariable Long id, @PathVariable boolean isActive){
         auctionService.deactivateProductAuction(id, isActive);

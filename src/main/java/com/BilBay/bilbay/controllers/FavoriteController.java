@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/favorite/")
+@RequestMapping("/api/")
 public class FavoriteController {
     @Autowired
     private FavoriteService favoriteService;
@@ -29,18 +29,18 @@ public class FavoriteController {
     private UserRepository userRepository;
 
 
-    @PostMapping("/{user_id}/{product_id}")
+    @PostMapping("auth/favorite/{user_id}/{product_id}")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     Favorite addFavorite(@PathVariable @NotNull Long user_id, @PathVariable @NotNull Long product_id) {
         return favoriteService.addFavorite(user_id, product_id);
     }
 
-    @GetMapping("getFavorites")
+    @GetMapping("auth/getFavorites")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     Map<User, List<Product>> getAllFavorites() {
         return favoriteService.getAllFavorites();
     }
-    @GetMapping("{user_id}")
+    @GetMapping("auth/favorite/{user_id}")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     List<Product> getUsersFavorites(@PathVariable Long user_id) {
         return favoriteService.getUsersFavorites(user_id);

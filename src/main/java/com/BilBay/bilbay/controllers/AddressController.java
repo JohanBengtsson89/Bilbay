@@ -8,31 +8,31 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/address")
+@RequestMapping("/api/")
 public class AddressController {
 
     @Autowired
     AddressService addressService;
 
-    @PostMapping("/create")
+    @PostMapping("auth/address")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public Address createAddress(@RequestBody Address address) {
         return addressService.createAddress(address);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("auth/address/{id}")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public Address getAddressById (@PathVariable Long id) {
         return addressService.getAddressById(id);
     }
 
-    @PutMapping("/update")
+    @PutMapping("auth/address/update")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public Address updateAddress (@RequestBody Address address){
         return addressService.updateAddress(address);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("auth/address/delete/{id}")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public String deleteById (@PathVariable Long id) {
         addressService.deleteById(id);

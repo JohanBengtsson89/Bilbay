@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/review/")
+@RequestMapping("/api/")
 public class ReviewController {
     @Autowired
     private final ReviewService reviewService;
@@ -23,12 +23,12 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
-    @PostMapping("createReview")
+    @PostMapping("auth/Review")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     Review createReview(@RequestBody Review review) {
         return reviewService.createReview(review);
     }
-    @GetMapping("getAllReviews")
+    @GetMapping("auth/getAllReviews")
     List<Review> getAllReviews() {
         return reviewService.getAllReviews();
     }

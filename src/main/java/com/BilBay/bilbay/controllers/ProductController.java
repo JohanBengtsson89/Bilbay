@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-@RequestMapping("/")
+@RequestMapping("/api/")
 @RestController
 public class ProductController {
     @Autowired
@@ -17,16 +17,16 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PostMapping("post-product")
+    @PostMapping("auth/product")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public Product registerProduct(@RequestBody Product product) {
         return productService.registerProduct(product);
     }
-    @GetMapping("product-id/{id}")
+    @GetMapping("product/{id}")
     public Product findProductById(@PathVariable Long id) {
         return productService.findProductById(id);
     }
-    @GetMapping("search-products")
+    @GetMapping("products")
     public List<Product> searchProducts(@RequestParam("query") String query){
         return productService.searchProducts(query);
     }
@@ -34,7 +34,7 @@ public class ProductController {
     public List<Product> findByIsAvailable(@PathVariable boolean isAvailable){
         return productService.findByIsAvailable(isAvailable);
     }
-    @DeleteMapping("delete-product/{id}")
+    @DeleteMapping("auth/product/delete/{id}")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public String deleteById(@PathVariable Long id){
             productService.deleteProduct(id);
@@ -42,7 +42,7 @@ public class ProductController {
         }
 
     
-    @PutMapping("product/{id}/{isAvailable}")
+    @PutMapping("auth/product/{id}/{isAvailable}")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public String updateProductStatus (@PathVariable Long id, @PathVariable boolean isAvailable) {
         if (!productRepository.findById(id).isEmpty()){

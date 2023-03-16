@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/")
+@RequestMapping(value = "/api/")
 public class BidController {
 
     @Autowired
     BidService bidService;
 
-    @PostMapping("bid")
+    @PostMapping("auth/bid")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public Bid createBid(@RequestBody Bid bid) {
         return bidService.createBid(bid);
     }
 
-    @GetMapping("bid/{id}")
+    @GetMapping("auth/bid/{id}")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public Bid getBidById(@PathVariable Long id) {
         return bidService.getBidByID(id);

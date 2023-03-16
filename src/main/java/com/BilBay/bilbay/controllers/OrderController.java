@@ -7,31 +7,31 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/api/")
 public class OrderController {
 
     @Autowired
     OrderService orderService;
 
-    @PostMapping("/create")
+    @PostMapping("auth/order")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public Order createOrder (@RequestBody Order order){
         return orderService.createOrder(order);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("auth/order/{id}")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public Order getOrderById (@PathVariable Long id){
         return orderService.getOrderById(id);
     }
 
-    @PutMapping("/update")
+    @PutMapping("auth/order/update")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public Order updateOrder (@RequestBody Order order){
         return orderService.updateOrder(order);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("auth/order/delete/{id}")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public String deleteOrderById (@PathVariable Long id){
         orderService.deleteOrderById(id);

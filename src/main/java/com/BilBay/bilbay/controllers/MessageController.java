@@ -19,16 +19,16 @@ import java.util.List;
 @Configuration
 @EnableScheduling
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api/")
 public class MessageController {
     @Autowired
     PaymentTransactionRepository paymentTransactionRepository;
     @Autowired
     MessageService messageService;
-    @GetMapping("reminding-message")
+    @GetMapping("auth/reminding-message")
     @PreAuthorize("hasRole('ADMIN')")
     //this function will be executed every day at midnight to.
-    @Scheduled(cron = "0 0 0 1 * *", zone = "Europe/Stockholm")
+    @Scheduled(cron = "5 0 0 1 * *", zone = "Europe/Stockholm")
     public ResponseEntity<String> sendPaymentReminders() {
         //this will check the status of payment. if false within 30 days, a message will be sent to the buyer.
         LocalDate checkPaymentStatus = LocalDate.now().minusDays(30);
