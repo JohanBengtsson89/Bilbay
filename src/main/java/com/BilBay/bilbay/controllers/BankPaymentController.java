@@ -35,5 +35,9 @@ public class BankPaymentController {
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public BankPayment updateBankPayment (@RequestBody BankPayment bankPayment){
         return bankPaymentService.updateBankPayment(bankPayment);
+        
+
     }
+    /*@PostMapping ("bankpayment/pay")
+     public BankPayment payForProduct (@RequestBody Long id){return bankPaymentService.payForProduct(id);}*/
 }
