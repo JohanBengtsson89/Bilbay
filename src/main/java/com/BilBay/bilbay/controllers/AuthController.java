@@ -22,11 +22,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -120,4 +117,31 @@ public class AuthController {
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully"));
     }
+
+    @PutMapping("users/{id}")
+    public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @Valid @RequestBody User updateUser) {
+        if (!userRepository.existsById(id)) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: User not found!"));
+        }
+
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: User not found!"));
+
+        user.setFirstName(updateUser.getFirstName());
+        user.setLastName(updateUser.getLastName());
+        user.setEmail(updateUser.getEmail());
+        user.setUsername(updateUser.getUsername());
+        user.setCompanyName(updateUser.getCompanyName());
+        user.setOrganizationNumber(updateUser.getOrganizationNumber());
+
+        if (updateUser.getPassword() != null && !updateUser.getPassword().isEmpty()) {
+            user.setPassword(encoder.encode(updateUser.getPassword()));
+        }
+
+        userRepository.save(user);
+
+        return ResponseEntity.ok(new MessageResponse("User updated successfully"));
+    }
 }
+
