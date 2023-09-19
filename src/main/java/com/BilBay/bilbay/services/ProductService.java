@@ -34,4 +34,8 @@ public class ProductService {
     public void updateProductStatus(Long id, boolean isAvailable){
         productRepository.updateProductStatus(isAvailable, id);
     }
+
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
 }
