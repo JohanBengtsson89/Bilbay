@@ -51,7 +51,8 @@ public class Product {
     
     @Column(name = "product_name")
     private String productName;
-    
+    @Column(name= "product_description")
+    private String productDescription;
     @Column(name = "original_price")
     private long originalPrice;
     
@@ -102,6 +103,12 @@ public class Product {
     }
     public String getProductName() {
         return productName;
+    }
+    public String getProductDescription() {
+        return productDescription;
+    }
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
     }
     public void setProductName(String productName) {
         this.productName = productName;
