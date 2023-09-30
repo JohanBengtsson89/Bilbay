@@ -52,6 +52,7 @@ public class User {
     private String username;
     @Column(name = "organization_nr")
     private String organizationNumber;
+    @JsonIgnore
     @Column(name = "password")
     @Size(min = 1, max = 120, message = "Lösenord måste vara mellan {min} och {max} tecken långt.")
     private String password;

@@ -1,6 +1,7 @@
 package com.BilBay.bilbay.controllers;
 
 
+import com.BilBay.bilbay.models.Auction;
 import com.BilBay.bilbay.models.ERole;
 import com.BilBay.bilbay.models.Role;
 import com.BilBay.bilbay.models.User;
@@ -12,6 +13,7 @@ import com.BilBay.bilbay.repositories.RoleRepository;
 import com.BilBay.bilbay.repositories.UserRepository;
 import com.BilBay.bilbay.security.jwt.JwtUtils;
 import com.BilBay.bilbay.security.services.UserDetailsImpl;
+import com.BilBay.bilbay.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -30,7 +32,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600, allowCredentials = "true")
 @RestController
 @RequestMapping("/api/test")
 public class TestController {
@@ -40,6 +42,8 @@ public class TestController {
 
     @Autowired
     RoleRepository roleRepository;
+    @Autowired
+    UserService userService;
 
     @Autowired
     PasswordEncoder encoder;
@@ -78,6 +82,10 @@ public class TestController {
     @GetMapping("/users")
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+    @GetMapping("user/{id}")
+    public User findUserById (@PathVariable Long id){
+        return userService.findUserById(id);
     }
 
     @PostMapping("login")

@@ -1,5 +1,6 @@
 package com.BilBay.bilbay.services;
 
+import com.BilBay.bilbay.models.Auction;
 import com.BilBay.bilbay.models.User;
 import com.BilBay.bilbay.repositories.RoleRepository;
 import com.BilBay.bilbay.repositories.UserRepository;
@@ -61,6 +62,10 @@ public class UserService {
 
     public User getUserById(Long id) {
         return userRepository.findUserById(id);
+    }
+
+    public User findUserById(Long id) {
+        return  userRepository.findUserById(id);
     }
 
 //    public User changeUserType(String email, Set<Role> roles) {

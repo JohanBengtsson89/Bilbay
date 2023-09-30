@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "*", maxAge = 3600, allowCredentials = "true")
 @RestController
 @RequestMapping("/api/")
 public class AuctionController {
@@ -33,6 +33,14 @@ public class AuctionController {
         }
         return ResponseEntity.ok(highestBid);
     }
+    @GetMapping("{auctionId}/all-bids")
+    public ResponseEntity<List<Bid>> getAllBids(@PathVariable Long auctionId) {
+        List<Bid> allBids = auctionService.getAllBids(auctionId);
+        if (allBids.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(allBids);
+    }
 
     @PostMapping("auth/post-auction")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
@@ -45,5 +53,7 @@ public class AuctionController {
         auctionService.deactivateProductAuction(id, isActive);
         return "Auction has been deactivated";
     }
+
+
 }
 
