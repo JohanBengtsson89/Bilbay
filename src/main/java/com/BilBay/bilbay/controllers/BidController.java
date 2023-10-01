@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600)
 @RestController
 @RequestMapping(value = "/api/")
 public class BidController {
@@ -17,8 +17,8 @@ public class BidController {
     @Autowired
     BidService bidService;
 
-    @PostMapping("auth/bid")
-    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
+    @PostMapping("bid")
+
     public Bid createBid(@RequestBody Bid bid) {
         return bidService.createBid(bid);
     }

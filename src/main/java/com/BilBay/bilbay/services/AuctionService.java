@@ -44,6 +44,9 @@ public class AuctionService {
     public List<Auction> findAllAuctions() {
         return auctionRepository.findAll();
     }
+    public List<Bid> getAllBids(Long auctionId) {
+        return bidRepository.findByAuctionId(auctionId);
+    }
 
     /*public List<Bid> findAllBidsOnAuction(Auction auction){
         return auctionRepository.findAllBidsOnAuction(auction.getId());

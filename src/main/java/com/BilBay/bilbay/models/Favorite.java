@@ -25,7 +25,7 @@ public class Favorite {
     private User user;
     @ManyToOne
     @JoinColumn(name = "product_id")
-    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIdentityReference(alwaysAsId = false)
     private Product product;
 
     public Favorite() {
