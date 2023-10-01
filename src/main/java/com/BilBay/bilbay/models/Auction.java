@@ -30,10 +30,10 @@ public class Auction {
     private User user;
     @OneToOne
     @JoinColumn(name = "product_id", referencedColumnName = "id")
-    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIdentityReference(alwaysAsId = false)
     private Product product;
     @OneToMany(mappedBy = "auction", cascade = CascadeType.ALL)
-    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIdentityReference(alwaysAsId = false)
     private Set<Bid> bids = new HashSet<>();
     @Column(name = "reserve_price")
     private int reservePrice;
