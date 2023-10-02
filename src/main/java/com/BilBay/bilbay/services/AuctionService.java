@@ -2,11 +2,9 @@ package com.BilBay.bilbay.services;
 
 import com.BilBay.bilbay.models.Auction;
 import com.BilBay.bilbay.models.Bid;
-import com.BilBay.bilbay.models.Product;
 import com.BilBay.bilbay.repositories.AuctionRepository;
 import com.BilBay.bilbay.repositories.BidRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,6 +41,9 @@ public class AuctionService {
         return bids.get(0);
     }
 
+    public List<Auction> findAllAuctions() {
+        return auctionRepository.findAll();
+    }
     public List<Bid> getAllBids(Long auctionId) {
         return bidRepository.findByAuctionId(auctionId);
     }

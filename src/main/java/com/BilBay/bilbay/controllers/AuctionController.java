@@ -15,11 +15,16 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:5173", maxAge = 3600)
 @RestController
 @RequestMapping("/api/")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class AuctionController {
 
     @Autowired
     AuctionService auctionService;
 
+    @GetMapping("auctions")
+    public List<Auction> findAllAuctions() {
+        return auctionService.findAllAuctions();
+    }
     @GetMapping("auction/{id}")
     public Auction findAuctionById (@PathVariable Long id){
         return auctionService.findAuctionById(id);
