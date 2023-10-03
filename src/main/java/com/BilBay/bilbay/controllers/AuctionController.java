@@ -15,7 +15,6 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:5173", maxAge = 3600)
 @RestController
 @RequestMapping("/api/")
-@CrossOrigin(origins = "*", maxAge = 3600)
 public class AuctionController {
 
     @Autowired

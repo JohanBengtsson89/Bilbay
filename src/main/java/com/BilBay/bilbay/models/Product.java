@@ -40,10 +40,11 @@ public class Product {
     @OneToOne(cascade = CascadeType.ALL) //denna cascade funkar för inmatning
     private ProductSpecification productSpecification;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    @JsonIdentityReference(alwaysAsId = true)
-    @JsonIgnore
-    private Set<Favorite> favorites;
+//    @OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST, orphanRemoval = true)
+//    @JsonIdentityReference(alwaysAsId = true)
+//    @JsonIgnore
+//    private Set<Favorite> favorites;
+
     
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
     @JsonIdentityReference(alwaysAsId = true)
@@ -138,13 +139,13 @@ public class Product {
         this.isAvailable = isAvailable;
     }
 
-    public Set<Favorite> getFavorites() {
-        return favorites;
-    }
-
-    public void setFavorites(Set<Favorite> favorites) {
-        this.favorites = favorites;
-    }
+//    public Set<Favorite> getFavorites() {
+//        return favorites;
+//    }
+//
+//    public void setFavorites(Set<Favorite> favorites) {
+//        this.favorites = favorites;
+//    }
 
     public Boolean getAvailable() {
         return isAvailable;

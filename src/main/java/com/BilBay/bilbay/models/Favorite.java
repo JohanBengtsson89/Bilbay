@@ -23,17 +23,29 @@ public class Favorite {
     @JoinColumn(name = "user_id")
     @JsonIdentityReference(alwaysAsId = true)
     private User user;
+//    @ManyToOne
+//    @JoinColumn(name = "product_id")
+//    @JsonIdentityReference(alwaysAsId = false)
+//    private Product product;
+
     @ManyToOne
-    @JoinColumn(name = "product_id")
-    @JsonIdentityReference(alwaysAsId = false)
-    private Product product;
+    @JoinColumn(name = "auction_id")
+    @JsonIdentityReference(alwaysAsId = true)
+    private Auction auction;
+
 
     public Favorite() {
     }
 
-    public Favorite(User user, Product product) {
+//    public Favorite(User user, Product product) {
+//        this.user = user;
+//        this.product = product;
+//    }
+
+
+    public Favorite(User user, Auction auction) {
         this.user = user;
-        this.product = product;
+        this.auction = auction;
     }
 
     public Long getId() {
@@ -44,13 +56,13 @@ public class Favorite {
         this.id = id;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
+//    public Product getProduct() {
+//        return product;
+//    }
+//
+//    public void setProduct(Product product) {
+//        this.product = product;
+//    }
 
     public User getUser() {
         return user;
@@ -60,4 +72,11 @@ public class Favorite {
         this.user = user;
     }
 
+    public Auction getAuction() {
+        return auction;
+    }
+
+    public void setAuction(Auction auction) {
+        this.auction = auction;
+    }
 }

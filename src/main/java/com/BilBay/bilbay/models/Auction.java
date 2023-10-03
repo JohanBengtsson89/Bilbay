@@ -35,6 +35,10 @@ public class Auction {
     @OneToMany(mappedBy = "auction", cascade = CascadeType.ALL)
     @JsonIdentityReference(alwaysAsId = false)
     private Set<Bid> bids = new HashSet<>();
+    @OneToMany(mappedBy = "auction", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIgnore
+    private Set<Favorite> favorites;
     @Column(name = "reserve_price")
     private int reservePrice;
     @Column(name = "start_price")
@@ -69,6 +73,12 @@ public class Auction {
     }
     public void setProduct(Product product) {
         this.product = product;
+    }
+    public Set<Favorite> getFavorites() {
+        return favorites;
+    }
+    public void setFavorites(Set<Favorite> favorites) {
+        this.favorites = favorites;
     }
     public Set<Bid> getBids() {
         return bids;

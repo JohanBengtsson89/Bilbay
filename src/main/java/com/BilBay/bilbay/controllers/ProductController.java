@@ -18,8 +18,8 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PostMapping("auth/product")
-    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
+    @PostMapping("product")
+
     public Product registerProduct(@RequestBody Product product) {
         return productService.registerProduct(product);
     }
