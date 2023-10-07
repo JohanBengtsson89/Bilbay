@@ -9,4 +9,6 @@ import java.util.Set;
 
 public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
     List<Favorite> findByUserId(Long id);
+
+    void deleteByUserIdAndAuctionId(Long userId, Long auctionId);
 }

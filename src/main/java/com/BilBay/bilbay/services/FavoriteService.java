@@ -9,13 +9,12 @@ import com.BilBay.bilbay.repositories.FavoriteRepository;
 import com.BilBay.bilbay.repositories.ProductRepository;
 import com.BilBay.bilbay.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,34 +42,57 @@ public class FavoriteService {
         this.auctionRepository = auctionRepository;
     }
 
-    public Favorite addFavorite(Long user_id, Long auction_id) {
+    public ResponseEntity<Favorite> addFavorite(Long user_id, Long auction_id) {
         User user = userRepository.findUserById(user_id);
         Auction auction = auctionRepository.findAuctionById(auction_id);
-        Favorite favorite = new Favorite(user, auction);
 
-        return favoriteRepository.save(favorite);
-    }
-
-    public Map<User, List<Auction>> getAllFavorites() {
-        List<Favorite> favorites = favoriteRepository.findAll();
-
-        Map<User, List<Auction>> userFavoritesMap = new HashMap<>();
-
-        for (Favorite favorite : favorites) {
-            User user = favorite.getUser();
-            Auction auction = favorite.getAuction(); // Assuming you have a getAuction() method in Favorite
-
-            List<Auction> userFavorites = userFavoritesMap.get(user);
-
-            if (userFavorites == null) {
-                userFavorites = new ArrayList<>();
-                userFavoritesMap.put(user, userFavorites);
-            }
-
-            userFavorites.add(auction);
+        if (user == null || auction == null) {
+            // Handle the case where the user or auction is not found
+            return ResponseEntity.notFound().build();
         }
 
-        return userFavoritesMap;
+        Favorite favorite = new Favorite(user, auction);
+        favorite = favoriteRepository.save(favorite);
+
+        // Now, fetch the favorite with associated user and auction details
+        Optional<Favorite> savedFavorite = favoriteRepository.findById(favorite.getId());
+
+        return savedFavorite.map(ResponseEntity::ok).orElse(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
+    }
+
+
+//    public Map<User, List<Auction>> getAllFavorites() {
+//        List<Favorite> favorites = favoriteRepository.findAll();
+//
+//        Map<User, List<Auction>> userFavoritesMap = new HashMap<>();
+//
+//        for (Favorite favorite : favorites) {
+//            User user = favorite.getUser();
+//            Auction auction = favorite.getAuction(); // Assuming you have a getAuction() method in Favorite
+//
+//            List<Auction> userFavorites = userFavoritesMap.get(user);
+//
+//            if (userFavorites == null) {
+//                userFavorites = new ArrayList<>();
+//                userFavoritesMap.put(user, userFavorites);
+//            }
+//
+//            userFavorites.add(auction);
+//        }
+//
+//        return userFavoritesMap;
+//    }
+
+    public List<Auction> getAllFavorites() {
+        List<Favorite> favorites = favoriteRepository.findAll();
+
+        List<Auction> allFavorites = new ArrayList<>();
+
+        for (Favorite favorite : favorites) {
+            allFavorites.add(favorite.getAuction());
+        }
+
+        return allFavorites;
     }
 
     public List<Auction> getUsersFavoriteAuctions(Long id) {
@@ -79,6 +101,10 @@ public class FavoriteService {
         return favorites.stream()
                 .map(Favorite::getAuction)
                 .toList();
+    }
+    @Transactional
+    public void removeFromFavorite(Long userId, Long auctionId) {
+        favoriteRepository.deleteByUserIdAndAuctionId(userId, auctionId);
     }
 
 

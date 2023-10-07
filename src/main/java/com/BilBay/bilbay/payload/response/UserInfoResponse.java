@@ -6,11 +6,13 @@ public class UserInfoResponse {
     private Long id;
     private String email;
     private List<String> roles;
+    private String username;
 
-    public UserInfoResponse(Long id, String email, List<String> roles) {
+    public UserInfoResponse(Long id, String email, List<String> roles, String username) {
         this.id = id;
         this.email = email;
         this.roles = roles;
+        this.username = username;
     }
 
     public Long getId() {
@@ -35,6 +37,14 @@ public class UserInfoResponse {
 
     public List<String> getRoles() {
         return roles;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
 

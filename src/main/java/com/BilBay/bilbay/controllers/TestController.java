@@ -108,7 +108,7 @@ public class TestController {
                 .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
                 .body(new UserInfoResponse(userDetails.getId(),
                         userDetails.getEmail(),
-                        roles));
+                        roles, userDetails.getUsername()));
     }
 
     @PostMapping("register")
