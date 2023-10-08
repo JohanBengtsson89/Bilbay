@@ -34,7 +34,7 @@ public class FavoriteController {
     }
 
     @GetMapping("auth/favorite/{user_id}")
-    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     List<Auction> getUsersFavoriteAuctions(@PathVariable Long user_id) {
         return favoriteService.getUsersFavoriteAuctions(user_id);
     }
