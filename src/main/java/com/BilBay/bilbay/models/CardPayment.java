@@ -1,7 +1,10 @@
 package com.BilBay.bilbay.models;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 import java.util.*;
+@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600)
 @Entity
 @Table(name = "card_payment")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = CardPayment.class)

@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600, allowCredentials = "true")
 @RestController
 @RequestMapping("/api/test")
 public class TestController {
@@ -157,7 +157,31 @@ public class TestController {
         return ResponseEntity.ok(new MessageResponse("User registered successfully"));
     }
 
+    @PutMapping("users/{id}")
+    public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @Valid @RequestBody User updateUser) {
+        if (!userRepository.existsById(id)) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: User not found!"));
+        }
 
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: User not found!"));
+
+        user.setFirstName(updateUser.getFirstName());
+        user.setLastName(updateUser.getLastName());
+        user.setEmail(updateUser.getEmail());
+        user.setUsername(updateUser.getUsername());
+        user.setCompanyName(updateUser.getCompanyName());
+        user.setOrganizationNumber(updateUser.getOrganizationNumber());
+
+        if (updateUser.getPassword() != null && !updateUser.getPassword().isEmpty()) {
+            user.setPassword(encoder.encode(updateUser.getPassword()));
+        }
+
+        userRepository.save(user);
+
+        return ResponseEntity.ok(new MessageResponse("User updated successfully"));
+    }
 //    @PostMapping("/todo")
 //    public ResponseEntity<Todo> createTodo(@RequestBody Todo todo) {
 //        try {

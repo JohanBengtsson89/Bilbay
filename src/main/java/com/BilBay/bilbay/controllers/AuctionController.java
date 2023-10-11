@@ -46,8 +46,8 @@ public class AuctionController {
         return ResponseEntity.ok(allBids);
     }
 
-    @PostMapping("auth/post-auction")
-    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
+    @PostMapping("post-auction")
+
     public Auction createAuction (@RequestBody Auction auction) {
         return auctionService.createAuction(auction);}
 

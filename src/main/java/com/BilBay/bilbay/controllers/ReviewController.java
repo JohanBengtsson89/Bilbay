@@ -5,14 +5,10 @@ import com.BilBay.bilbay.models.Review;
 import com.BilBay.bilbay.services.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600)
 @RestController
 @RequestMapping("/api/")
 public class ReviewController {
@@ -28,7 +24,7 @@ public class ReviewController {
     Review createReview(@RequestBody Review review) {
         return reviewService.createReview(review);
     }
-    @GetMapping("auth/getAllReviews")
+    @GetMapping("getAllReviews")
     List<Review> getAllReviews() {
         return reviewService.getAllReviews();
     }

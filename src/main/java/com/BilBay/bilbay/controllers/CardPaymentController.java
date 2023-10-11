@@ -16,8 +16,8 @@ public class CardPaymentController {
     @Autowired
     private CardPaymentRepository cardPaymentRepository;
 
-    @PostMapping("auth/cardpayment")
-    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
+    @PostMapping("cardpayment")
+//    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public CardPayment createCardPayment (@RequestBody CardPayment cardPayment){
         return cardPaymentService.createCardPayment(cardPayment);
     }

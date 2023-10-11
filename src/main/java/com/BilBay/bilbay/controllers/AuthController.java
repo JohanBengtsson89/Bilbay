@@ -153,6 +153,7 @@ public class AuthController {
         user.setUsername(updateUser.getUsername());
         user.setCompanyName(updateUser.getCompanyName());
         user.setOrganizationNumber(updateUser.getOrganizationNumber());
+//        user.setPassword(encoder.encode(updateUser.getPassword()));
 
         if (updateUser.getPassword() != null && !updateUser.getPassword().isEmpty()) {
             user.setPassword(encoder.encode(updateUser.getPassword()));

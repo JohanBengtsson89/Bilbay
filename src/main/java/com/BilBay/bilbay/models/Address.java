@@ -1,7 +1,6 @@
 package com.BilBay.bilbay.models;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 @Entity
@@ -24,7 +23,7 @@ public class Address {
     @Column (name = "country")
     private String country;
     @Column (name = "postal_code")
-    private int postal_code;
+    private int postalCode;
 
 
     public Address() {
@@ -65,10 +64,10 @@ public class Address {
     public void setCountry(String country) {
         this.country = country;
     }
-    public int getPostal_code() {
-        return postal_code;
+    public int getPostalCode() {
+        return postalCode;
     }
-    public void setPostal_code(int postal_code) {
-        this.postal_code = postal_code;
+    public void setPostalCode(int postalCode) {
+        this.postalCode = postalCode;
     }
 }

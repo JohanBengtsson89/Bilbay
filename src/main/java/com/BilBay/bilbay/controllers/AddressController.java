@@ -14,8 +14,8 @@ public class AddressController {
     @Autowired
     AddressService addressService;
 
-    @PostMapping("auth/address")
-    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
+    @PostMapping("address")
+//    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public Address createAddress(@RequestBody Address address) {
         return addressService.createAddress(address);
     }

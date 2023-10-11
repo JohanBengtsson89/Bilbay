@@ -13,8 +13,8 @@ public class BankPaymentController {
     @Autowired
     BankPaymentService bankPaymentService;
 
-    @PostMapping("auth/bankpayment")
-    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
+    @PostMapping("bankpayment")
+//    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public BankPayment createBankpayment(@RequestBody BankPayment bankPayment){
         return bankPaymentService.createBankPayment(bankPayment);
     }
