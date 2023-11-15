@@ -14,30 +14,11 @@ public class Order {
     @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "bid_id", referencedColumnName = "id")
     private Bid bid;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
-    @JsonIdentityReference(alwaysAsId = true)
-    private DeliveryPaymentTransaction deliveryPaymentTransaction;
-    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
-    @JsonIdentityReference(alwaysAsId = true)
-    private PaymentTransaction paymentTransaction;
     @CreationTimestamp
     @Column(name = "registration_date")
     private LocalDate registrationDate;
 
-
     public Order() {
-    }
-    public DeliveryPaymentTransaction getDeliveryPaymentTransaction() {
-        return deliveryPaymentTransaction;
-    }
-    public void setDeliveryPaymentTransaction(DeliveryPaymentTransaction deliveryPaymentTransaction) {
-        this.deliveryPaymentTransaction = deliveryPaymentTransaction;
-    }
-    public PaymentTransaction getPaymentTransaction() {
-        return paymentTransaction;
-    }
-    public void setPaymentTransaction(PaymentTransaction paymentTransaction) {
-        this.paymentTransaction = paymentTransaction;
     }
     public Long getId() {
         return id;
