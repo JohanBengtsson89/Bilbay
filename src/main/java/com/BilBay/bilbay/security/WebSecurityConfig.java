@@ -24,6 +24,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 @Configuration
@@ -115,7 +116,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         //Added cookie
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "cookie"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Cookie"));
         //Added true credential to all request between backend and frontend
         configuration.setAllowCredentials(true);
 
