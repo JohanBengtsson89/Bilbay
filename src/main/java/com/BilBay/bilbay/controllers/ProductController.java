@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600)
-@RequestMapping("/api/")
+//@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600, allowCredentials = "true")
+@RequestMapping("/api/auth/")
 @RestController
 public class ProductController {
     @Autowired
@@ -19,19 +19,22 @@ public class ProductController {
     }
 
     @PostMapping("product")
-
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public Product registerProduct(@RequestBody Product product) {
         return productService.registerProduct(product);
     }
     @GetMapping("product/{id}")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public Product findProductById(@PathVariable Long id) {
         return productService.findProductById(id);
     }
     @GetMapping("products")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public List<Product> searchProducts(@RequestParam("query") String query){
         return productService.searchProducts(query);
     }
     @GetMapping("available-products/{isAvailable}")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public List<Product> findByIsAvailable(@PathVariable boolean isAvailable){
         return productService.findByIsAvailable(isAvailable);
     }

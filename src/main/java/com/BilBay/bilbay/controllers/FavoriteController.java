@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600)
+//@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600, allowCredentials = "true")
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/auth/")
 public class FavoriteController {
     @Autowired
     private FavoriteService favoriteService;
@@ -23,24 +23,25 @@ public class FavoriteController {
     private UserRepository userRepository;
 
     @PostMapping("favorite/{user_id}/{auction_id}")
-//    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     Favorite addToFavorite(@PathVariable @NotNull Long user_id, @PathVariable @NotNull Long auction_id) {
         return favoriteService.addFavorite(user_id, auction_id).getBody();
     }
 
     @GetMapping("getFavorites")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     List<Auction> getAllFavorites() {
         return favoriteService.getAllFavorites();
     }
 
-    @GetMapping("auth/favorite/{user_id}")
-//    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
+    @GetMapping("favorite/{user_id}")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     List<Auction> getUsersFavoriteAuctions(@PathVariable Long user_id) {
         return favoriteService.getUsersFavoriteAuctions(user_id);
     }
 
     @DeleteMapping("delete-favorite/{user_id}/{auction_id}")
-//    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     ResponseEntity<String> removeFromFavorite(@PathVariable @NotNull Long user_id, @PathVariable @NotNull Long auction_id) {
         favoriteService.removeFromFavorite(user_id, auction_id);
         return ResponseEntity.ok("Favorite removed successfully");
