@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600)
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/auth/")
 public class FavoriteController {
     @Autowired
     private FavoriteService favoriteService;
@@ -23,7 +22,7 @@ public class FavoriteController {
     private UserRepository userRepository;
 
     @PostMapping("favorite/{user_id}/{auction_id}")
-//    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     Favorite addToFavorite(@PathVariable @NotNull Long user_id, @PathVariable @NotNull Long auction_id) {
         return favoriteService.addFavorite(user_id, auction_id).getBody();
     }
@@ -33,7 +32,7 @@ public class FavoriteController {
         return favoriteService.getAllFavorites();
     }
 
-    @GetMapping("auth/favorite/{user_id}")
+    @GetMapping("favorite/{user_id}")
 //    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     List<Auction> getUsersFavoriteAuctions(@PathVariable Long user_id) {
         return favoriteService.getUsersFavoriteAuctions(user_id);

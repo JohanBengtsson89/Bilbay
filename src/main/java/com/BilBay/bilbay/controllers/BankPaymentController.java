@@ -7,7 +7,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/auth/")
 public class BankPaymentController {
 
     @Autowired
@@ -19,19 +19,19 @@ public class BankPaymentController {
         return bankPaymentService.createBankPayment(bankPayment);
     }
 
-    @GetMapping("auth/bankpayment/get/{id}")
+    @GetMapping("bankpayment/get/{id}")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public BankPayment getBankPaymentDyId(@PathVariable Long id){
         return bankPaymentService.getBankPaymentById(id);
     }
 
-    @DeleteMapping("auth/bankpayment/delete/{id}")
+    @DeleteMapping("bankpayment/delete/{id}")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public String deleteBankPaymentById(@PathVariable Long id) {
         return bankPaymentService.deleteBankPaymentById(id);
     }
 
-    @PutMapping("auth/bankpayment/update")
+    @PutMapping("bankpayment/update")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public BankPayment updateBankPayment (@RequestBody BankPayment bankPayment){
         return bankPaymentService.updateBankPayment(bankPayment);

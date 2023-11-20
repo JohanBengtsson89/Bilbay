@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Set;
 
 @RestController
-@RequestMapping(value = "/api/")
+@RequestMapping(value = "/api/auth/")
 public class UserController extends Exception{
     @Autowired
     private UserService userService;
@@ -34,7 +34,7 @@ public class UserController extends Exception{
 //            return userService.addUser(user);
 //    }
 
-    @GetMapping("auth/getUsers")
+    @GetMapping("getUsers")
     @PreAuthorize("hasRole('ADMIN')")
     List<User> getUsers() {
         return userService.getUsers();

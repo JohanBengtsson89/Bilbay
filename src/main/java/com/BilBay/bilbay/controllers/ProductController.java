@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600)
-@RequestMapping("/api/")
+
+@RequestMapping("/api/auth/")
 @RestController
 public class ProductController {
     @Autowired
@@ -35,7 +35,7 @@ public class ProductController {
     public List<Product> findByIsAvailable(@PathVariable boolean isAvailable){
         return productService.findByIsAvailable(isAvailable);
     }
-    @DeleteMapping("auth/product/delete/{id}")
+    @DeleteMapping("product/delete/{id}")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public String deleteById(@PathVariable Long id){
             productService.deleteProduct(id);
@@ -43,7 +43,7 @@ public class ProductController {
         }
 
     
-    @PutMapping("auth/product/{id}/{isAvailable}")
+    @PutMapping("product/{id}/{isAvailable}")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public String updateProductStatus (@PathVariable Long id, @PathVariable boolean isAvailable) {
         if (!productRepository.findById(id).isEmpty()){

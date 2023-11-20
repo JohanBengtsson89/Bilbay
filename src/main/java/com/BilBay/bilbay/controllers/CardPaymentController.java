@@ -8,7 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/auth/")
 public class CardPaymentController {
 
     @Autowired
@@ -17,23 +17,23 @@ public class CardPaymentController {
     private CardPaymentRepository cardPaymentRepository;
 
     @PostMapping("cardpayment")
-//    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public CardPayment createCardPayment (@RequestBody CardPayment cardPayment){
         return cardPaymentService.createCardPayment(cardPayment);
     }
 
-    @GetMapping("auth/cardpayment/{id}")
+    @GetMapping("cardpayment/{id}")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public CardPayment findCardPaymentById(@PathVariable Long id){
         return cardPaymentService.findCardPaymentById(id);
     }
 
-    @PutMapping("auth/cardpayment/update")
+    @PutMapping("cardpayment/update")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public CardPayment updateCardPayment(@RequestBody CardPayment cardPayment){
         return cardPaymentService.updateCardPayment(cardPayment);
     }
-    @DeleteMapping("auth/cardpayment/delete/{id}")
+    @DeleteMapping("cardpayment/delete/{id}")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public String deleteCardPayment(@PathVariable Long id){
         return cardPaymentService.deleteCardPayment(id);
