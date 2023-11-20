@@ -12,9 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600)
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/auth/")
 public class AuctionController {
 
     @Autowired
@@ -25,11 +24,13 @@ public class AuctionController {
         return auctionService.findAllAuctions();
     }
     @GetMapping("auction/{id}")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public Auction findAuctionById (@PathVariable Long id){
         return auctionService.findAuctionById(id);
     }
 
     @GetMapping("{auctionId}/highest-bid")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public ResponseEntity<Bid> getHighestBid(@PathVariable Long auctionId) {
         Bid highestBid = auctionService.getHighestBid(auctionId);
         if (highestBid == null) {
@@ -38,6 +39,7 @@ public class AuctionController {
         return ResponseEntity.ok(highestBid);
     }
     @GetMapping("{auctionId}/all-bids")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public ResponseEntity<List<Bid>> getAllBids(@PathVariable Long auctionId) {
         List<Bid> allBids = auctionService.getAllBids(auctionId);
         if (allBids.isEmpty()) {
@@ -47,7 +49,7 @@ public class AuctionController {
     }
 
     @PostMapping("post-auction")
-
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public Auction createAuction (@RequestBody Auction auction) {
         return auctionService.createAuction(auction);}
 

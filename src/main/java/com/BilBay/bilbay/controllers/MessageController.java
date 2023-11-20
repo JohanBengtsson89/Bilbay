@@ -19,13 +19,13 @@ import java.util.List;
 @Configuration
 @EnableScheduling
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/auth/")
 public class MessageController {
     @Autowired
     PaymentTransactionRepository paymentTransactionRepository;
     @Autowired
     MessageService messageService;
-    @GetMapping("auth/reminding-message")
+    @GetMapping("reminding-message")
     @PreAuthorize("hasRole('ADMIN')")
     //this function will be executed every day at midnight to.
     @Scheduled(cron = "5 0 0 1 * *", zone = "Europe/Stockholm")
