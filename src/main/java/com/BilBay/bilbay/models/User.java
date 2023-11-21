@@ -65,10 +65,6 @@ public class User {
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIdentityReference(alwaysAsId = true)
-    private Set<Product> products = new HashSet<>();
-    
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonIdentityReference(alwaysAsId = true)
     private Set<Auction> auctions = new HashSet<>();
     
     @OneToMany(mappedBy = "buyer", cascade = CascadeType.ALL)
@@ -168,12 +164,6 @@ public class User {
     }
     public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
-    }
-    public Set<Product> getProducts() {
-        return products;
-    }
-    public void setProducts(Set<Product> products) {
-        this.products = products;
     }
     public Set<Auction> getAuctions() {
         return auctions;
