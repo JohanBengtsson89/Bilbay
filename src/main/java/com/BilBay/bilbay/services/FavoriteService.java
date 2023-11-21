@@ -2,11 +2,9 @@ package com.BilBay.bilbay.services;
 
 import com.BilBay.bilbay.models.Auction;
 import com.BilBay.bilbay.models.Favorite;
-import com.BilBay.bilbay.models.Product;
 import com.BilBay.bilbay.models.User;
 import com.BilBay.bilbay.repositories.AuctionRepository;
 import com.BilBay.bilbay.repositories.FavoriteRepository;
-import com.BilBay.bilbay.repositories.ProductRepository;
 import com.BilBay.bilbay.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class FavoriteService {

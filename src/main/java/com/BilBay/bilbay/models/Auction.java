@@ -28,10 +28,6 @@ public class Auction {
     @JoinColumn(name = "seller_id", referencedColumnName = "id")
     @JsonIdentityReference(alwaysAsId = true)
     private User user;
-    @OneToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
-    @JsonIdentityReference(alwaysAsId = false)
-    private Product product;
     @OneToMany(mappedBy = "auction", cascade = CascadeType.ALL)
     @JsonIdentityReference(alwaysAsId = false)
     private Set<Bid> bids = new HashSet<>();
@@ -39,6 +35,30 @@ public class Auction {
     @JsonIdentityReference(alwaysAsId = true)
     @JsonIgnore
     private Set<Favorite> favorites;
+    @Column(name = "product_name")
+    private String productName;
+    @Column(name = "product_photo")
+    private String productPhoto;
+    @Column(name = "category")
+    private String category;
+    @Column(name = "original_price")
+    private int original_price;
+    @Column(name = "model_year")
+    private int modelYear;
+    @Column(name = "gear")
+    private String gear;
+    @Column(name = "engine_power")
+    private int enginePower;
+    @Column(name = "color")
+    private String color;
+    @Column(name = "mileage")
+    private int mileage;
+    @Column(name = "VIN_nr")
+    private String vinNr;
+    @Column(name = "created_at")
+    private String createdAt;
+    @Column(name = "updated_at")
+    private String updatedAt;
     @Column(name = "reserve_price")
     private int reservePrice;
     @Column(name = "start_price")
@@ -67,53 +87,5 @@ public class Auction {
     }
     public void setUser(User user) {
         this.user = user;
-    }
-    public Product getProduct() {
-        return product;
-    }
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-    public Set<Favorite> getFavorites() {
-        return favorites;
-    }
-    public void setFavorites(Set<Favorite> favorites) {
-        this.favorites = favorites;
-    }
-    public Set<Bid> getBids() {
-        return bids;
-    }
-    public void setBids(Set<Bid> bids) {
-        this.bids = bids;
-    }
-    public int getReservePrice() {
-        return reservePrice;
-    }
-    public void setReservePrice(int reservePrice) {
-        this.reservePrice = reservePrice;
-    }
-    public int getStartPrice() {
-        return startPrice;
-    }
-    public void setStartPrice(int startPrice) {
-        this.startPrice = startPrice;
-    }
-    public LocalDate getStartTime() {
-        return startTime;
-    }
-    public void setStartTime(LocalDate startTime) {
-        this.startTime = startTime;
-    }
-    public LocalDate getEndTime() {
-        return endTime;
-    }
-    public void setEndTime(LocalDate endTime) {
-        this.endTime = endTime;
-    }
-    public boolean isActive() {
-        return active;
-    }
-    public void setActive(boolean active) {
-        this.active = active;
     }
 }
