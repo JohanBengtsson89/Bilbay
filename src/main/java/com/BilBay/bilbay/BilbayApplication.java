@@ -11,11 +11,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EnableJpaRepositories
 public class BilbayApplication {
-	@Autowired
-	ProductRepository productRepository;
-	@Autowired
-	BidRepository bidRepository;
-
 	public static void main(String[] args) {
 		SpringApplication.run(BilbayApplication.class, args);
 	}

@@ -15,5 +15,4 @@ public interface AuctionService<T> {
     public T create(T entity);
 
     public List<T> findAll();
-
 }

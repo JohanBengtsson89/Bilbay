@@ -8,8 +8,4 @@ public interface CrudController<T> {
     T findById(Long id);
 
     T create(T entity);
-
-    T update(Long id, T entity);
-
-    void delete(Long id);
 }

@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600, allowCredentials = "true")
 @RestController
 @RequestMapping("/api/test")
 public class TestController {
@@ -88,100 +87,100 @@ public class TestController {
         return userService.findUserById(id);
     }
 
-    @PostMapping("login")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+//    @PostMapping("login")
+//    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+//
+//        Authentication authentication = authenticationManager.authenticate(
+//                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+//
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+//
+//        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+//
+//        ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
+//
+//        List<String> roles = userDetails.getAuthorities().stream()
+//                .map(item -> item.getAuthority())
+//                .collect(Collectors.toList());
+//
+//        return ResponseEntity.ok()
+//                .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
+//                .body(new UserInfoResponse(userDetails.getId(),
+//                        userDetails.getEmail(),
+//                        roles, userDetails.getUsername()));
+//    }
 
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+//    @PostMapping("register")
+//    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signupRequest) {
+//        if (userRepository.existsByUsername((signupRequest.getUsername()))) {
+//            return ResponseEntity
+//                    .badRequest()
+//                    .body(new MessageResponse("Error: Email is already in use!"));
+//        }
+//
+//        // create new users account
+//        User user = new User(signupRequest.getFirstName(),signupRequest.getLastName(), signupRequest.getEmail(),signupRequest.getUsername(),
+//                encoder.encode(signupRequest.getPassword()),signupRequest.getCompanyName(), signupRequest.getOrganizationNumber());
+//
+//        Set<String> strRoles = signupRequest.getRoles();
+//        Set<Role> roles = new HashSet<>();
+//
+//        if (strRoles == null) {
+//            Role privateRole = roleRepository.findByName(ERole.ROLE_PRIVATE)
+//                    .orElseThrow(() -> new RuntimeException("Error: Role is not found"));
+//            roles.add(privateRole);
+//        } else {
+//            strRoles.forEach(role -> {
+//                switch (role) {
+//                    case "company":
+//                        Role companyRole = roleRepository.findByName(ERole.ROLE_COMPANY)
+//                                .orElseThrow(() -> new RuntimeException("Error: Role is not found"));
+//                        roles.add(companyRole);
+//                        break;
+//                    case "admin":
+//                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+//                                .orElseThrow(() -> new RuntimeException("Error: Role is not found"));
+//                        roles.add(adminRole);
+//                        break;
+//                    default:
+//                        Role privateRole = roleRepository.findByName(ERole.ROLE_PRIVATE)
+//                                .orElseThrow(() -> new RuntimeException("Error: Role is not found"));
+//                        roles.add(privateRole);
+//                }
+//            });
+//        }
+//
+//        user.setRoles(roles);
+//        userRepository.save(user);
+//
+//        return ResponseEntity.ok(new MessageResponse("User registered successfully"));
+//    }
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-
-        ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
-
-        List<String> roles = userDetails.getAuthorities().stream()
-                .map(item -> item.getAuthority())
-                .collect(Collectors.toList());
-
-        return ResponseEntity.ok()
-                .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
-                .body(new UserInfoResponse(userDetails.getId(),
-                        userDetails.getEmail(),
-                        roles, userDetails.getUsername()));
-    }
-
-    @PostMapping("register")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signupRequest) {
-        if (userRepository.existsByUsername((signupRequest.getUsername()))) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Email is already in use!"));
-        }
-
-        // create new users account
-        User user = new User(signupRequest.getFirstName(),signupRequest.getLastName(), signupRequest.getEmail(),signupRequest.getUsername(),
-                encoder.encode(signupRequest.getPassword()),signupRequest.getCompanyName(), signupRequest.getOrganizationNumber());
-
-        Set<String> strRoles = signupRequest.getRoles();
-        Set<Role> roles = new HashSet<>();
-
-        if (strRoles == null) {
-            Role privateRole = roleRepository.findByName(ERole.ROLE_PRIVATE)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found"));
-            roles.add(privateRole);
-        } else {
-            strRoles.forEach(role -> {
-                switch (role) {
-                    case "company":
-                        Role companyRole = roleRepository.findByName(ERole.ROLE_COMPANY)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found"));
-                        roles.add(companyRole);
-                        break;
-                    case "admin":
-                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found"));
-                        roles.add(adminRole);
-                        break;
-                    default:
-                        Role privateRole = roleRepository.findByName(ERole.ROLE_PRIVATE)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found"));
-                        roles.add(privateRole);
-                }
-            });
-        }
-
-        user.setRoles(roles);
-        userRepository.save(user);
-
-        return ResponseEntity.ok(new MessageResponse("User registered successfully"));
-    }
-
-    @PutMapping("users/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @Valid @RequestBody User updateUser) {
-        if (!userRepository.existsById(id)) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: User not found!"));
-        }
-
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: User not found!"));
-
-        user.setFirstName(updateUser.getFirstName());
-        user.setLastName(updateUser.getLastName());
-        user.setEmail(updateUser.getEmail());
-        user.setUsername(updateUser.getUsername());
-        user.setCompanyName(updateUser.getCompanyName());
-        user.setOrganizationNumber(updateUser.getOrganizationNumber());
-
-        if (updateUser.getPassword() != null && !updateUser.getPassword().isEmpty()) {
-            user.setPassword(encoder.encode(updateUser.getPassword()));
-        }
-
-        userRepository.save(user);
-
-        return ResponseEntity.ok(new MessageResponse("User updated successfully"));
-    }
+//    @PutMapping("users/{id}")
+//    public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @Valid @RequestBody User updateUser) {
+//        if (!userRepository.existsById(id)) {
+//            return ResponseEntity
+//                    .badRequest()
+//                    .body(new MessageResponse("Error: User not found!"));
+//        }
+//
+//        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: User not found!"));
+//
+//        user.setFirstName(updateUser.getFirstName());
+//        user.setLastName(updateUser.getLastName());
+//        user.setEmail(updateUser.getEmail());
+//        user.setUsername(updateUser.getUsername());
+//        user.setCompanyName(updateUser.getCompanyName());
+//        user.setOrganizationNumber(updateUser.getOrganizationNumber());
+//
+//        if (updateUser.getPassword() != null && !updateUser.getPassword().isEmpty()) {
+//            user.setPassword(encoder.encode(updateUser.getPassword()));
+//        }
+//
+//        userRepository.save(user);
+//
+//        return ResponseEntity.ok(new MessageResponse("User updated successfully"));
+//    }
 //    @PostMapping("/todo")
 //    public ResponseEntity<Todo> createTodo(@RequestBody Todo todo) {
 //        try {
