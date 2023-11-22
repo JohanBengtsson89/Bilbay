@@ -2,6 +2,7 @@ package com.BilBay.bilbay.serviceImpl;
 
 import com.BilBay.bilbay.models.Auction;
 import com.BilBay.bilbay.models.Bid;
+import com.BilBay.bilbay.models.User;
 import com.BilBay.bilbay.repositories.AuctionRepository;
 import com.BilBay.bilbay.repositories.BidRepository;
 import com.BilBay.bilbay.services.AuctionService;
@@ -21,27 +22,39 @@ public class AuctionServiceImpl implements AuctionService<Auction> {
     public Auction create(Auction auction) {
         return auctionRepository.save(auction);
     }
+
+    public Auction createWithBuilder (Auction auction) {
+        Auction newAuction = new Auction.Builder(auction.getUser(), auction.getProductName(), auction.getCategory(), auction.getStartPrice(), auction.getStartTime(), auction.getEndTime())
+                .gear(auction.getGear())
+                .mileage(auction.getMileage())
+                .enginPower(auction.getEnginePower())
+                .active(auction.isActive())
+                .reservePrice(auction.getReservePrice())
+                .productPhoto(auction.getProductPhoto())
+                .vinNr(auction.getVinNr())
+                .modelYear(auction.getModelYear())
+                .originalPrice(auction.getOriginalPrice())
+                .color(auction.getColor())
+                .build();
+
+        return auctionRepository.save(newAuction);
+    }
     @Override
     public Auction findById(Long id) {
         return auctionRepository.findById(id).get();
     }
-
 
     @Override
     public List<Auction> findAll() {
         return auctionRepository.findAll();
     }
 
-
     public AuctionServiceImpl(AuctionRepository auctionRepository) {
         this.auctionRepository = auctionRepository;
     }
 
-
-
     public void deactivateProductAuction(Long id, boolean isActive){
         auctionRepository.deactivateProductAuction(isActive, id);
-
     }
 
     public Bid getHighestBid(Long auctionId) {
