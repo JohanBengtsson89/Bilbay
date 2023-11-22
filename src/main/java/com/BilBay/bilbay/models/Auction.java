@@ -13,6 +13,9 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -42,7 +45,7 @@ public class Auction {
     @Column(name = "category")
     private String category;
     @Column(name = "original_price")
-    private int original_price;
+    private int originalPrice;
     @Column(name = "model_year")
     private int modelYear;
     @Column(name = "gear")
@@ -56,9 +59,11 @@ public class Auction {
     @Column(name = "VIN_nr")
     private String vinNr;
     @Column(name = "created_at")
-    private String createdAt;
+    @CreationTimestamp
+    private LocalDate createdAt;
     @Column(name = "updated_at")
-    private String updatedAt;
+    @UpdateTimestamp
+    private LocalDate updatedAt;
     @Column(name = "reserve_price")
     private int reservePrice;
     @Column(name = "start_price")
@@ -87,5 +92,120 @@ public class Auction {
     }
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<Bid> getBids() {
+        return bids;
+    }
+    public void setBids(Set<Bid> bids) {
+        this.bids = bids;
+    }
+    public Set<Favorite> getFavorites() {
+        return favorites;
+    }
+    public void setFavorites(Set<Favorite> favorites) {
+        this.favorites = favorites;
+    }
+    public String getProductName() {
+        return productName;
+    }
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+    public String getProductPhoto() {
+        return productPhoto;
+    }
+    public void setProductPhoto(String productPhoto) {
+        this.productPhoto = productPhoto;
+    }
+    public String getCategory() {
+        return category;
+    }
+    public void setCategory(String category) {
+        this.category = category;
+    }
+    public int getOriginalPrice() {
+        return originalPrice;
+    }
+    public void setOriginalPrice(int originalPrice) {
+        this.originalPrice = originalPrice;
+    }
+    public int getModelYear() {
+        return modelYear;
+    }
+    public void setModelYear(int modelYear) {
+        this.modelYear = modelYear;
+    }
+    public String getGear() {
+        return gear;
+    }
+    public void setGear(String gear) {
+        this.gear = gear;
+    }
+    public int getEnginePower() {
+        return enginePower;
+    }
+    public void setEnginePower(int enginePower) {
+        this.enginePower = enginePower;
+    }
+    public String getColor() {
+        return color;
+    }
+    public void setColor(String color) {
+        this.color = color;
+    }
+    public int getMileage() {
+        return mileage;
+    }
+    public void setMileage(int mileage) {
+        this.mileage = mileage;
+    }
+    public String getVinNr() {
+        return vinNr;
+    }
+    public void setVinNr(String vinNr) {
+        this.vinNr = vinNr;
+    }
+    public LocalDate getCreatedAt() {
+        return createdAt;
+    }
+    public void setCreatedAt(LocalDate createdAt) {
+        this.createdAt = createdAt;
+    }
+    public LocalDate getUpdatedAt() {
+        return updatedAt;
+    }
+    public void setUpdatedAt(LocalDate updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+    public int getReservePrice() {
+        return reservePrice;
+    }
+    public void setReservePrice(int reservePrice) {
+        this.reservePrice = reservePrice;
+    }
+    public int getStartPrice() {
+        return startPrice;
+    }
+    public void setStartPrice(int startPrice) {
+        this.startPrice = startPrice;
+    }
+    public LocalDate getStartTime() {
+        return startTime;
+    }
+    public void setStartTime(LocalDate startTime) {
+        this.startTime = startTime;
+    }
+    public LocalDate getEndTime() {
+        return endTime;
+    }
+    public void setEndTime(LocalDate endTime) {
+        this.endTime = endTime;
+    }
+    public boolean isActive() {
+        return active;
+    }
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
