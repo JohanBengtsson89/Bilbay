@@ -80,20 +80,109 @@ public class Auction {
     public Auction() {
     }
 
+    public static class Builder {
+        private final User user;
+        private final String productName;
+        private String productPhoto;
+        private final String category;
+        private int originalPrice;
+        private int modelYear;
+        private String gear;
+        private int enginPower;
+        private String color;
+        private int mileage;
+        private String vinNr;
+        private int reservePrice;
+        private final int startPrice;
+        private final LocalDate startTime;
+        private final LocalDate endTime;
+        private boolean active;
+
+        //Builder pattern implementation
+        public Builder(User user,String productName, String category, int startPrice, LocalDate startTime, LocalDate endTime){
+            this.productName = productName;
+            this.user = user;
+            this.category = category;
+            this.startPrice = startPrice;
+            this.startTime = startTime;
+            this.endTime = endTime;
+        }
+
+        public Builder color (String color){
+            this.color = color;
+            return this;
+        }
+        public Builder vinNr (String vinNr) {
+            this.vinNr = vinNr;
+            return this;
+        }
+        public Builder reservePrice (int reservePrice) {
+            this.reservePrice = reservePrice;
+            return this;
+        }
+        public Builder mileage (int mileage) {
+            this.mileage = mileage;
+            return this;
+        }
+        public Builder productPhoto (String productPhoto) {
+            this.productPhoto = productPhoto;
+            return this;
+        }
+        public Builder originalPrice (int originalPrice) {
+            this.originalPrice = originalPrice;
+            return this;
+        }
+        public Builder modelYear (int modelYear) {
+            this.modelYear = modelYear;
+            return this;
+        }
+        public Builder gear (String gear) {
+            this.gear = gear;
+            return this;
+        }
+        public Builder enginPower (int enginPower) {
+            this.enginPower = enginPower;
+            return this;
+        }
+        public Builder active (boolean active) {
+            this.active = active;
+            return this;
+        }
+        public Auction build() {
+            Auction auction = new Auction();
+            auction.user = this.user;
+            auction.productName = this.productName;
+            auction.category = this.category;
+            auction.color = this.color;
+            auction.endTime = this.endTime;
+            auction.originalPrice = this.originalPrice;
+            auction.active = this.active;
+            auction.gear = this.gear;
+            auction.enginePower = this.enginPower;
+            auction.modelYear = this.modelYear;
+            auction.startPrice = this.startPrice;
+            auction.startTime = this.startTime;
+            auction.reservePrice = this.reservePrice;
+            auction.vinNr = this.vinNr;
+            auction.productPhoto = this.productPhoto;
+            auction.mileage = this.mileage;
+            return auction;
+        }
+    }
+
+
     public Long getId() {
         return id;
     }
     public void setId(Long id) {
         this.id = id;
     }
-
     public User getUser() {
         return user;
     }
     public void setUser(User user) {
         this.user = user;
     }
-
     public Set<Bid> getBids() {
         return bids;
     }

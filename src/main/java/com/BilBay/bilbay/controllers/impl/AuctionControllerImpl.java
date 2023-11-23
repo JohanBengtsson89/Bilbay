@@ -33,6 +33,11 @@ public class AuctionControllerImpl implements CrudController<Auction> {
     public Auction create(@RequestBody Auction auction) {
         return auctionServiceImpl.create(auction);
     }
+    //New endpoint for builder pattern
+    @PostMapping("auctions/new-auction")
+    public Auction build (@RequestBody Auction auction) {
+        return auctionServiceImpl.createWithBuilder(auction);
+    }
 
     @GetMapping("auctions/{id}/highest-bid")
     public ResponseEntity<Bid> getHighestBid(@PathVariable Long id) {
