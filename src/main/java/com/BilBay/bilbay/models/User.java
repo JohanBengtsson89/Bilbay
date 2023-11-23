@@ -65,10 +65,6 @@ public class User {
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIdentityReference(alwaysAsId = true)
-    private Set<Product> products = new HashSet<>();
-    
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonIdentityReference(alwaysAsId = true)
     private Set<Auction> auctions = new HashSet<>();
     
     @OneToMany(mappedBy = "buyer", cascade = CascadeType.ALL)
@@ -87,26 +83,6 @@ public class User {
     @JsonManagedReference("favorites")
     @JsonIgnore
     private Set<Favorite> favorites;
-    
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonIdentityReference(alwaysAsId = true)
-    private Set<BankPayment> bankPayments = new HashSet<>();
-    
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonIdentityReference(alwaysAsId = true)
-    private Set<CardPayment> cardPayments = new HashSet<>();
-    
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonIdentityReference(alwaysAsId = true)
-    private Set<DeliveryPaymentTransaction> deliveryPaymentTransactions = new HashSet<>();
-    
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonIdentityReference(alwaysAsId = true)
-    private Address address;
-    
-    @JsonIdentityReference(alwaysAsId = true)
-    @OneToMany(mappedBy = "buyer")
-    private Set<PaymentTransaction> paymentTransactions= new HashSet<>();
 
     public void setId(Long id) {
         this.id = id;
@@ -189,12 +165,6 @@ public class User {
     public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
     }
-    public Set<Product> getProducts() {
-        return products;
-    }
-    public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
     public Set<Auction> getAuctions() {
         return auctions;
     }
@@ -219,41 +189,9 @@ public class User {
     public void setReviewsBy(Set<Review> reviewsBy) {
         this.reviewsBy = reviewsBy;
     }
-    public Set<BankPayment> getBankPayments() {
-        return bankPayments;
-    }
-    public void setBankPayments(Set<BankPayment> bankPayments) {
-        this.bankPayments = bankPayments;
-    }
-    public Set<CardPayment> getCardPayments() {
-        return cardPayments;
-    }
-    public void setCardPayments(Set<CardPayment> cardPayments) {
-        this.cardPayments = cardPayments;
-    }
-    public Set<DeliveryPaymentTransaction> getDeliveryPaymentTransactions() {
-        return deliveryPaymentTransactions;
-    }
-    public void setDeliveryPaymentTransactions(Set<DeliveryPaymentTransaction> deliveryPaymentTransactions) {
-        this.deliveryPaymentTransactions = deliveryPaymentTransactions;
-    }
-    public Address getAddress() {
-        return address;
-    }
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-    public Set<PaymentTransaction> getPaymentTransactions() {
-        return paymentTransactions;
-    }
-    public void setPaymentTransactions(Set<PaymentTransaction> paymentTransactions) {
-        this.paymentTransactions = paymentTransactions;
-    }
-
     public Set<Favorite> getFavorites() {
         return favorites;
     }
-
     public void setFavorites(Set<Favorite> favorites) {
         this.favorites = favorites;
     }
