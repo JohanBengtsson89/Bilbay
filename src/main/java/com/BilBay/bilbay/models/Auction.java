@@ -80,30 +80,6 @@ public class Auction {
     public Auction() {
     }
 
-//    public Auction(Long id, User user, Set<Bid> bids, Set<Favorite> favorites, String productName, String productPhoto, String category, int originalPrice, int modelYear, String gear, int enginePower, String color, int mileage, String vinNr, LocalDate createdAt, LocalDate updatedAt, int reservePrice, int startPrice, LocalDate startTime, LocalDate endTime, boolean active) {
-//        this.id = id;
-//        this.user = user;
-//        this.bids = bids;
-//        this.favorites = favorites;
-//        this.productName = productName;
-//        this.productPhoto = productPhoto;
-//        this.category = category;
-//        this.originalPrice = originalPrice;
-//        this.modelYear = modelYear;
-//        this.gear = gear;
-//        this.enginePower = enginePower;
-//        this.color = color;
-//        this.mileage = mileage;
-//        this.vinNr = vinNr;
-//        this.createdAt = createdAt;
-//        this.updatedAt = updatedAt;
-//        this.reservePrice = reservePrice;
-//        this.startPrice = startPrice;
-//        this.startTime = startTime;
-//        this.endTime = endTime;
-//        this.active = active;
-//    }
-
     public static class Builder {
         private final User user;
         private final String productName;
