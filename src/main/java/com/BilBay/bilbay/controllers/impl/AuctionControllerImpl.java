@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/auth")
 public class AuctionControllerImpl implements CrudController<Auction> {
 
     @Autowired
@@ -19,27 +19,32 @@ public class AuctionControllerImpl implements CrudController<Auction> {
 
     @Override
     @GetMapping("auctions")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public List<Auction> findAll() {
         return auctionServiceImpl.findAll();
     }
     @Override
     @GetMapping("auctions/{id}")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public Auction findById(@PathVariable Long id) {
         return auctionServiceImpl.findById(id);
     }
 
     @Override
     @PostMapping("auctions/post-auction")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public Auction create(@RequestBody Auction auction) {
         return auctionServiceImpl.create(auction);
     }
     //New endpoint for builder pattern
     @PostMapping("auctions/new-auction")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public Auction build (@RequestBody Auction auction) {
         return auctionServiceImpl.createWithBuilder(auction);
     }
 
     @GetMapping("auctions/{id}/highest-bid")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public ResponseEntity<Bid> getHighestBid(@PathVariable Long id) {
         Bid highestBid = auctionServiceImpl.getHighestBid(id);
         if (highestBid == null) {
@@ -48,6 +53,7 @@ public class AuctionControllerImpl implements CrudController<Auction> {
         return ResponseEntity.ok(highestBid);
     }
     @GetMapping("auctions/{id}/all-bids")
+    @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public ResponseEntity<List<Bid>> getAllBids(@PathVariable Long id) {
         List<Bid> allBids = auctionServiceImpl.getAllBids(id);
 

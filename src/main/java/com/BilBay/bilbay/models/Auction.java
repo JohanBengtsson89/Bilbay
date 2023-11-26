@@ -88,7 +88,7 @@ public class Auction {
         private int originalPrice;
         private int modelYear;
         private String gear;
-        private int enginPower;
+        private int enginePower;
         private String color;
         private int mileage;
         private String vinNr;
@@ -140,8 +140,8 @@ public class Auction {
             this.gear = gear;
             return this;
         }
-        public Builder enginPower (int enginPower) {
-            this.enginPower = enginPower;
+        public Builder enginePower (int enginePower) {
+            this.enginePower = enginePower;
             return this;
         }
         public Builder active (boolean active) {
@@ -158,7 +158,7 @@ public class Auction {
             auction.originalPrice = this.originalPrice;
             auction.active = this.active;
             auction.gear = this.gear;
-            auction.enginePower = this.enginPower;
+            auction.enginePower = this.enginePower;
             auction.modelYear = this.modelYear;
             auction.startPrice = this.startPrice;
             auction.startTime = this.startTime;

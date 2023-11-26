@@ -27,7 +27,7 @@ public class AuctionServiceImpl implements AuctionService<Auction> {
         Auction newAuction = new Auction.Builder(auction.getUser(), auction.getProductName(), auction.getCategory(), auction.getStartPrice(), auction.getStartTime(), auction.getEndTime())
                 .gear(auction.getGear())
                 .mileage(auction.getMileage())
-                .enginPower(auction.getEnginePower())
+                .enginePower(auction.getEnginePower())
                 .active(auction.isActive())
                 .reservePrice(auction.getReservePrice())
                 .productPhoto(auction.getProductPhoto())
