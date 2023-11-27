@@ -1,31 +1,28 @@
 package com.BilBay.bilbay.controllers;
 
-import com.BilBay.bilbay.models.Auction;
-import com.BilBay.bilbay.models.Bid;
-import com.BilBay.bilbay.services.BidService;
+import com.BilBay.bilbay.dto.BidDto;
+import com.BilBay.bilbay.serviceImpl.BidServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 @RestController
 @RequestMapping(value = "/api/auth/")
 public class BidController {
 
     @Autowired
-    BidService bidService;
+    BidServiceImpl bidServiceImpl;
 
     @PostMapping("bid")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
-    public Bid createBid(@RequestBody Bid bid) {
-        return bidService.createBid(bid);
+    public BidDto createBid(@RequestBody BidDto bidDTO) {
+        return bidServiceImpl.createBid(bidDTO);
     }
 
-    @GetMapping("auth/bid/{id}")
+    @GetMapping("bid/{id}")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
-    public Bid getBidById(@PathVariable Long id) {
-        return bidService.getBidByID(id);
+    public BidDto getBidById(@PathVariable Long id) {
+        return bidServiceImpl.getBidByID(id);
     }
 
 //    @GetMapping("find-highestBid")
