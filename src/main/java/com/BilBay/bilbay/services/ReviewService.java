@@ -8,19 +8,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ReviewService {
-    @Autowired
-    private final ReviewRepository reviewRepository;
+public interface ReviewService {
+  Review createReview (Review review);
+  List <Review> getAllReviews();
 
-    public ReviewService(ReviewRepository reviewRepository) {
-        this.reviewRepository = reviewRepository;
-    }
-
-    public Review createReview(Review review) {
-        return reviewRepository.save(review);
-    }
-
-    public List<Review> getAllReviews() {
-        return reviewRepository.findAll();
-    }
 }
