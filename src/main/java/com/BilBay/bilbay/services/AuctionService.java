@@ -9,46 +9,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class AuctionService {
+public interface AuctionService<T> {
+    public T findById (Long id);
 
-    @Autowired
-    AuctionRepository auctionRepository;
-    @Autowired
-    private BidRepository bidRepository;
+    public T create(T entity);
 
-    public AuctionService(AuctionRepository auctionRepository) {
-        this.auctionRepository = auctionRepository;
-    }
-
-    public Auction findAuctionById (Long id){
-        return auctionRepository.findById(id).get();
-    }
-
-    public Auction createAuction(Auction auction) {
-        return auctionRepository.save(auction);
-    }
-    public void deactivateProductAuction(Long id, boolean isActive){
-        auctionRepository.deactivateProductAuction(isActive, id);
-
-    }
-
-    public Bid getHighestBid(Long auctionId) {
-        List<Bid> bids = bidRepository.findByAuctionIdOrderByBidAmountDesc(auctionId);
-        if (bids.isEmpty()) {
-            return null;
-        }
-        return bids.get(0);
-    }
-
-    public List<Auction> findAllAuctions() {
-        return auctionRepository.findAll();
-    }
-    public List<Bid> getAllBids(Long auctionId) {
-        return bidRepository.findByAuctionId(auctionId);
-    }
-
-    /*public List<Bid> findAllBidsOnAuction(Auction auction){
-        return auctionRepository.findAllBidsOnAuction(auction.getId());
-    }*/
+    public List<T> findAll();
 }

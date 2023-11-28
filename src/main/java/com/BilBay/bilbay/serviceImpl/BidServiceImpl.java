@@ -13,12 +13,12 @@ public class BidServiceImpl implements BidService {
     }
 
     @Override
-    public Bid placeBid(Bid bid) {
+    public Bid createBid(Bid bid) {
         return bidRepository.save(bid);
     }
 
     @Override
-    public Bid getBid(Long id) {
+    public Bid getBidByID(Long id) {
         return bidRepository.findById(id).get();
     }
 }
