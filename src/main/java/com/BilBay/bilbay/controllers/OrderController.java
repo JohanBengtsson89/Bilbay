@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class OrderController {
 
     @Autowired
-    OrderService orderService;
+    private OrderService orderService;
 
     @PostMapping("order")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
@@ -22,7 +22,7 @@ public class OrderController {
     @GetMapping("order/{id}")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
     public Order getOrderById (@PathVariable Long id){
-        return orderService.getOrderById(id);
+        return orderService.getOrder(id);
     }
 
     @PutMapping("order/update")
@@ -33,9 +33,8 @@ public class OrderController {
 
     @DeleteMapping("order/delete/{id}")
     @PreAuthorize("hasRole('PRIVATE') or hasRole('COMPANY') or hasRole('ADMIN')")
-    public String deleteOrderById (@PathVariable Long id){
-        orderService.deleteOrderById(id);
-        return "Order has been deleted";
+    public void deleteOrderById (@PathVariable Long id){
+        orderService.deleteOrder(id);
     }
 
 }
