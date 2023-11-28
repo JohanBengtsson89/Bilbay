@@ -35,7 +35,7 @@ public class BidServiceImpl implements BidService {
             return BidDto.toDto(savedBid);
 
         } else {
-            throw new IllegalArgumentException("Bid or buyer does not exist");
+            throw new IllegalArgumentException("Auction or buyer does not exist");
         }
     }
 
